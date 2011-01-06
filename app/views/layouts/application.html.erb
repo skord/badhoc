@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Badhoc</title>
+  <%= stylesheet_link_tag :flutie %>
+  <%= javascript_include_tag :defaults %>
+  <%= csrf_meta_tag %>
+
+  <style type="text/css"> 
+  /* These are styles to make the page look nice */
+
+  body { background-color: #dadada;}
+  .content {
+    background: #fff;
+    padding: 40px;
+    margin: 40px auto;
+    width: 880px;
+    -moz-border-radius: 24px;
+    -webkit-border-radius: 24px;
+  }
+  </style>
+
+
+</head>
+<body>
+
+<div class="content">
+	<%= yield %>	
+</div>
+
+
+
+</body>
+</html>
