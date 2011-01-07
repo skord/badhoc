@@ -1,0 +1,35 @@
+Posts: <%= Post.count %> | Pics: <%= Post.has_attachment.count %> | JibberJabber: <%= Post.no_attachment.count %>
+
+
+
+<div class='content'>
+	<% @last_13_posts.each do |going_fast|%>
+	<%= link_to(image_tag(going_fast.postpic.url(:thumb), :title => going_fast.subject), going_fast) %>
+	<% end %>
+<%= render 'form' %>
+<div class='digg_pagination'>
+	<%= will_paginate @posts %>
+</div>
+
+<table>
+  <tr>
+		<th>Pos</th>
+		<th>Pic</th>
+    <th>Name</th>
+    <th>Subject</th>
+    <th>Message</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<%= render @posts %>
+
+</table>
+
+<div class='digg_pagination'>
+	<%= will_paginate @posts %>
+</div>
+
+</div>
+

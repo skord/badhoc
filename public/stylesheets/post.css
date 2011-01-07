@@ -1,0 +1,43 @@
+/* @override 
+	http://127.0.0.1:3000/stylesheets/post.css?1294416315
+	http://127.0.0.1:3000/stylesheets/post.css?1294416446
+	http://127.0.0.1:3000/stylesheets/post.css?1294418638
+	http://127.0.0.1:3000/stylesheets/post.css?1294421672
+*/
+
+body { background-color: #dadada;}
+
+.content {
+  background: #fff;
+  padding: 40px;
+  margin: 40px auto;
+  width: 880px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+}
+
+form#new_post.formtastic.post {
+	margin: 10px;
+}
+
+#new_post fieldset.inputs ol li{
+	padding: 2px;
+	margin: 2px;
+}
+
+div.digg_pagination {
+	margin: 10px;
+	-moz-border-radius: 10px;
+  	-webkit-border-radius: 10px;
+}
+
+
+strong.authenticated {
+	color: #0432ff;
+}
+
+
+
+
+
+

@@ -1,0 +1,18 @@
+<tr>
+	<td><%= post.position %></td>
+	<% if post.postpic? %>
+	<td><%= link_to(image_tag(post.postpic.url(:small)),post.postpic.url) %></td>
+	<% else %>
+	<td>None</td>
+	<% end %>
+	<% if post.tripcoded %>
+  	<td><strong class='authenticated'><%= post.name %></strong></td>
+	<% else %>
+		<td><strong><%= post.name %></strong></td>
+	<% end %>
+  <td><%= post.subject %></td>
+  <td><%= truncate(post.message, :length => 50, :omission => '...cont') %></td>
+  <td><%= link_to 'Show', post %></td>
+  <td><%= link_to 'Edit', edit_post_path(post) %></td>
+  <td><%= link_to 'Destroy', post, :confirm => 'Are you sure?', :method => :delete %></td>
+</tr>
