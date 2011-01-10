@@ -2,7 +2,7 @@ class Post < ActiveRecord::Base
   acts_as_list 
   
   cattr_reader :per_page
-  @@per_page = 5
+  @@per_page = 10
   
   
   
@@ -20,7 +20,7 @@ class Post < ActiveRecord::Base
   
   scope :has_attachment, where('postpic_file_name is not ?', nil)
   scope :no_attachment, where('postpic_file_name is ?', nil)
-  default_scope where('position < ?', 101)
+  #default_scope where('position < ?', 101)
   validates_presence_of :name, :message => "can't be blank"
 
   def tripcode(string)
