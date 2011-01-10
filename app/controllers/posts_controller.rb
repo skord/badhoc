@@ -43,6 +43,8 @@ class PostsController < ApplicationController
   # POST /posts.xml
   def create
     @post = Post.new(params[:post])
+    @client_ip = request.remote_ip
+    @post.client_ip = @client_ip
 
     respond_to do |format|
       if @post.save

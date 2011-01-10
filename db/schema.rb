@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110107051335) do
+ActiveRecord::Schema.define(:version => 20110110031526) do
 
   create_table "posts", :force => true do |t|
     t.string   "name",                 :default => "Anonymous"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(:version => 20110107051335) do
     t.datetime "postpic_updated_at"
     t.boolean  "tripcoded"
     t.integer  "position"
+    t.string   "client_ip"
   end
 
 end

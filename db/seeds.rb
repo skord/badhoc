@@ -31,6 +31,7 @@ def create_post(image)
   post.message= Faker::Lorem.paragraph(10)
   post.postpic= File.open(image)
   post.email= Faker::Internet.email
+  post.client_ip= '127.0.0.1'
   post.save
 end
 

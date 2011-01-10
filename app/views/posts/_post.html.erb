@@ -1,18 +1,25 @@
-<tr>
-	<td><%= post.position %></td>
-	<% if post.postpic? %>
-	<td><%= link_to(image_tag(post.postpic.url(:small)),post.postpic.url) %></td>
-	<% else %>
-	<td>None</td>
-	<% end %>
+<div class='post'>
+
+<% if post.postpic? %>
+<%= link_to(image_tag(post.postpic.url(:small)),post.postpic.url, :class => 'postpic') %>
+<% else %>
+None
+<% end %>
+	<div class='post-info'>
 	<% if post.tripcoded %>
-  	<td><strong class='authenticated'><%= post.name %></strong></td>
+		<strong class='authenticated'><%= post.name %></strong>
 	<% else %>
-		<td><strong><%= post.name %></strong></td>
+		<strong><%= post.name %></strong>
 	<% end %>
-  <td><%= post.subject %></td>
-  <td><%= truncate(post.message, :length => 50, :omission => '...cont') %></td>
-  <td><%= link_to 'Show', post %></td>
-  <td><%= link_to 'Edit', edit_post_path(post) %></td>
-  <td><%= link_to 'Destroy', post, :confirm => 'Are you sure?', :method => :delete %></td>
-</tr>
+	<dfn><%= post.subject %></dfn>
+	<em><%= post.created_at %> -</em>
+	<em>No. <%= post.id %></em>
+	<%= link_to 'Show', post %>
+	<%= link_to 'Edit', edit_post_path(post) %>
+	<%= link_to 'Destroy', post, :confirm => 'Are you sure?', :method => :delete %>
+	<br />
+	Client IP: <%= post.client_ip %>
+	<br />
+	<%= post_text_markdown(post.message)%>
+</div>
+</div>
