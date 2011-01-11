@@ -1,9 +1,11 @@
 class PostsController < ApplicationController
+
+  before_filter :authenticate_admin!, :except => [:index, :show]
   # GET /posts
   # GET /posts.xml
   def index
     @post = Post.new
-    @posts = Post.paginate :order => 'position ASC', :page => params[:page]
+    @posts = Post.active.paginate :order => 'position ASC', :page => params[:page], :per_page => 10
 
     respond_to do |format|
       format.html # index.html.erb
