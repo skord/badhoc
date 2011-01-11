@@ -1,0 +1,3 @@
+<% if admin_signed_in? %>
+<p>Signed in as <%= link_to current_admin.email, edit_admin_registration_path %> - <%= link_to 'Sign Out?', destroy_admin_session_path %></p>
+<% end %>

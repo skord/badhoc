@@ -17,10 +17,12 @@ None
 	<br />
 	<em>No: <%= post.id %> - Current Rank: <%= post.position %></em>
 	<%= link_to 'Show', post %>
+	<% if admin_signed_in? %>
 	<%= link_to 'Edit', edit_post_path(post) %>
 	<%= link_to 'Destroy', post, :confirm => 'Are you sure?', :method => :delete %>
 	<br />
 	Client IP: <%= post.client_ip %>
+	<% end %>
 	<br />
 	<%= post_text_markdown(post.message)%>
 </div>
