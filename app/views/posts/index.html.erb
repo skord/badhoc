@@ -1,5 +1,5 @@
-<% @last_13_posts.each do |going_fast|%>
-<%= link_to(image_tag(going_fast.postpic.url(:thumb), :title => going_fast.subject), going_fast) %>
+<% @posts.each do |thumb|%>
+<%= link_to(image_tag(thumb.postpic.url(:thumb), :title => thumb.subject), post_path(thumb)) %>
 <% end %>
 <%= button_to_function 'New Post', "Element.toggle('new_post_form', 'slide')"%>
 

@@ -4,7 +4,6 @@ class PostsController < ApplicationController
   def index
     @post = Post.new
     @posts = Post.paginate :order => 'position ASC', :page => params[:page]
-    @last_13_posts = Post.where(:position => (88..100)).order(:position)
 
     respond_to do |format|
       format.html # index.html.erb

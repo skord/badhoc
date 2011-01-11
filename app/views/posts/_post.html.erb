@@ -8,12 +8,14 @@ None
 	<div class='post-info'>
 	<% if post.tripcoded %>
 		<strong class='authenticated'><%= post.name %></strong>
+		<%= pluralize post.poster_post_count, 'post' %>
 	<% else %>
 		<strong><%= post.name %></strong>
 	<% end %>
 	<dfn><%= post.subject %></dfn>
-	<em><%= post.created_at %> -</em>
-	<em>No. <%= post.id %></em>
+	<em><%= post.created_at %></em>
+	<br />
+	<em>No: <%= post.id %> - Current Rank: <%= post.position %></em>
 	<%= link_to 'Show', post %>
 	<%= link_to 'Edit', edit_post_path(post) %>
 	<%= link_to 'Destroy', post, :confirm => 'Are you sure?', :method => :delete %>
