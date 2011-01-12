@@ -1,0 +1,28 @@
+/* @override 
+	http://iphone.localhost.com:3000/stylesheets/iphone/pagination.css?1294846253
+	http://iphone.localhost.com:3000/stylesheets/iphone/pagination.css?1294847132
+*/
+
+.iphone_pagination {
+	background: #F1F1F1;
+	border: 1px solid #E5E5E5;
+	text-align: center;
+	padding: 5px;
+	margin-top: 1em;
+	margin-bottom: 1em; 
+	}
+	
+.iphone_pagination a, .iphone_pagination span, .digg_pagination em {
+    padding: .2em .3em;
+    
+	}
+.iphone_pagination span.disabled {
+    color: #AAA; }
+.iphone_pagination em {
+    font-weight: bold;
+    background: transparent url(apple-circle.gif) no-repeat 50% 50%; }
+.iphone_pagination a {
+    text-decoration: none;
+    color: black; }
+.iphone_pagination a:hover, .iphone_pagination a:focus {
+	text-decoration: underline; }

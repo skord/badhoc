@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	  <title>Badhoc</title>
+		<%= stylesheet_link_tag :flutie %>
+	  <%= stylesheet_link_tag  'iphone/pagination'%>
+		<%= stylesheet_link_tag 'iphone/app' %>
+	  <!-- <%= stylesheet_link_tag  'post'%> -->
+	  <%= javascript_include_tag :defaults %>
+	  <%= csrf_meta_tag %>
+		<meta id="viewport" name="viewport" content="width=device-width" />
+	</head>
+	<body>
+		<div class='content'>
+			<%= link_to 'BBS View', posts_path %>
+			<%= link_to 'Pic Wall View', picwalls_path %>
+			<br />
+			<% if notice %>
+				<div class="notice"><%= notice %></div>
+			<% end %>
+			<% if alert %>
+		  	<div class="alert"><%= alert %></div>
+			<% end %>
+
+			<%= yield %>	
+		</div>
+	</body>
+</html>
