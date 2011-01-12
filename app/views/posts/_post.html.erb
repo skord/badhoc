@@ -1,7 +1,7 @@
 <div class='post'>
 
 <% if post.postpic? %>
-<%= link_to(image_tag(post.postpic.url(:small)),post.postpic.url, :class => 'postpic') %>
+<%= link_to(image_tag(post.postpic.url(:small)),post.postpic.url, :class => 'postpic', :target => "_blank") %>
 <% else %>
 None
 <% end %>

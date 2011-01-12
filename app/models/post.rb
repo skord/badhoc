@@ -62,12 +62,19 @@ class Post < ActiveRecord::Base
   
   private
   
+
+  #
+  # These are weird, and the english doesn't exactly match the SQL. Basically, you have
+  # to read it not as "Created at less than five minutes ago", but rather
+  # "The time this was created at is before 5 minutes ago."
+  #
+
   def self.cleanup
-    Post.inactive.where("created_at > ?", Time.now - 5.minutes).count
+    Post.inactive.where("created_at < ?", 5.minutes.ago).count
   end
 
   def self.cleanup!
-    Post.inactive.where("created_at > ?", Time.now - 5.minutes).destroy_all.count
+    Post.inactive.where("created_at < ?", 5.minutes.ago).destroy_all.count
   end
 
   
