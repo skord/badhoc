@@ -1,0 +1,26 @@
+<div class="comment <%= cycle('even', 'odd')%>">
+	<% if comment.commentpic? %>
+		<%= link_to(image_tag(comment.commentpic.url(:small)),comment.commentpic.url, :class => 'comment-pic', :target => '_blank') %>
+	<% else %>
+		None
+	<% end %>
+
+	<div class='comment-info'>
+		<% if comment.tripcoded? %>
+			<strong class="authenticated"><%= comment.name %></strong>
+		<% else %>
+			<strong><%= comment.name %></strong>
+		<% end %>
+
+	  <dfn><%= comment.subject %></dfn>
+		<em><%= comment.created_at %></em>
+		<em>No. <%= comment.id %></em>
+		<% if admin_signed_in? %>
+			<%= link_to 'Edit', edit_post_comment_path(comment.post, comment)%>
+			<%= link_to 'Destroy', post_comment_path(comment.post, comment), :confirm => 'Are you sure?', :method => :delete %>
+			<br />
+			<%= comment.client_ip %>
+		<% end %>
+	  <p><%= user_text_markdown(comment.message) %></p>
+	</div>
+</div>

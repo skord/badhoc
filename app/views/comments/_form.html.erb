@@ -1,0 +1,10 @@
+<%= semantic_form_for([@comment.post, @comment], :html => {:multipart => true}) do |f| %>
+	<% f.inputs "Comment" do %>
+	  <%= f.input :name %>
+	  <%= f.input :email %>
+	  <%= f.input :subject %>
+	  <%= f.input :message %>
+		<%= f.input :commentpic %>
+	<% end %>
+	<%= f.buttons %>
+<% end %>

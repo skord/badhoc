@@ -7,7 +7,7 @@ class Post < ActiveRecord::Base
   @@per_page = 10
   
   
-  
+  has_many :comments, :dependent => :destroy
   has_attached_file :postpic,
                     :styles => {:small => '128x128#',
                                 :thumb => '64x64#'}
@@ -58,6 +58,10 @@ class Post < ActiveRecord::Base
   
   def poster_post_count
     Post.find_all_by_name(self.name).count
+  end
+  
+  def locked?
+    self.comments_count >= 100
   end
   
   private

@@ -1,0 +1,19 @@
+.comment {
+	padding-top: 10px;
+	width: 100%;
+	display: inline-block;
+	border-top: 1px solid #999;
+	margin-left: 20px;
+}
+
+.even {
+	background-color: #E1EDFA;
+}
+
+.comment-info {
+	padding-left: 150px;
+}
+
+a.comment-pic {
+	float: left;
+}

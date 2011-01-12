@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110111174647) do
+ActiveRecord::Schema.define(:version => 20110112204802) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                               :default => "", :null => false
@@ -29,6 +29,24 @@ ActiveRecord::Schema.define(:version => 20110111174647) do
   add_index "admins", ["email"], :name => "index_admins_on_email", :unique => true
   add_index "admins", ["reset_password_token"], :name => "index_admins_on_reset_password_token", :unique => true
 
+  create_table "comments", :force => true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "subject"
+    t.text     "message"
+    t.boolean  "tripcoded"
+    t.string   "client_ip"
+    t.integer  "post_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "commentpic_file_name"
+    t.string   "commentpic_content_type"
+    t.integer  "commentpic_file_size"
+    t.datetime "commentpic_updated_at"
+  end
+
+  add_index "comments", ["post_id"], :name => "index_comments_on_post_id"
+
   create_table "posts", :force => true do |t|
     t.string   "name",                 :default => "Anonymous"
     t.string   "email"
@@ -44,6 +62,7 @@ ActiveRecord::Schema.define(:version => 20110111174647) do
     t.boolean  "tripcoded"
     t.integer  "position"
     t.string   "client_ip"
+    t.integer  "comments_count",       :default => 0
   end
 
 end

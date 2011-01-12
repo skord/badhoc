@@ -1,7 +1,11 @@
 Badhoc::Application.routes.draw do
+  resources :comments
+
   devise_for :admins
 
-  resources :posts
+  resources :posts do
+    resources :comments
+  end
   resources :picwalls
 
   root :to => 'posts#index'

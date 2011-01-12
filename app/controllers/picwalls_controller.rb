@@ -1,4 +1,6 @@
 class PicwallsController < ApplicationController
+
+  before_filter :authenticate_admin!, :except => [:index, :show, :new, :create]
   # GET /picwalls
   # GET /picwalls.xml
   def index

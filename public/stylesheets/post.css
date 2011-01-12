@@ -44,7 +44,7 @@ div.post {
 	display: inline-block;
 }
 
-.post a.postpic {
+a.postpic {
 	float: left;
 }
 

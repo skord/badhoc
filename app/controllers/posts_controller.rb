@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   # GET /posts.xml
   def index
     @post = Post.new
-    @posts = Post.active.paginate :order => 'position ASC', :page => params[:page], :per_page => 10
+    @posts = Post.active.paginate :order => 'position ASC', :page => params[:page], :per_page => 10, :include => :comments
 
     respond_to do |format|
       format.html # index.html.erb
@@ -17,6 +17,7 @@ class PostsController < ApplicationController
   # GET /posts/1.xml
   def show
     @post = Post.find(params[:id])
+    @comment = @post.comments.new
 
     respond_to do |format|
       format.html # show.html.erb

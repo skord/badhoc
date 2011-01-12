@@ -36,6 +36,24 @@ def create_post(image)
   post.move_to_top
 end
 
-for image in $images
+def create_comment(post)
+  comment= Comment.new
+  comment.name= Faker::Name.first_name + "#" + Faker::Lorem.words(1)[0]
+  comment.subject= Faker::Lorem.sentence
+  comment.message= Faker::Lorem.paragraph(10)
+  comment.email= Faker::Internet.email
+  comment.client_ip= '127.0.0.1'
+  comment.post= post
+  comment.commentpic= File.open($images.rand)
+  comment.save
+end
+
+for image in $images[1..20]
   create_post(image)
+end
+
+Post.all.each do |post|
+  (rand(4) + 1).times do
+    create_comment(post)
+  end
 end

@@ -1,6 +1,12 @@
-<p id="notice"><%= notice %></p>
-
+<% if @post.locked?%>
+	<em>This post has reached its comment limit and has been locked</em>
+<% else %>
+	<%= button_to_function 'New Comment', "Element.toggle('new_comment_form', 'slide')"%>
+<% end %>
+<div id="new_comment_form" style="display:none;">
+<%= render 'comments/form'%>
+</div>
 <%= render @post %>
-
+<%= render @post.comments %>
 <%= link_to('Edit', edit_post_path(@post)) if admin_signed_in? %>
 <%= link_to 'Back', posts_path %>

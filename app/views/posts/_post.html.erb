@@ -24,6 +24,8 @@ None
 	Client IP: <%= post.client_ip %>
 	<% end %>
 	<br />
-	<%= post_text_markdown(post.message)%>
+	<%= user_text_markdown(post.message)%>
+	<br />
+	<em><%= pluralize post.comments_count, 'comment' %></em>
 </div>
 </div>
