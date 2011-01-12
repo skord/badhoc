@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
 
-  before_filter :authenticate_admin!, :except => [:index, :show]
+  before_filter :authenticate_admin!, :except => [:index, :show, :new, :create]
   # GET /posts
   # GET /posts.xml
   def index

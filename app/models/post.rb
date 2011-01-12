@@ -1,4 +1,6 @@
 class Post < ActiveRecord::Base
+
+  ACTIVE_POST_THRESHOLD = 1000
   acts_as_list 
   
   cattr_reader :per_page
@@ -14,9 +16,12 @@ class Post < ActiveRecord::Base
     self.name = tripcode(self.name)
   end
 
-  after_save do
-    Post.inactive.where("created_at < ?", Time.now - 5.minutes).destroy_all
-  end
+  # I thought this could clean up inactive posts, but I think it causes an infinite loop 
+  # or something somewhere. Rails will crash with an illegal instruction upon a creating a new record. 
+  #
+  # before_save do
+  #   Post.inactive.where("created_at < ?", Time.now - 5.minutes).destroy_all
+  # end
 
   before_destroy do
     self.destroy_attached_files
@@ -24,11 +29,13 @@ class Post < ActiveRecord::Base
     
   scope :has_attachment, where('postpic_file_name is not ?', nil)
   scope :no_attachment, where('postpic_file_name is ?', nil)
-  scope :active, where('position < ?', 101)
-  scope :inactive, where('position > ?', 101)
+  scope :active, where('position <= ?', ACTIVE_POST_THRESHOLD)
+  scope :inactive, where('position > ?', ACTIVE_POST_THRESHOLD)
   validates_presence_of :name, :message => "can't be blank"
 
-  validates_attachment_presence :postpic
+  validates_attachment_presence :postpic, :message => "can't be blank. That means you have to upload something."
+  validates_attachment_size :postpic, :less_than => 5.megabytes
+  validates_attachment_content_type :postpic, :content_type => ['image/jpeg', 'image/png', 'image/gif']
 
   # validate :posting_too_quickly, :on => :create
   # 
@@ -52,6 +59,17 @@ class Post < ActiveRecord::Base
   def poster_post_count
     Post.find_all_by_name(self.name).count
   end
+  
+  private
+  
+  def self.cleanup
+    Post.inactive.where("created_at > ?", Time.now - 5.minutes).count
+  end
+
+  def self.cleanup!
+    Post.inactive.where("created_at > ?", Time.now - 5.minutes).destroy_all.count
+  end
+
   
   attr_protected :client_ip, :tripcoded, :position
 end

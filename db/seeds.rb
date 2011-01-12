@@ -8,12 +8,12 @@
 
 require 'find'
 
-Post.destroy_all
+#Post.destroy_all
 
 $images = []
 
 def find_images
-  Find.find('/Users/mike/Pictures/iPhoto Library') do |path|
+  Find.find('/Users/mike/Pictures/INTERNET/SFW') do |path|
     if File.basename(path) =~ /^\w.*.(jpg|png|gif)$/
       $images << path
     else
@@ -33,8 +33,9 @@ def create_post(image)
   post.email= Faker::Internet.email
   post.client_ip= '127.0.0.1'
   post.save
+  post.move_to_top
 end
 
-for image in $images[1..150]
+for image in $images
   create_post(image)
 end

@@ -1,26 +1,14 @@
 <%= semantic_form_for(@post, :html => {:multipart => true}) do |f| %>
-  <% if @post.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
-
-      <ul>
-      <% @post.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
 
 	<% f.inputs do %>
 	  <%= f.input :name, :input_html => { :size => 10 } %>
 	  <%= f.input :email %>
 	  <%= f.input :subject %>
 	  <%= f.input :message %>
-		<%= f.input :postpic %>
+		<%= f.input :postpic, :hint => 'Max 5Mb. jpg/png/gif accepted' %>
 	  <%= f.input :password %>
 	<% end %>
   <div class="actions">
     <%= f.submit %>
   </div>
-
 <% end %>
