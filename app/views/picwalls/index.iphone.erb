@@ -1,0 +1,13 @@
+<div class='iphone_pagination'>
+	<%= page_entries_info @picwalls %>
+	<%= will_paginate @picwalls %>
+</div>
+
+<% @picwalls.each do |thumb|%>
+	<%= link_to(image_tag(thumb.postpic.url(:thumb), :title => thumb.subject), thumb.postpic.url) %>
+<% end %>
+<div class='iphone_pagination'>
+	<%= page_entries_info @picwalls %>
+	<%= will_paginate @picwalls %>
+</div>
+

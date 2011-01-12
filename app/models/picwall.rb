@@ -1,0 +1,2 @@
+class Picwall < Post
+end
