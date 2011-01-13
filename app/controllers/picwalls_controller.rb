@@ -4,7 +4,7 @@ class PicwallsController < ApplicationController
   # GET /picwalls
   # GET /picwalls.xml
   def index
-    @picwalls = Picwall.active.paginate :order => 'position ASC', :page => params[:page], :per_page => 100
+    @picwalls = Picwall.active.paginate :order => 'position ASC', :page => params[:page], :per_page => 10, :include => :comments
 
     respond_to do |format|
       format.html # index.html.erb
@@ -15,7 +15,7 @@ class PicwallsController < ApplicationController
   # GET /picwalls/1
   # GET /picwalls/1.xml
   def show
-    @picwall = Picwall.find(params[:id])
+    @picwall = Picwall.find(params[:id], :include => :comments)
 
     respond_to do |format|
       format.html # show.html.erb
