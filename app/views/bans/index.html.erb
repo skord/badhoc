@@ -1,0 +1,25 @@
+<h1>Listing bans</h1>
+
+<table>
+  <tr>
+    <th>Client IP</th>
+    <th>Reason</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @bans.each do |ban| %>
+  <tr>
+    <td><%= ban.client_ip %></td>
+    <td><%= ban.reason %></td>
+    <td><%= link_to 'Show', ban %></td>
+    <td><%= link_to 'Edit', edit_ban_path(ban) %></td>
+    <td><%= link_to 'Destroy', ban, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Ban', new_ban_path %>

@@ -1,0 +1,25 @@
+<%= form_for(@ban) do |f| %>
+  <% if @ban.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@ban.errors.count, "error") %> prohibited this ban from being saved:</h2>
+
+      <ul>
+      <% @ban.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :client_ip %><br />
+    <%= f.text_field :client_ip %>
+  </div>
+  <div class="field">
+    <%= f.label :reason %><br />
+    <%= f.text_field :reason %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

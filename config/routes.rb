@@ -1,4 +1,6 @@
 Badhoc::Application.routes.draw do
+  resources :bans
+
   resources :comments
 
   devise_for :admins

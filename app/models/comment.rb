@@ -24,6 +24,12 @@ class Comment < ActiveRecord::Base
   def tripcode(string)
     if string =~ /#/
       name, salt = string.split('#')
+  
+  validate :user_not_banned
+  
+  def user_not_banned
+    errors.add("You Are Banned From Posting for the Following Reason: ","#{Ban.find_by_client_ip(self.client_ip).reason}") unless Ban.find_by_client_ip(self.client_ip) == nil
+  end
       salt = salt + 'H..'
       tripcoded_name = name + '!' + (name.crypt(salt))[-10..-1].to_s
       self.tripcoded = true
