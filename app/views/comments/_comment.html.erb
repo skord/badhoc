@@ -6,11 +6,7 @@
 	<% end %>
 
 	<div class='comment-info'>
-		<% if comment.tripcoded? %>
-			<strong class="authenticated"><%= comment.name %></strong>
-		<% else %>
-			<strong><%= comment.name %></strong>
-		<% end %>
+		<%= sanitize tripcode_auth_tags(comment.tripcoded, comment.name)%>
 
 	  <dfn><%= comment.subject %></dfn>
 		<em><%= comment.created_at %></em>

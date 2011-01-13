@@ -1,31 +1,34 @@
-<div class='post'>
+<div class='post span-24 last'>
 
-<% if post.postpic? %>
-<%= link_to(image_tag(post.postpic.url(:small)),post.postpic.url, :class => 'postpic', :target => "_blank") %>
-<% else %>
-None
-<% end %>
-	<div class='post-info'>
-	<% if post.tripcoded %>
-		<strong class='authenticated'><%= post.name %></strong>
-		<%= pluralize post.poster_post_count, 'post' %>
-	<% else %>
-		<strong><%= post.name %></strong>
-	<% end %>
-	<dfn><%= post.subject %></dfn>
-	<em><%= post.created_at %></em>
-	<br />
-	<em>No: <%= post.id %> - Current Rank: <%= post.position %></em>
-	<%= link_to 'Show', post %>
-	<% if admin_signed_in? %>
-	<%= link_to 'Edit', edit_post_path(post) %>
-	<%= link_to 'Destroy', post, :confirm => 'Are you sure?', :method => :delete %>
-	<br />
-	Client IP: <%= post.client_ip %>
-	<% end %>
-	<br />
-	<%= user_text_markdown(post.message)%>
-	<br />
-	<em><%= pluralize post.comments_count, 'comment' %></em>
-</div>
+	<div class='postpic span-6'>
+		<% if post.postpic? %>
+			<%= link_to(image_tag(post.postpic.url(:small)),post.postpic.url, :class => 'postpic', :target => "_blank") %>
+		<% else %>
+			None
+		<% end %>
+		<div class='post-comment-thumbs span-6 last'>
+			<%= render :partial => 'post_thumbs', :locals => {:post => post}%>
+		</div>
+	</div>
+	<div class='post-info span-16 last'>
+		<%= sanitize tripcode_auth_tags(post.tripcoded, post.name)%>
+		<dfn><%= post.subject %></dfn>
+		<em><%= post.created_at %></em>
+		<br />
+		<em>No: <%= post.id %> - Current Rank: <%= post.position %></em>
+		<%= link_to 'Show', post %>
+		<%= link_to "Picwall", picwall_path(post)%>
+		<% if admin_signed_in? %>
+		<%= link_to 'Edit', edit_post_path(post) %>
+		<%= link_to 'Destroy', post, :confirm => 'Are you sure?', :method => :delete %>
+		<br />
+		Client IP: <%= post.client_ip %>
+		<% end %>
+		<br />
+		<%= user_text_markdown(post.message)%>
+		<br />
+		<em><%= pluralize post.comments_count, 'comment' %></em>
+		<br />
+
+	</div>
 </div>

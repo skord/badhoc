@@ -3,6 +3,14 @@ module ApplicationHelper
     request.env["HTTP_USER_AGENT"] && request.env["HTTP_USER_AGENT"][/(Mobile\/.+Safari)/]
   end
   
+  def tripcode_auth_tags(tripcode_status, name)
+    if tripcode_status
+      "<strong class='authenticated'>#{name}</strong>"
+    else
+      "<strong>#{name}</strong>"
+    end
+  end
+  
   # needs refactor
   def user_text_markdown(text)
     if controller.action_name == 'index'
