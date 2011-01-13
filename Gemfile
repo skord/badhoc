@@ -5,7 +5,8 @@ gem 'rails', '3.0.3'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'pg'
+# gem 'pg'
+gem 'mysql2'
 gem 'devise', :git => 'git://github.com/plataformatec/devise.git'
 gem 'paperclip'
 gem 'flutie'
@@ -14,6 +15,7 @@ gem 'will_paginate', "~> 3.0.pre2"
 gem 'aws-s3'
 gem 'acts_as_list'
 gem 'rdiscount'
+gem 'faker'
 
 # Use unicorn as the web server
 # gem 'unicorn'
@@ -43,5 +45,4 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'autotest'
   gem 'webrat'
-  gem 'faker'
 end

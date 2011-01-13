@@ -65,12 +65,12 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.16)
+    mysql2 (0.2.6)
     nokogiri (1.4.4)
     orm_adapter (0.0.4)
     paperclip (2.3.8)
       activerecord
       activesupport
-    pg (0.10.0)
     polyglot (0.3.1)
     rack (1.2.1)
     rack-mount (0.6.13)
@@ -130,8 +130,8 @@ DEPENDENCIES
   faker
   flutie
   formtastic
+  mysql2
   paperclip
-  pg
   rails (= 3.0.3)
   rdiscount
   rspec-rails
