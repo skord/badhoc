@@ -1,5 +1,29 @@
 <p id="notice"><%= notice %></p>
 
-
-<%= link_to 'Edit', edit_picwall_path(@picwall) %> |
+<div class='span-6'>
+	<%= link_to(image_tag(@picwall.postpic.url(:small)), @picwall.postpic.url) %>
+</div>
+<div class='span-18 last'>
+	<div class='span-4'>
+		Original Post: 
+		<br />
+		Picture Comments:
+		<br />
+		Text Comments:
+	</div>
+	<div class='span-4 last'>
+		<%= link_to "Post #{@picwall.id}", post_path(@picwall) %>
+		<br />
+		<%= @picwall.comments.has_attachment.count %>
+		<br />
+		<%= @picwall.comments.no_attachment.count %>
+	</div>
+</div>
+<div class='span-24 last'>
+	<% @picwall.comments.each do |comment|%>
+		<%= link_to(image_tag(comment.commentpic.url(:small)), comment.commentpic.url) %>
+	<% end %>
+</div>
+<div class='span-24 last'>
 <%= link_to 'Back', picwalls_path %>
+</div>

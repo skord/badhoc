@@ -2,15 +2,13 @@
 <html>
 	<head>
 	  <title>Badhoc</title>
-		<%= stylesheet_link_tag :flutie %>
-	  <%= stylesheet_link_tag  'pagination'%>
-	  <%= stylesheet_link_tag  'post'%>
-	  <%= stylesheet_link_tag  'comment'%>
-	  <%= javascript_include_tag :defaults %>
+		<%= stylesheet_link_tag 'pagination', 'post', 'comment', 'blueprint/screen', :cache => true %>
+	  <%= javascript_include_tag :defaults, :cache => true %>
 	  <%= csrf_meta_tag %>
+
 	</head>
 	<body>
-		<div class='content'>
+		<div class='container'>
 			<%= link_to 'BBS View', posts_path %>
 			<%= link_to 'Pic Wall View', picwalls_path %>
 			<br />

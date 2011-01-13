@@ -2,6 +2,7 @@
 
 <table>
   <tr>
+		<th>Thumb</th>
 		<th>ID</th>
     <th>Name</th>
     <th>Subject</th>
@@ -11,6 +12,7 @@
 
 <% @comments.each do |comment| %>
   <tr>
+		<td><%= image_tag comment.commentpic.url(:thumb) %>
     <td><%= comment.id %></td>
     <td><%= comment.name %></td>
     <td><%= comment.subject %></td>

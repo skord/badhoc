@@ -1,14 +1,19 @@
 <h1>Picwall</h1>
 
-<div class='digg_pagination'>
+<div class='digg_pagination span-24 last'>
 	<%= page_entries_info @picwalls %>
 	<%= will_paginate @picwalls %>
 </div>
 
-<% @picwalls.each do |thumb|%>
-<%= link_to(image_tag(thumb.postpic.url(:thumb), :title => thumb.subject), thumb.postpic.url) %>
+<% @picwalls.each do |picwall|%>
+	<div class='span-2 last'>
+	<%= link_to(image_tag(picwall.postpic.url(:thumb), :title => picwall.subject), picwall_path(picwall)) %>
+	<% picwall.comments.each do |comment|%>
+		<%= image_tag(comment.commentpic.url(:thumb))%>
+	<% end %>
+</div>
 <% end %>
-<div class='digg_pagination'>
+<div class='digg_pagination span-24 last'>
 	<%= page_entries_info @picwalls %>
 	<%= will_paginate @picwalls %>
 </div>
