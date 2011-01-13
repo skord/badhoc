@@ -46,14 +46,9 @@ def create_comment(post)
   comment.post= post
   comment.commentpic= File.open($images.rand)
   comment.save
+  comment.post.move_to_top
 end
 
-for image in $images[1..20]
+for image in $images
   create_post(image)
-end
-
-Post.all.each do |post|
-  (rand(4) + 1).times do
-    create_comment(post)
-  end
 end

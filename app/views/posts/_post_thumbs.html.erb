@@ -1,0 +1,6 @@
+<% for comment in post.comments.reverse[0..8] %>
+	<% if comment.commentpic? %>
+		<%= image_tag comment.commentpic.url(:thumb)%>
+	<% end %>
+<% end %>
+

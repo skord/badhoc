@@ -3,6 +3,7 @@
 	http://127.0.0.1:3000/stylesheets/post.css?1294416446
 	http://127.0.0.1:3000/stylesheets/post.css?1294418638
 	http://127.0.0.1:3000/stylesheets/post.css?1294421672
+	http://localhost:3000/stylesheets/post.css?1294881776
 */
 
 body { background-color: #dadada;}
@@ -39,15 +40,5 @@ strong.authenticated {
 
 div.post {
 	border-top: 1px solid #000;
-	padding: 5px 5px;
-	width: 100%;
-	display: inline-block;
-}
-
-a.postpic {
-	float: left;
-}
-
-.post .post-info {
-	padding-left: 150px;
+	padding-top: 5px;
 }

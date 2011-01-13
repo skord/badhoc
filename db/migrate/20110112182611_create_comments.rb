@@ -1,7 +1,7 @@
 class CreateComments < ActiveRecord::Migration
   def self.up
     create_table :comments do |t|
-      t.string :name
+      t.string :name, :default => 'Anonymous'
       t.string :email
       t.string :subject
       t.text :message
