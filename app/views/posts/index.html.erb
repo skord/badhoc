@@ -1,26 +1,33 @@
 <%= auto_discovery_link_tag(:atom, '/posts.atom', {:title => 'Posts Atom'}) %>
-<div class="span-24 last">
-<% @posts.each do |thumb|%>
-<%= link_to(image_tag(thumb.postpic.url(:thumb), :title => thumb.subject), post_path(thumb)) %>
-<% end %>
+<div id='post-page-thumbbar' class='span-24 last'>
+	<div class='span-2'><%= link_to(image_tag('icons/home.png', :title => 'Home'), '/') %></div>
+	<% @posts.each do |thumb|%>
+		<div class='span-2'>
+			<%= link_to(image_tag(thumb.postpic.url(:thumb), :title => thumb.subject), post_path(thumb)) %>
+		</div>
+	<% end %>
+	<div class='span-2 last'><%= render :partial => 'rss_icon' %></div>
 </div>
-<%= button_to_function 'New Post', "Element.toggle('new_post_form', 'slide')"%>
+
+
+<div class='digg_pagination span-24 last'>
+	<div class='span-24 last'>
+	<%= page_entries_info @posts %>
+	</div>
+	<div class='span-20'>
+	<%= will_paginate @posts %>
+	</div>
+	<div class='span-4 last'>
+		<%= link_to_function 'New Post', "Element.toggle('new_post_form', 'slide')"%>
+	</div>
+</div>
 
 <div id='new_post_form' style="display:none;">
 <%= render 'form' %>
 </div>
-<div class='digg_pagination'>
-	<%= page_entries_info @posts %>
-	<%= will_paginate @posts %>
-</div>
-
 <%= render @posts %>
 
-<br />
-
-
-
-<div class='digg_pagination'>
+<div class='digg_pagination span-24 last'>
 	<%= page_entries_info @posts %>
 	<%= will_paginate @posts %>
 </div>

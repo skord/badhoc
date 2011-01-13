@@ -21,7 +21,7 @@
 </div>
 <div class='span-24 last'>
 	<% @picwall.comments.each do |comment|%>
-		<%= link_to(image_tag(comment.commentpic.url(:small)), comment.commentpic.url) %>
+		<%= link_to(image_tag(comment.commentpic.url(:small)), comment.commentpic.url) if comment.commentpic? %>
 	<% end %>
 </div>
 <div class='span-24 last'>

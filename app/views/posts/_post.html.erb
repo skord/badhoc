@@ -2,9 +2,9 @@
 
 	<div class='postpic span-6'>
 		<% if post.postpic? %>
-			<%= link_to(image_tag(post.postpic.url(:small)),post.postpic.url, :class => 'postpic', :target => "_blank") %>
+			<%= link_to(image_tag(post.postpic.url(:small)),post, :class => 'postpic', :target => "_blank") %>
 		<% else %>
-			None
+			<p>None</p>
 		<% end %>
 		<div class='post-comment-thumbs span-6 last'>
 			<%= render :partial => 'post_thumbs', :locals => {:post => post}%>
@@ -25,10 +25,20 @@
 		Client IP: <%= post.client_ip %>
 		<% end %>
 		<br />
-		<%= user_text_markdown(post.message)%>
+		<%= user_text_markdown(post.message, 500)%>
 		<br />
-		<em><%= pluralize post.comments_count, 'comment' %></em>
+		<em><%= pluralize post.comments_count, 'comment' %>...</em>
 		<br />
-
+		<% if controller.action_name == "index" %>
+			<table>
+			<% post.comments.reverse[0..8].each do |comment| %>
+				<tr>
+					<td><%= sanitize tripcode_auth_tags(comment.tripcoded, comment.name) %></td>
+					<td><%= time_ago_in_words(comment.created_at) %> ago</td>
+					<td><%= strip_tags user_text_markdown(comment.message,20) %></td>
+				</tr>
+			<% end %>
+			</table>
+		<% end %>
 	</div>
 </div>

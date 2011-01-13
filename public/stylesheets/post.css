@@ -1,18 +1,7 @@
-/* @override 
-	http://127.0.0.1:3000/stylesheets/post.css?1294416315
-	http://127.0.0.1:3000/stylesheets/post.css?1294416446
-	http://127.0.0.1:3000/stylesheets/post.css?1294418638
-	http://127.0.0.1:3000/stylesheets/post.css?1294421672
-	http://localhost:3000/stylesheets/post.css?1294881776
-*/
+body { background-color: #000;}
 
-body { background-color: #dadada;}
-
-.content {
-  background: #fff;
-  padding: 40px;
-  margin: 40px auto;
-  width: 680px;
+.container {
+  background-color: #fff;
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
 }
@@ -41,4 +30,8 @@ strong.authenticated {
 div.post {
 	border-top: 1px solid #000;
 	padding-top: 5px;
+}
+
+#post-page-thumbbar {
+
 }
