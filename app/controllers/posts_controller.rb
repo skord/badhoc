@@ -6,10 +6,11 @@ class PostsController < ApplicationController
   def index
     @post = Post.new
     @posts = Post.active.paginate :order => 'position ASC', :page => params[:page], :per_page => 10, :include => :comments
-
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @posts }
+      format.atom
     end
   end
 
@@ -22,6 +23,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @post }
+      format.atom
     end
   end
 
@@ -54,7 +56,7 @@ class PostsController < ApplicationController
         format.html { redirect_to(posts_path, :notice => 'Post was successfully created.') }
         format.xml  { render :xml => @post, :status => :created, :location => @post }
       else
-        format.html { render :action => "new" }
+        format.html { render 'new' }
         format.xml  { render :xml => @post.errors, :status => :unprocessable_entity }
       end
     end

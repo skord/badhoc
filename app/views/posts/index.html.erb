@@ -1,6 +1,9 @@
+<%= auto_discovery_link_tag(:atom, '/posts.atom', {:title => 'Posts Atom'}) %>
+<div class="span-24 last">
 <% @posts.each do |thumb|%>
 <%= link_to(image_tag(thumb.postpic.url(:thumb), :title => thumb.subject), post_path(thumb)) %>
 <% end %>
+</div>
 <%= button_to_function 'New Post', "Element.toggle('new_post_form', 'slide')"%>
 
 <div id='new_post_form' style="display:none;">
@@ -13,11 +16,12 @@
 
 <%= render @posts %>
 
-</table>
+<br />
+
+
 
 <div class='digg_pagination'>
+	<%= page_entries_info @posts %>
 	<%= will_paginate @posts %>
 </div>
-
-
 

@@ -1,3 +1,4 @@
+<%= auto_discovery_link_tag(:atom, "/posts/#{@post.id}.atom", {:title => 'Posts Atom'}) %>
 <% if @post.locked?%>
 	<em>This post has reached its comment limit and has been locked</em>
 <% else %>
