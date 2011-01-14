@@ -16,6 +16,7 @@ gem 'aws-s3'
 gem 'acts_as_list'
 gem 'rdiscount'
 gem 'faker'
+gem 'httpbl'
 
 # Use unicorn as the web server
 # gem 'unicorn'

@@ -46,4 +46,7 @@ Badhoc::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+  
+  config.middleware.insert_before(Rack::Lock, HttpBL, :api_key => ENV['HTTPBL_KEY'])
+  
 end
