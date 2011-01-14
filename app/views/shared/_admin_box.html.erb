@@ -1,0 +1,9 @@
+<% if admin_signed_in? %>
+<div class='span-24 last'>
+	<p>
+		Signed in as <%= current_admin.email %> -
+		<%= link_to 'Manage Bans', bans_path %> -
+		<%= link_to 'Sign Out', destroy_admin_session_path %>
+	</p>
+</div>
+<% end %>

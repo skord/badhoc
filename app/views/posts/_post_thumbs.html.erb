@@ -1,6 +1,6 @@
 <% for comment in post.comments.reverse[0..8] %>
 	<% if comment.commentpic? %>
-		<%= image_tag comment.commentpic.url(:thumb)%>
+		<%= link_to(image_tag(comment.commentpic.url(:thumb)), comment.commentpic.url, :target => '_blank')%>
 	<% end %>
 <% end %>
 

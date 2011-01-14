@@ -1,8 +1,0 @@
-<% if admin_signed_in? %>
-<p>
-	Signed in as <%= current_admin.email %>
-	<%= link_to 'Manage Account', edit_admin_registration_path %> -
-	<%= link_to 'Manage Bans', bans_path %> -
-	<%= link_to 'Sign Out', destroy_admin_session_path %>
-</p>
-<% end %>

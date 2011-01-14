@@ -2,7 +2,7 @@
 <% if @post.locked?%>
 	<em>This post has reached its comment limit and has been locked</em>
 <% else %>
-	<%= link_to_function 'New Comment', "Element.toggle('new_comment_form', 'slide')"%>
+	<div class='pagination prepend-20'><%= link_to_function 'New Comment', "Element.toggle('new_comment_form', 'slide')"%></div>
 <% end %>
 <div id="new_comment_form" style="display:none;">
 <%= render 'comments/form'%>

@@ -1,0 +1,320 @@
+/*
+ 
+ File: style.css
+ 
+ Abstract: CSS properties for the Finger Tips sample.
+ 
+ Version: 1.0
+ 
+ Disclaimer: IMPORTANT:  This Apple software is supplied to you by 
+ Apple Inc. ("Apple") in consideration of your agreement to the
+ following terms, and your use, installation, modification or
+ redistribution of this Apple software constitutes acceptance of these
+ terms.  If you do not agree with these terms, please do not use,
+ install, modify or redistribute this Apple software.
+ 
+ In consideration of your agreement to abide by the following terms, and
+ subject to these terms, Apple grants you a personal, non-exclusive
+ license, under Apple's copyrights in this original Apple software (the
+ "Apple Software"), to use, reproduce, modify and redistribute the Apple
+ Software, with or without modifications, in source and/or binary forms;
+ provided that if you redistribute the Apple Software in its entirety and
+ without modifications, you must retain this notice and the following
+ text and disclaimers in all such redistributions of the Apple Software. 
+ Neither the name, trademarks, service marks or logos of Apple Inc. 
+ may be used to endorse or promote products derived from the Apple
+ Software without specific prior written permission from Apple.  Except
+ as expressly stated in this notice, no other rights or licenses, express
+ or implied, are granted by Apple herein, including but not limited to
+ any patent rights that may be infringed by your derivative works or by
+ other works in which the Apple Software may be incorporated.
+ 
+ The Apple Software is provided by Apple on an "AS IS" basis.  APPLE
+ MAKES NO WARRANTIES, EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION
+ THE IMPLIED WARRANTIES OF NON-INFRINGEMENT, MERCHANTABILITY AND FITNESS
+ FOR A PARTICULAR PURPOSE, REGARDING THE APPLE SOFTWARE OR ITS USE AND
+ OPERATION ALONE OR IN COMBINATION WITH YOUR PRODUCTS.
+ 
+ IN NO EVENT SHALL APPLE BE LIABLE FOR ANY SPECIAL, INDIRECT, INCIDENTAL
+ OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ INTERRUPTION) ARISING IN ANY WAY OUT OF THE USE, REPRODUCTION,
+ MODIFICATION AND/OR DISTRIBUTION OF THE APPLE SOFTWARE, HOWEVER CAUSED
+ AND WHETHER UNDER THEORY OF CONTRACT, TORT (INCLUDING NEGLIGENCE),
+ STRICT LIABILITY OR OTHERWISE, EVEN IF APPLE HAS BEEN ADVISED OF THE
+ POSSIBILITY OF SUCH DAMAGE.
+ 
+ Copyright (C) 2008 Apple Inc. All Rights Reserved.
+ 
+*/
+ 
+body {
+  /* disable some default behaviors that would not fit nicely in a web app */
+  -webkit-touch-callout: none;
+  -webkit-text-size-adjust: none;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+
+  /* make the page the same size as the available screen real estate */
+  width: 320px;
+  height: 416px;
+  margin: 0;
+
+  /* set up the default font */
+  font-family: Helvetica;
+
+  /* set up background shadows */
+  background-color: rgb(25, 25, 25);
+  background-image: url('ui/gradient_top.png'), url('ui/gradient_bottom.png');
+  background-position: 0 0, 0 326px;
+  background-repeat: repeat-x, repeat-x;
+}
+
+/* ============================== RING ============================== */
+
+#ring-container {
+  /* all our containers are positioned in absolute space */
+  position: absolute;
+
+  /* make the perspective origin be the center of the screen */
+  -webkit-perspective-origin: 160px 208px;
+  /* set up the amount of perspective on the children of this container */
+  -webkit-perspective: 1000;
+
+  /* base transform for this container, need a value to transition from */
+  -webkit-transform: translateX(0);
+
+  /* set up core properties for the sliding transitions, the changes of
+  values is done directly by script */
+  -webkit-transition-property: -webkit-transform;
+  -webkit-transition-duration: 0.5s;
+}
+
+#ring-aligner {
+  /* all our containers are positioned in absolute space */
+  position: absolute;
+  
+  /* make sure the content lives in 3D space */
+  -webkit-transform-style: preserve-3d;
+
+  /* push back the content in the Z axis to cancel individual
+  transforms set on ring items by script */
+  -webkit-transform: translateZ(-235px);
+}
+
+#ring {
+  /* all our containers are positioned in absolute space */
+  position: absolute;
+
+  /* position the ring to the center of the screen in height */
+  left: 5px;
+  top: 208px;
+
+  /* override some user agent styles on <ol> elements */
+  margin: 0;
+  list-style-type: none;
+  -webkit-padding-start: 0;
+  
+  /* make sure the content lives in 3D space */
+  -webkit-transform-style: preserve-3d;
+}
+
+/* this matches all items within the ring */
+#ring > li {
+  /* all our containers are positioned in absolute space */
+  position: absolute;
+
+  /* set the bounds of an item */
+  width: 310px;
+  height: 117px;
+  
+  /* offset each item by half its height so that they overlay
+  the center of the transform on the ring */
+  top: -58px; 
+
+  /* hide the back of the elements so that we don't see anything
+  but the items currently in the front of the ring */
+  -webkit-backface-visibility: hidden;
+}
+
+.image {
+  position: absolute;
+
+  top: 2px;
+  left: 2px;
+  width: 125px;
+  height: 113px;
+
+  background-repeat: no-repeat;
+  background-color: black;
+  background-position: center;
+
+  -webkit-box-shadow: 0px 0px 3px rgba(255, 255, 255, 0.7);
+  -webkit-border-radius: 5px;
+}
+
+.desc {
+  position: absolute;
+
+  top: 5px;
+  left: 136px;
+  width: 172px;
+  height: 110px;
+
+  color: white;
+
+  /* make sure the content is clipped to the bounds of the element */
+  overflow: hidden;
+}
+
+.desc > h1 {
+  margin-top: 0;
+  font-size: 13pt;
+}
+
+.desc > p {
+  font-size: 9pt;
+}
+
+/* ============================== INFO CONTAINER ============================== */
+
+#info-pane {
+  /* all our containers are positioned in absolute space */
+  position: absolute;
+
+  /* make the info pane the same size as the available screen real estate */
+  width: 320px;
+  height: 416px;
+
+  /* default all contained text color to white */
+  color: white;
+
+  /* base transform for this container, need a value to transition from */
+  -webkit-transform: translateX(320px);
+
+  /* set up core properties for the sliding transitions, changes to the transform
+  are done by script in the item_selected() and go_back() functions */
+  -webkit-transition-property: -webkit-transform;
+  -webkit-transition-duration: 0.5s;
+}
+
+/* ============================== INFO BACK BUTTON ============================== */
+
+#info-back-button {
+  position: absolute;
+
+  top: 15px;
+  left: 10px;
+  height: 22px;
+
+  /* set up the chrome of the button */
+  -webkit-border-image : url('/images/ui/back_button.png') 0 4 0 15;
+  border-width : 0 4px 0 14px;
+
+  padding-top: 8px;
+  padding-right: 4px;
+
+  text-shadow: rgba(0, 0, 0, .6) 0px -1px 0px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 12px;
+  color: white;
+}
+
+/* the :active pseudo-class kicks in when the button is pressed */
+#info-back-button:active {
+  -webkit-border-image : url('/images/ui/back_button_touched.png') 0 4 0 15;
+}
+
+/* ============================== INFO IMAGE ============================== */
+
+#info-image-wrapper {
+  position: absolute;
+
+  top: 60px;
+  left: 10px;
+  width: 140px;
+  height: 140px;
+	z-index: 1;
+
+  -webkit-border-radius: 5px;
+  border: 1px solid white;
+
+/*  background-color: black;*/
+}
+
+#info-image {
+  position: absolute;
+	z-index: -1;
+  top: 0px;
+  width: 140px;
+  -webkit-border-radius: 5px;
+}
+
+#info-play-button {
+  position: absolute;
+
+  top: 107px;
+  left: 104px;
+  width: 49px;
+  height: 47px;
+
+  /* add some padding so that the touched background can fit */
+  background-image: none;
+  padding: 4px 3px;
+
+  /* ensure that the play button is layered on top of anything
+  at that same position, for instance the poster frame */
+  z-index: 1;
+}
+
+/* the :active pseudo-class kicks in when the button is pressed */
+#info-play-button:active {
+  background-image: url('ui/play_button_ring.png');
+}
+
+/* ============================== INFO METADATA ============================== */
+
+#info-metadata {
+  position: absolute;
+
+  top: 62px;
+  left: 165px;
+  width: 145px;
+
+  line-height: 24px;
+  font-size: 14px;
+  color: gray;
+}
+
+#info-title {
+  font-size: 16px;
+  color: white;
+}
+
+#info-duration:before {
+  content: 'Duration: ';
+}
+
+#info-description {
+  position: absolute;
+
+  top: 218px;
+  left: 10px;
+  width: 300px;
+  height: 178px;
+
+  line-height: 22px;
+  font-size: 14px;
+
+  /* clip the content of this container */
+  overflow: hidden;
+}
+
+/* ============================== MOVIE ============================== */
+
+#movie {
+  /* push the media element outside of the bounds of the screen 
+  as we are building our own UI to launch the movie */
+  position: absolute;
+  left: 320px;
+}

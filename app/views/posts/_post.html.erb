@@ -1,12 +1,12 @@
-<div class='post span-24 last'>
+<div class='post prepend-1 append-1 span-22 last'>
 
 	<div class='postpic span-6'>
 		<% if post.postpic? %>
-			<%= link_to(image_tag(post.postpic.url(:small)),post, :class => 'postpic', :target => "_blank") %>
+			<%= link_to(image_tag(post.postpic.url(:small)),post.postpic.url, :class => 'postpic', :target => "_blank") %>
 		<% else %>
 			<p>None</p>
 		<% end %>
-		<div class='post-comment-thumbs span-6 last'>
+		<div class='post-comment-thumbs'>
 			<%= render :partial => 'post_thumbs', :locals => {:post => post}%>
 		</div>
 	</div>
@@ -16,7 +16,7 @@
 		<em><%= post.created_at %></em>
 		<br />
 		<em>No: <%= post.id %> - Current Rank: <%= post.position %></em>
-		<%= link_to 'Show', post %>
+		<%= link_to('Show/Reply', post) if controller.action_name == 'index'%>
 		<%= link_to "Picwall", picwall_path(post)%>
 		<% if admin_signed_in? %>
 		<%= link_to 'Edit', edit_post_path(post) %>
@@ -29,7 +29,7 @@
 		<br />
 		<em><%= pluralize post.comments_count, 'comment' %>...</em>
 		<br />
-		<% if controller.action_name == "index" %>
+		<% if controller.action_name == "index"%>
 			<table>
 			<% post.comments.reverse[0..8].each do |comment| %>
 				<tr>

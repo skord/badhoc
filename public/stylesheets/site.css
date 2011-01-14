@@ -1,0 +1,20 @@
+body { background-color: #CCC;}
+
+.container {
+  background-color: #fff;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+strong.authenticated {
+	color: #0432ff;
+}
+
+#thumbbar {
+	background-color: #eee;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	margin-top: 10px;
+}

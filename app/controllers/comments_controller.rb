@@ -62,14 +62,15 @@ class CommentsController < ApplicationController
   def update
     @comment = post.comments.find(params[:id])
 
-    respond_to do |format|
-      if @comment.update_attributes(params[:comment])
-        format.html { redirect_to(@comment, :notice => 'Comment was successfully updated.') }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @comment.errors, :status => :unprocessable_entity }
-      end
+    respond_with [post, @comment] do |format|
+      format.html {
+        if @comment.update_attributes(params[:comment])
+          flash[:notice] = 'Comment Updated'
+          redirect_to(post_path(post))
+        else
+          render "new"
+        end
+      }
     end
   end
 
