@@ -1,10 +1,12 @@
-<div class="comment span-24 last <%= cycle('even', 'odd')%>">
-	<% if comment.commentpic? %>
-		<%= link_to(image_tag(comment.commentpic.url(:small)),comment.commentpic.url, :class => 'comment-pic', :target => '_blank') %>
-	<% else %>
-		<p>None</p>
-	<% end %>
-	<div class='comment-info'>
+<div class="comment span-23  prepend-1 last <%= cycle('even', 'odd')%>">
+	<div class='span-6 last'>
+		<% if comment.commentpic? %>
+			<%= link_to(image_tag(comment.commentpic.url(:small)),comment.commentpic.url, :class => 'comment-pic', :target => '_blank') %>
+		<% else %>
+			<p></p>
+		<% end %>
+	</div>
+	<div class='comment-info span-16'>
 		<%= sanitize tripcode_auth_tags(comment.tripcoded, comment.name)%>
 
 	  <dfn><%= comment.subject %></dfn>

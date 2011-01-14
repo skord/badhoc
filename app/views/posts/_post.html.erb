@@ -7,7 +7,11 @@
 			<p>None</p>
 		<% end %>
 		<div class='post-comment-thumbs'>
-			<%= render :partial => 'post_thumbs', :locals => {:post => post}%>
+			<% for comment in post.comments.reverse[0..8] %>
+				<% if comment.commentpic? %>
+					<%= link_to(image_tag(comment.commentpic.url(:thumb)), comment.commentpic.url, :target => '_blank')%>
+				<% end %>
+			<% end %>
 		</div>
 	</div>
 	<div class='post-info span-16 last'>
