@@ -44,5 +44,5 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'autotest'
   gem 'webrat'
-  
+  gem 'faker'
 end
