@@ -40,3 +40,5 @@ Try:
 * Tripcode to Tripcode messaging.
 * More heroku friendly deployment options
 * View refactoring out the...
+* Incorporate more than a single 'board'
+* Allow ban lists to be shared ala activeresource.
