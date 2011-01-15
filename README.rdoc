@@ -1,0 +1,42 @@
+== Badhoc
+
+You've pretty much have to be out of your mind to run this, let alone any imageboard script really. 
+I threw this together in 30 second sprints here and there (adhoc), it needs a ton of work, but if you want it, 
+it's here. 
+
+== Getting started
+
+Git clone, <tt>bundle install</tt>, setup DB, get a project honeypot API key for HttpBL... 
+
+...some other things I'm probably missing.
+
+=== Project Honeypot Block List
+
+Badhoc makes use of bpalmen's httpbl rack middleware filter for httpbl. Read more at the 
+{HttpBL Project Page}[https://github.com/bpalmen/httpbl] about getting a key. Badhoc expects your key 
+to be an environmental variable 'HTTPBL_KEY', so something like:
+
+<tt>HATREDCOPTER:badhoc mike$ export HTTPBL_KEY='THISISMYKEYYYYYYYYY'</tt>
+
+needs to be done, or better yet, put it in your .profile.
+
+=== Create an admin user
+
+I turned off the registerable flag in devise, so you'll have to create a rake task or create an admin user at the console
+
+Try:
+
+<tt>rails c</tt>
+<tt>ruby > Admin.create!(:email => 'me@my.net', :password => 'password')</tt>
+
+... but with obviously a better password and your real email. 
+
+== TODO
+
+* FOR THE LOVE OF GOD WRITE SOME TESTS
+* Finish the iPhone views, never really tried anything like that before. 
+* Some rake tasks, for admin user creation, expired post cleanup (console Post.cleanup!)
+* Sage
+* Tripcode to Tripcode messaging.
+* More heroku friendly deployment options
+* View refactoring out the...
