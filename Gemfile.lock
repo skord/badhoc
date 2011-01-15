@@ -53,7 +53,6 @@ GEM
       abstract (>= 1.0.0)
     faker (0.9.4)
       i18n (~> 0.4)
-    flutie (1.1.4)
     formtastic (1.2.2)
       actionpack (>= 2.3.7)
       activesupport (>= 2.3.7)
@@ -130,7 +129,6 @@ DEPENDENCIES
   aws-s3
   devise!
   faker
-  flutie
   formtastic
   httpbl
   mysql2
