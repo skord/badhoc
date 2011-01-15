@@ -1,20 +1,15 @@
-<h1>Picwall</h1>
 
-<div class='pagination span-24 last'>
-	<%= page_entries_info @picwalls %>
-	<%= will_paginate @picwalls %>
-</div>
+<%= render 'pagination'%>
 
-<% @picwalls.each do |picwall|%>
-	<div class='span-2 last'>
-	<%= link_to(image_tag(picwall.postpic.url(:thumb), :title => picwall.subject), picwall_path(picwall)) %>
-	<% picwall.comments.each do |comment|%>
-		<%= image_tag(comment.commentpic.url(:thumb)) if comment.commentpic? %>
-	<% end %>
-</div>
+<div class='span-21 prepend-3 last'>
+	<% @picwalls.each do |picwall|%>
+		<div class='span-2 last'>
+			<%= link_to(image_tag(picwall.postpic.url(:thumb), :title => picwall.subject), picwall_path(picwall)) %>
+			<% picwall.comments.each do |comment|%>
+				<%= image_tag(comment.commentpic.url(:thumb)) if comment.commentpic? %>
+			<% end %>
+		</div>
 <% end %>
-<div class='pagination span-24 last'>
-	<%= page_entries_info @picwalls %>
-	<%= will_paginate @picwalls %>
 </div>
 
+<%= render 'pagination'%>

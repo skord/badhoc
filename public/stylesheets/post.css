@@ -10,4 +10,5 @@ form#new_post.formtastic.post {
 div.post {
 	border-top: 1px solid #ccc;
 	padding-top: 10px;
+	padding-bottom: 10px;
 }

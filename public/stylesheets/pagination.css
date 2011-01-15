@@ -1,5 +1,7 @@
 .pagination {
   background: white;
+	margin-top: 5px;
+	margin-bottom: 5px;
   /* self-clearing method: */ }
   .pagination a, .pagination span, .pagination em {
     padding: .2em .5em;
@@ -25,7 +27,7 @@
     background: #2E6AB1;
     color: white;
     padding: .4em .6em;
-    width: 2em;
+    width: 20em;
     margin-bottom: .3em;
     text-align: center; }
     .pagination .page_info b {

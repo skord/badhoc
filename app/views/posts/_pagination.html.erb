@@ -1,0 +1,8 @@
+<div class='pagination span-24 last'>
+	<div class='span-19 prepend-1'>
+	<%= will_paginate @posts %>
+	</div>
+	<div class='span-4 last pagination'>
+		<%= link_to_function 'New Post', "Element.toggle('new_post_form', 'slide')"%>
+	</div>
+</div>

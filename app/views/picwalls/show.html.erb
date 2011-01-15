@@ -1,9 +1,9 @@
 <p id="notice"><%= notice %></p>
 
-<div class='span-6'>
+<div class='span-6 prepend-2'>
 	<%= link_to(image_tag(@picwall.postpic.url(:small)), @picwall.postpic.url) %>
 </div>
-<div class='span-18 last'>
+<div class='span-15 prepend-1 last'>
 	<div class='span-4'>
 		Original Post: 
 		<br />
@@ -19,7 +19,7 @@
 		<%= @picwall.comments.no_attachment.count %>
 	</div>
 </div>
-<div class='span-24 last'>
+<div class='span-20 prepend-2 append-2 last'>
 	<% @picwall.comments.each do |comment|%>
 		<%= link_to(image_tag(comment.commentpic.url(:small)), comment.commentpic.url) if comment.commentpic? %>
 	<% end %>

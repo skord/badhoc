@@ -16,7 +16,7 @@ module ApplicationHelper
     if truncate_to == nil
       sanitize RDiscount.new(text, :filter_html, :filter_styles, :safelink, :no_pseudo_protocols, :smart).to_html
     else
-      sanitize RDiscount.new(truncate(text, :length => truncate_to), :filter_html, :filter_styles, :safelink, :no_pseudo_protocols, :smart).to_html      
+      sanitize(RDiscount.new(truncate(text, :length => truncate_to), :filter_html, :filter_styles, :safelink, :no_pseudo_protocols, :smart).to_html)
     end
   end
 end

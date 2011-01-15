@@ -1,24 +1,11 @@
 <%= auto_discovery_link_tag(:atom, '/posts.atom', {:title => 'Posts Atom'}) %>
 
-<div class='pagination span-24 last'>
-	<div class='span-24 last'>
-	<%= page_entries_info @posts %>
-	</div>
-	<div class='span-20'>
-	<%= will_paginate @posts %>
-	</div>
-	<div class='span-4 last'>
-		<%= link_to_function 'New Post', "Element.toggle('new_post_form', 'slide')"%>
-	</div>
-</div>
+<%= render 'pagination' %>
 
 <div id='new_post_form' style="display:none;">
-<%= render 'form' %>
+	<%= render 'form' %>
 </div>
 <%= render @posts %>
 
-<div class='pagination span-24 last'>
-	<%= page_entries_info @posts %>
-	<%= will_paginate @posts %>
-</div>
+<%= render 'pagination' %>
 

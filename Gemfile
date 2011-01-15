@@ -9,13 +9,11 @@ gem 'rails', '3.0.3'
 gem 'mysql2'
 gem 'devise', :git => 'git://github.com/plataformatec/devise.git'
 gem 'paperclip'
-gem 'flutie'
 gem 'formtastic'
 gem 'will_paginate', "~> 3.0.pre2"
 gem 'aws-s3'
 gem 'acts_as_list'
 gem 'rdiscount'
-gem 'faker'
 gem 'httpbl'
 
 # Use unicorn as the web server
@@ -46,4 +44,5 @@ group :test, :development do
   gem 'rspec-rails'
   gem 'autotest'
   gem 'webrat'
+  
 end

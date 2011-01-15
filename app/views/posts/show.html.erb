@@ -1,15 +1,17 @@
+<div class='span-24'>
 <%= auto_discovery_link_tag(:atom, "/posts/#{@post.id}.atom", {:title => 'Posts Atom'}) %>
 <% if @post.locked?%>
 	<em>This post has reached its comment limit and has been locked</em>
 <% else %>
-	<div class='pagination prepend-20'><%= link_to_function 'New Comment', "Element.toggle('new_comment_form', 'slide')"%></div>
+	<div class='pagination prepend-20 last'><%= link_to_function 'New Comment', "Element.toggle('new_comment_form', 'slide')"%><%= link_to('Edit', edit_post_path(@post)) if admin_signed_in? %></div>
 <% end %>
 <div id="new_comment_form" style="display:none;">
 	<%= render 'comments/form'%>
 </div>
 <%= render @post %>
 <%= render @post.comments %>
-<div class='span-24 last'>
-<%= link_to('Edit', edit_post_path(@post)) if admin_signed_in? %>
-<%= link_to 'Back', posts_path %>
+<div class='pagination prepend-20 last'>
+
+
+</div>
 </div>
