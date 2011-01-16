@@ -66,7 +66,6 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.16)
-    mysql2 (0.2.6)
     nokogiri (1.4.4)
     orm_adapter (0.0.4)
     paperclip (2.3.8)
@@ -106,6 +105,7 @@ GEM
       activesupport (~> 3.0)
       railties (~> 3.0)
       rspec (~> 2.4.0)
+    sqlite3-ruby (1.3.2)
     thor (0.14.6)
     treetop (1.4.9)
       polyglot (>= 0.3.1)
@@ -131,11 +131,11 @@ DEPENDENCIES
   faker
   formtastic
   httpbl
-  mysql2
   paperclip
   rails (= 3.0.3)
   rdiscount
   rspec-rails
+  sqlite3-ruby
   webrat
   will_paginate (~> 3.0.pre2)
   wirble
