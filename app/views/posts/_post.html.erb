@@ -29,7 +29,11 @@
 		Client IP: <%= post.client_ip %>
 		<% end %>
 		<br />
-		<%= user_text_markdown(post.message, 500)%>
+		<% if controller.action_name == 'index'%>
+			<%= user_text_markdown(post.message, 500)%>
+		<% else %>
+			<%= user_text_markdown(post.message)%>
+		<% end %>
 		<br />
 		<em><%= pluralize post.comments_count, 'comment' %>...</em>
 		<br />
@@ -39,7 +43,7 @@
 				<tr>
 					<td><%= sanitize tripcode_auth_tags(comment.tripcoded, comment.name) %></td>
 					<td><%= time_ago_in_words(comment.created_at) %> ago</td>
-					<td><%= strip_tags user_text_markdown(comment.message,20) %></td>
+					<td><%= strip_tags user_text_markdown(comment.message,40) %></td>
 				</tr>
 			<% end %>
 			</table>
