@@ -6,9 +6,21 @@ it's here.
 
 == Getting started
 
-Git clone, <tt>bundle install</tt>, setup DB, get a project honeypot API key for HttpBL... 
+You'll need git, ruby, and rubygems. Optionally a database, if you're running this in production, that's a really good idea.
+
+You'll also need to get a project honeypot API key for HttpBL. This is an attempt to block spam before it hits your board.
 
 ...some other things I'm probably missing.
+
+Quicklist:
+
+<tt>git clone git://github.com/skord/badhoc.git</tt>
+
+<tt>bundle</tt>
+
+<tt>rake db:setup</tt>
+
+<tt>rails s</tt>
 
 === Project Honeypot Block List
 
@@ -22,11 +34,12 @@ needs to be done, or better yet, put it in your .profile.
 
 === Create an admin user
 
-I turned off the registerable flag in devise, so you'll have to create a rake task or create an admin user at the console
+I turned off the registrable flag in devise, so you'll have to create a rake task or create an admin user at the console
 
 Try:
 
 <tt>rails c</tt>
+
 <tt>ruby > Admin.create!(:email => 'me@my.net', :password => 'password')</tt>
 
 ... but with obviously a better password and your real email. 
