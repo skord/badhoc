@@ -1,3 +1,4 @@
+<div class='prepend-2 span-20 last'>
 <%= semantic_form_for(@post, :html => {:multipart => true}) do |f| %>
 	<% if @post.errors.any? %>
 	  <div id="error_explanation">
@@ -11,7 +12,7 @@
 	  </div>
 	<% end %>
 	<% f.inputs do %>
-	  <%= f.input :name, :input_html => { :size => 10 } %>
+	  <%= f.input :name %>
 	  <%= f.input :email %>
 	  <%= f.input :subject %>
 	  <%= f.input :message %>
@@ -22,3 +23,4 @@
     <%= f.submit %>
   </div>
 <% end %>
+</div>

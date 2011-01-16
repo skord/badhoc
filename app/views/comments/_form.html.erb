@@ -1,3 +1,4 @@
+<div class='prepend-2 span-20 last'>
 <%= semantic_form_for([@comment.post, @comment], :html => {:multipart => true}) do |f| %>
 	<% f.inputs "Comment" do %>
 	  <%= f.input :name %>
@@ -8,3 +9,4 @@
 	<% end %>
 	<%= f.buttons %>
 <% end %>
+</div>
