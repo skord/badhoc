@@ -4,6 +4,20 @@ You've pretty much have to be out of your mind to run this, let alone any imageb
 I threw this together in 30 second sprints here and there (adhoc), it needs a ton of work, but if you want it, 
 it's here. 
 
+If you can get past that, Badhoc has support for:
+
+* Multiple Boards, Multiple Categories of Boards
+* Application-level bans
+* Markdown markup.
+* Project Honeypot Blocklist Lock-outs
+* Atom Feeds for posts and boards (includes ID's so your feed reader doesn't hose itself)
+* TL;DR picture wall view of all site threads. 
+
+=== Use
+
+If you intend on actually using this, drop me a line, I'd like to know how it works out for you. My github account is
+skord, you can find me on irc.rizon.net sometimes by the same. 
+
 == Getting started
 
 You'll need git, ruby, and rubygems. Optionally a database, if you're running this in production, that's a really good idea.
@@ -21,6 +35,11 @@ Quicklist:
 <tt>rake db:setup</tt>
 
 <tt>rails s</tt>
+
+== Upgrading
+
+Should you already have Badhoc running, I try to make sure you can <tt>git pull</tt>, run <tt>rake db:migrate</tt>,
+and possibly restart your application if need be without too much headache.
 
 === Project Honeypot Block List
 
@@ -53,5 +72,3 @@ Try:
 * Tripcode to Tripcode messaging.
 * More heroku friendly deployment options
 * View refactoring out the...
-* Incorporate more than a single 'board'
-* Allow ban lists to be shared ala activeresource.
