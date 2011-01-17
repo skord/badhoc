@@ -1,5 +1,5 @@
 <div class='prepend-2 span-20 last'>
-<%= semantic_form_for(@post, :html => {:multipart => true}) do |f| %>
+<%= semantic_form_for([@post.board, @post], :html => {:multipart => true}) do |f| %>
 	<% if @post.errors.any? %>
 	  <div id="error_explanation">
 	    <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>

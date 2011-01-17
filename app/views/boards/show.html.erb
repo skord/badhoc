@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @board.name %>
+</p>
+
+<p>
+  <b>Slug:</b>
+  <%= @board.slug %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @board.description %>
+</p>
+<% unless @board.posts.empty? %>
+<p>
+	<b>Posts Count:</b>
+	<%= @board.posts_count %>
+</p>
+
+<p>
+	<b>Images Count:</b>
+	<%= @board.posts.has_attachment.count + @board.comments.has_attachment.count %>
+</p>
+
+<p>
+	<b>Comments Count</b>
+	<%= @board.comments.count %>
+</p>
+
+<p>
+	<b>Last New Post:</b>
+	<%= time_ago_in_words(@board.posts.last.created_at)%>
+
+<p>
+	<b>Last Commented:</b>
+	<%= time_ago_in_words(@board.comments.last.created_at) %>
+</p>
+
+<% end %>
+<%= link_to 'Edit', edit_board_path(@board) %> |
+<%= link_to 'Back', boards_path %>

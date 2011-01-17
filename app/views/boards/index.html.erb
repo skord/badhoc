@@ -1,0 +1,21 @@
+<div class='span-22 prepend-2 last'>
+	<% @boards.each do |board| %>
+		<div class='span-2'>
+			<%= link_to board.name, board_posts_path(board), :title => board.description %>
+		</div>
+		<div class='span-4 append-16 last'>
+			<%= link_to 'Info', board %>
+			<% if admin_signed_in? %>
+				<%= link_to 'Edit', edit_board_path(board) %>
+				<%= link_to 'Destroy', board, :confirm => 'Are you sure?', :method => :delete %>
+			<% end %>
+		</div>
+	<% end %>
+</div>
+
+<br />
+<div class='span-24 last'>
+<% if admin_signed_in? %>
+<%= link_to 'New Board', new_board_path %>
+<% end %>
+</div>

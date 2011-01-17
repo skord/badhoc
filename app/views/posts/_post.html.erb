@@ -23,8 +23,8 @@
 		<%= link_to('Show/Reply', post) if controller.action_name == 'index'%>
 		<%= link_to "Picwall", picwall_path(post)%>
 		<% if admin_signed_in? %>
-		<%= link_to 'Edit', edit_post_path(post) %>
-		<%= link_to 'Destroy', post, :confirm => 'Are you sure?', :method => :delete %>
+		<%= link_to 'Edit', edit_board_post_path(post.board, post) %>
+		<%= link_to 'Destroy', board_post_path(post.board, post), :confirm => 'Are you sure?', :method => :delete %>
 		<br />
 		Client IP: <%= post.client_ip %>
 		<% end %>

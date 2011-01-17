@@ -1,15 +1,16 @@
 class PostsController < ApplicationController
 
+  respond_to :html
+
   before_filter :authenticate_admin!, :except => [:index, :show, :new, :create]
   # GET /posts
   # GET /posts.xml
   def index
-    @post = Post.new
-    @posts = Post.active.paginate :order => 'position ASC', :page => params[:page], :per_page => 10, :include => :comments
+    @post = board.posts.new
+    @posts = board.posts.active.paginate :order => 'position ASC', :page => params[:page], :per_page => 10, :include => :comments
     
-    respond_to do |format|
+    respond_with [board, @posts] do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @posts }
       format.atom
     end
   end
@@ -22,7 +23,6 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @post }
       format.atom
     end
   end
@@ -30,34 +30,31 @@ class PostsController < ApplicationController
   # GET /posts/new
   # GET /posts/new.xml
   def new
-    @post = Post.new
+    @post = board.posts.new
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @post }
     end
   end
 
   # GET /posts/1/edit
   def edit
-    @post = Post.find(params[:id])
+    @post = board.posts.find(params[:id])
   end
 
   # POST /posts
   # POST /posts.xml
   def create
-    @post = Post.new(params[:post])
+    @post = board.posts.new(params[:post])
     @client_ip = request.remote_ip
     @post.client_ip = @client_ip
 
     respond_to do |format|
       if @post.save
         @post.move_to_top
-        format.html { redirect_to(posts_path, :notice => 'Post was successfully created.') }
-        format.xml  { render :xml => @post, :status => :created, :location => @post }
+        format.html { redirect_to(board_posts_path, :notice => 'Post was successfully created.') }
       else
         format.html { render 'new' }
-        format.xml  { render :xml => @post.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -65,15 +62,13 @@ class PostsController < ApplicationController
   # PUT /posts/1
   # PUT /posts/1.xml
   def update
-    @post = Post.find(params[:id])
+    @post = board.posts.find(params[:id])
 
     respond_to do |format|
       if @post.update_attributes(params[:post])
-        format.html { redirect_to(posts_path, :notice => 'Post was successfully updated.') }
-        format.xml  { head :ok }
+        format.html { redirect_to(board_posts_path, :notice => 'Post was successfully updated.') }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @post.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -81,12 +76,17 @@ class PostsController < ApplicationController
   # DELETE /posts/1
   # DELETE /posts/1.xml
   def destroy
-    @post = Post.find(params[:id])
+    @post = board.posts.find(params[:id])
     @post.destroy
 
     respond_to do |format|
-      format.html { redirect_to(posts_url) }
-      format.xml  { head :ok }
+      format.html { redirect_to(board_posts_path) }
     end
+  end
+  
+  private
+  
+  def board
+    @board ||= Board.find(params[:board_id])
   end
 end

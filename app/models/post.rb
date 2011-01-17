@@ -8,6 +8,7 @@ class Post < ActiveRecord::Base
   
   
   has_many :comments, :dependent => :destroy
+  belongs_to :board, :counter_cache => true
   has_attached_file :postpic,
                     :styles => {:small => '200x200#',
                                 :thumb => '64x64#'}

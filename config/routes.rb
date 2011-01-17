@@ -1,16 +1,21 @@
 Badhoc::Application.routes.draw do
-  resources :bans
-
-  resources :comments
-
-  devise_for :admins
 
   resources :posts do
     resources :comments
   end
+
+
+  resources :boards do
+    resources :posts
+  end
+
+  resources :bans
+
+  devise_for :admins
+
   resources :picwalls
 
-  root :to => 'posts#index'
+  root :to => 'boards#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
