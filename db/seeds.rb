@@ -8,7 +8,16 @@
 
 Board.destroy_all
 
-Board.create!(:name => 'Random', :slug => 'b', :description => 'Random')
+Board.create!(:name => 'Random', :slug => 'b', :description => 'Random', :category => Category.find_or_create_by_name('Uncategorized'))
+
+Post.create!(:name => "skord", 
+             :email => "", 
+             :subject => "Welcome!", 
+             :message => "You've just installed Badhoc, I hope it wasn't entirely too difficult, driving you to seek blood revenge.\r\n\r\nIf you need help with anything, need to pitch a gripe, have a feature request, or want to help, see the [Github Page](https://github.com/skord/badhoc). The best way to get something done besides fork it, patch it, and get a pull request is to open an issue there. \r\n\r\nThere's a few more posts that have automatically been put below explaining some of the features of the app, feel free to delete them when you're done with them. \r\n\r\nIf you haven't figured it out yet, the admin sign in is [here](/admins/sign_in). After you sign in, there should be some admin options displayed in-line with everything else.", 
+             :client_ip => "127.0.0.1",
+             :postpic => File.open("#{Rails.root}/db/seed_data/bigdish.jpg"),
+             :board_id => Board.find_by_name("Random").id
+            )
 
 Post.create!(:name => "skord", 
              :email => "", 
