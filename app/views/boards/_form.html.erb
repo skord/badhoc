@@ -1,4 +1,5 @@
-<%= form_for(@board) do |f| %>
+<div class='span-20 append-2 prepend-2'>
+<%= semantic_form_for(@board) do |f| %>
   <% if @board.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@board.errors.count, "error") %> prohibited this board from being saved:</h2>
@@ -11,19 +12,12 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :slug %><br />
-    <%= f.text_field :slug %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_field :description %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+	<% f.inputs do %>
+	  <%= f.input :name %>
+	  <%= f.input :slug %>
+	  <%= f.input :description %>
+		<%= f.input :category %>
+	<% end %>
+	<%= f.buttons %>
 <% end %>
+</div>

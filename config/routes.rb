@@ -1,5 +1,7 @@
 Badhoc::Application.routes.draw do
 
+  resources :categories
+
   resources :posts do
     resources :comments
   end
@@ -15,7 +17,7 @@ Badhoc::Application.routes.draw do
 
   resources :picwalls
 
-  root :to => 'boards#index'
+  root :to => 'categories#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

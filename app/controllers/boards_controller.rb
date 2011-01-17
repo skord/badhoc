@@ -46,11 +46,9 @@ class BoardsController < ApplicationController
 
     respond_to do |format|
       if @board.save
-        format.html { redirect_to(@board, :notice => 'Board was successfully created.') }
-        format.xml  { render :xml => @board, :status => :created, :location => @board }
+        format.html { redirect_to(categories_path, :notice => 'Board was successfully created.') }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @board.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -62,11 +60,9 @@ class BoardsController < ApplicationController
 
     respond_to do |format|
       if @board.update_attributes(params[:board])
-        format.html { redirect_to(@board, :notice => 'Board was successfully updated.') }
-        format.xml  { head :ok }
+        format.html { redirect_to(categories_path, :notice => 'Board was successfully updated.') }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @board.errors, :status => :unprocessable_entity }
       end
     end
   end

@@ -1,3 +1,4 @@
+<div class='span-20 append-2 prepend-2'>
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -14,7 +15,7 @@
   <b>Description:</b>
   <%= @board.description %>
 </p>
-<% unless @board.posts.empty? %>
+<% unless @board.comments.empty? %>
 <p>
 	<b>Posts Count:</b>
 	<%= @board.posts_count %>
@@ -33,6 +34,7 @@
 <p>
 	<b>Last New Post:</b>
 	<%= time_ago_in_words(@board.posts.last.created_at)%>
+</p>
 
 <p>
 	<b>Last Commented:</b>
@@ -41,4 +43,5 @@
 
 <% end %>
 <%= link_to 'Edit', edit_board_path(@board) %> |
-<%= link_to 'Back', boards_path %>
+<%= link_to 'Back', categories_path %>
+</div>
