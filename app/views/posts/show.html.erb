@@ -3,7 +3,7 @@
 <% if @post.locked?%>
 	<em>This post has reached its comment limit and has been locked</em>
 <% else %>
-	<div class='pagination prepend-20 last'><%= link_to_function 'New Comment', "Element.toggle('new_comment_form', 'slide')"%><%= link_to('Edit', edit_post_path(@post)) if admin_signed_in? %></div>
+	<div class='pagination prepend-20 last'><%= link_to_function 'New Comment', "Element.toggle('new_comment_form', 'slide')"%><%= link_to('Edit', edit_board_post_path(@post.board, @post)) if admin_signed_in? %></div>
 <% end %>
 <div id="new_comment_form" style="display:none;">
 	<%= render 'comments/form'%>
