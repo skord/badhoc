@@ -1,10 +1,9 @@
 <div class='span-20 prepend-2 append-2 last'>
 	<h3>Boards by Category</h3>
 </div>
-
-<% @categories.each do |category| %>
-	<div class='span-20 prepend-2 append-2 last'>
-		<table>
+<div class='span-20 prepend-2 append-2 last'>
+	<table>
+		<% @categories.each do |category| %>
 			<tr>
 				<th>
 					<%= category.name %> 
@@ -36,15 +35,14 @@
 						<%= link_to image_tag('icons/information.png', :title => 'Info'), board_path(board) %>	
 						<% if admin_signed_in? %>
 							<%= link_to image_tag('icons/application_edit.png', :title => 'Edit'), edit_board_path(board) %>
-							<%= link_to image_tag('icons/delete.png', :title => 'Delete'), board, :confirm => 'Are you sure?', :method => :delete %>
+							<%= link_to image_tag('icons/delete.png', :title => 'Delete'), board, :confirm => 'Are you sure? This will delete all boards, posts and comments under this category!', :method => :delete %>
 						<% end %>
 					</td>
 				</tr>
 			<% end %>
-		</table>
-	</div>
-<% end %>
-
+		<% end %>
+	</table>
+</div>
 
 <br />
 <% if admin_signed_in? %>
