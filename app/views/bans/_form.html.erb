@@ -1,4 +1,4 @@
-<%= form_for(@ban) do |f| %>
+<%= semantic_form_for(@ban) do |f| %>
   <% if @ban.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@ban.errors.count, "error") %> prohibited this ban from being saved:</h2>
@@ -11,15 +11,12 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :client_ip %><br />
-    <%= f.text_field :client_ip %>
-  </div>
-  <div class="field">
-    <%= f.label :reason %><br />
-    <%= f.text_field :reason %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+	<% f.inputs do %>
+	  <%= f.input :client_ip %>
+	  <%= f.input :reason %>
+	  <%= f.input :expires_at %>
+	  <%= f.input :permanent %>
+	<% end %>
+
+	<%= f.buttons %>
 <% end %>

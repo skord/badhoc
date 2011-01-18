@@ -4,7 +4,7 @@ class Comment < ActiveRecord::Base
   belongs_to :post, :counter_cache => true
   
   has_attached_file :commentpic, 
-                    :styles => {:small => '128x128#',
+                    :styles => {:small => '200x200#',
                                 :thumb => '64x64#'}
   
   scope :has_attachment, where('commentpic_file_name is not ?', nil)
@@ -28,10 +28,18 @@ class Comment < ActiveRecord::Base
   validate :user_not_banned
   
   def user_not_banned
-    errors.add("You Are Banned From Posting for the Following Reason: ","#{Ban.find_by_client_ip(self.client_ip).reason}") unless Ban.find_by_client_ip(self.client_ip) == nil
+    errors.add("You Are Banned From Posting for the Following Reason: ","#{Ban.find_by_client_ip(self.client_ip).reason}") unless Ban.active.find_by_client_ip(self.client_ip) == nil
   end
     
-  attr_protected :tripcoded, :client_ip  
+  def active_ban
+    @ban_record ||= Ban.active.find_by_client_ip(self.client_ip)
+  end
+  
+  def active_ban?
+    active_ban != nil
+  end  
+    
+  attr_accessible :name, :email, :subject, :message, :password, :commentpic
     
   private 
   

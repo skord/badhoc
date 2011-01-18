@@ -1,0 +1,24 @@
+Client IP: 
+
+<% if post.active_ban? %>
+	<strike><%= post.client_ip %></strike>
+	Client currently banned for <%= distance_of_time_in_words(Time.now, post.active_ban.expires_at)%>
+<% else %>
+<%= post.client_ip %>
+<%= link_to '1 day ban', bans_path(:ban => {:client_ip => post.client_ip, 
+																						:expires_at => 1.day.from_now, 
+																						:reason => 'Submitted from Post Page'}), 
+																						:remote => true, 
+																						:method => 'post' %>
+																						
+<%= link_to '5 day ban', bans_path(:ban => {:client_ip => post.client_ip, 
+																						:expires_at => 5.days.from_now, 
+																						:reason => 'Submitted from Post Page'}), 
+																						:remote => true, :method => 'post' %>
+																						
+<%= link_to 'Permaban!', bans_path(:ban => {:client_ip => post.client_ip, 
+																						:permanent => true, :reason => 'Submitted from Post Page'}), 
+																						:remote => true, 
+																						:method => 'post', 
+																						:confirm => 'Are you sure?' %>
+<% end %>

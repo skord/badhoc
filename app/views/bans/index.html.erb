@@ -4,6 +4,8 @@
   <tr>
     <th>Client IP</th>
     <th>Reason</th>
+    <th>Expires</th>
+    <th>Permanent?</th>
     <th></th>
     <th></th>
     <th></th>
@@ -13,6 +15,8 @@
   <tr>
     <td><%= ban.client_ip %></td>
     <td><%= ban.reason %></td>
+    <td><%= ban.expires_at %></td>
+    <td><%= ban.permanent %></td>
     <td><%= link_to 'Show', ban %></td>
     <td><%= link_to 'Edit', edit_ban_path(ban) %></td>
     <td><%= link_to 'Destroy', ban, :confirm => 'Are you sure?', :method => :delete %></td>

@@ -5,4 +5,6 @@ class Board < ActiveRecord::Base
   validates_uniqueness_of :name, :slug, :description
   validates_presence_of :name, :slug, :description
   validates_presence_of :category_id
+  
+  attr_accessible :name, :slug, :description, :category_id
 end

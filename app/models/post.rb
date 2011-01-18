@@ -1,6 +1,18 @@
 class Post < ActiveRecord::Base
 
-  ACTIVE_POST_THRESHOLD = 1000
+  # The active post threshold is site wide, which effects the contents of the positions
+  # per-board. this is why I've pulled the post "rank" (position) as of this commit,
+  # as it can be confusing to see a board with no posts ranked #1. It's actually sort of 
+  # confusing to think about too, but a change in the positions in one board will just 
+  # shift the positions in the other without changing their order. 
+  # 
+  # Why this way? Because the picwall also sorts by position, but it ignores any sort
+  # of board order. 
+  #
+  # So if you have one insanely popular board, yes, content will expire on less popular 
+  # boards sooner, but then again, you probably have other problems if that's the case. 
+
+  ACTIVE_POST_THRESHOLD = 10000
   acts_as_list 
   
   cattr_reader :per_page
@@ -41,7 +53,7 @@ class Post < ActiveRecord::Base
   validate :user_not_banned
   
   def user_not_banned
-    errors.add("You Are Banned From Posting for the Following Reason: ","#{Ban.find_by_client_ip(self.client_ip).reason}") unless Ban.find_by_client_ip(self.client_ip) == nil
+    errors.add("You Are Banned From Posting for the Following Reason: ","#{Ban.find_by_client_ip(self.client_ip).reason}") unless Ban.active.find_by_client_ip(self.client_ip) == nil
   end
 
   # validate :posting_too_quickly, :on => :create
@@ -71,6 +83,14 @@ class Post < ActiveRecord::Base
     self.comments_count >= 100
   end
   
+  def active_ban
+    @ban_record ||= Ban.active.find_by_client_ip(self.client_ip)
+  end
+  
+  def active_ban?
+    active_ban != nil
+  end
+  
   private
   
 
@@ -89,5 +109,5 @@ class Post < ActiveRecord::Base
   end
 
   
-  attr_protected :client_ip, :tripcoded, :position
+  attr_accessible :name, :email, :subject, :message, :password, :postpic
 end

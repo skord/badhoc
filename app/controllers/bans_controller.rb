@@ -47,6 +47,7 @@ class BansController < ApplicationController
       if @ban.save
         format.html { redirect_to(@ban, :notice => 'Ban was successfully created.') }
         format.xml  { render :xml => @ban, :status => :created, :location => @ban }
+        format.js
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @ban.errors, :status => :unprocessable_entity }

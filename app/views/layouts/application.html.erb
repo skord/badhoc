@@ -11,12 +11,8 @@
 		<div class='container'>
 			<%= render :partial => 'shared/thumbbar'%>
 			<div class='span-24 last'>
-				<% if notice %>
-					<div class="notice"><%= notice %></div>
-				<% end %>
-				<% if alert %>
-			  	<div class="alert"><%= alert %></div>
-				<% end %>
+					<div id='notice'><%= notice %></div>
+			  	<div id="alert"><%= alert %></div>
 			</div>
 
 			<%= render :partial => 'shared/admin_box'%>

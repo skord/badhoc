@@ -1,0 +1,4 @@
+# page.replace_html('notice', 'Action Successful')
+# page[:notice].visual_effect :highlight
+page.replace_html("ban_block_#{@ban.client_ip}", "User banned until #{@ban.expires_at}")
+page.visual_effect :highlight, "ban_block_#{@ban.client_ip}"

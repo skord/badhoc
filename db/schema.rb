@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110117012317) do
+ActiveRecord::Schema.define(:version => 20110117175313) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                               :default => "", :null => false
@@ -34,6 +34,8 @@ ActiveRecord::Schema.define(:version => 20110117012317) do
     t.string   "reason"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "expires_at"
+    t.boolean  "permanent"
   end
 
   add_index "bans", ["client_ip"], :name => "index_bans_on_client_ip"
@@ -72,6 +74,7 @@ ActiveRecord::Schema.define(:version => 20110117012317) do
     t.datetime "commentpic_updated_at"
   end
 
+  add_index "comments", ["client_ip"], :name => "index_comments_on_client_ip"
   add_index "comments", ["post_id"], :name => "index_comments_on_post_id"
 
   create_table "posts", :force => true do |t|
@@ -94,5 +97,6 @@ ActiveRecord::Schema.define(:version => 20110117012317) do
   end
 
   add_index "posts", ["board_id"], :name => "index_posts_on_board_id"
+  add_index "posts", ["client_ip"], :name => "index_posts_on_client_ip"
 
 end
