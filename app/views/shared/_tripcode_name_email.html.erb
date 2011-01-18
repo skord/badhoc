@@ -1,0 +1,15 @@
+<% if post.tripcoded? %>
+	<% if post.email.empty? %>
+		<strong class='authenticated'>
+			<%= post.name %>
+		</strong>
+	<% else %>
+		<strong class='authenticated'>
+			<%= mail_to post.email, post.name, :encode => 'javascript' %>
+		</strong>
+	<% end %>
+<% else %>
+	<strong>
+		<%= post.name %>
+	</strong>
+<% end %>

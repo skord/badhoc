@@ -7,8 +7,7 @@
 		<% end %>
 	</div>
 	<div class='comment-info span-16'>
-		<%= sanitize tripcode_auth_tags(comment.tripcoded, comment.name)%>
-
+		<%= render :partial => 'shared/tripcode_name_email', :locals => {:post => comment}%>
 	  <dfn><%= comment.subject %></dfn>
 		<em><%= comment.created_at %></em>
 		<em>Comment: <%= comment.id %></em>

@@ -15,7 +15,7 @@
 		</div>
 	</div>
 	<div class='post-info span-16 last'>
-		<%= sanitize tripcode_auth_tags(post.tripcoded, post.name)%>
+		<%= render :partial => 'shared/tripcode_name_email', :locals => {:post => post}%>
 		<dfn><%= post.subject %></dfn>
 		<em><%= post.created_at %></em>
 		<br />
