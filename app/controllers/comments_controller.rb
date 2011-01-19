@@ -47,7 +47,7 @@ class CommentsController < ApplicationController
     respond_with [post, @comment] do |format|
       format.html {
       if @comment.save
-        @comment.post.move_to_top
+        @comment.post.move_to_top unless @comment.email == 'sage'
         flash[:notice] = 'Comment created'
         redirect_to(post_path(post))
       else
