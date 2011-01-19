@@ -43,7 +43,7 @@
 			<table>
 			<% post.comments.reverse[0..8].each do |comment| %>
 				<tr>
-					<td><%= sanitize tripcode_auth_tags(comment.tripcoded, comment.name) %></td>
+					<td><%= render :partial => 'shared/tripcode_name_email', :locals => {:post => comment}%></td>
 					<td><%= time_ago_in_words(comment.created_at) %> ago</td>
 					<td><%= strip_tags user_text_markdown(comment.message,40) %></td>
 				</tr>
