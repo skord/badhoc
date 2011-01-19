@@ -52,7 +52,13 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.save
         @post.move_to_top
-        format.html { redirect_to(board_posts_path, :notice => 'Post was successfully created.') }
+        format.html { 
+          if @post.email == 'noko'
+            redirect_to(board_post_path(board, @post), :notice => 'Post was successfully created.') 
+          else
+            redirect_to(board_posts_path, :notice => 'Post was successfully created.')
+          end
+          }
       else
         format.html { render 'new' }
       end

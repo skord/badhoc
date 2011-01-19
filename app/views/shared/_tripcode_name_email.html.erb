@@ -1,5 +1,5 @@
 <% if post.tripcoded? %>
-	<% if post.email.empty? %>
+	<% if post.email.empty? || post.email == 'noko' || post.email == 'sage' %>
 		<strong class='authenticated'>
 			<%= post.name %>
 		</strong>
