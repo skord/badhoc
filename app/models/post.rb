@@ -62,19 +62,6 @@ class Post < ActiveRecord::Base
   #   errors.add("Error Posting", "You are attempting to post too quickly. Posts are allowed once a minute.") if Post.order('created_at DESC').find_by_client_ip(self.client_ip).created_at > Time.now - 1.minute
   # end
   
-  def tripcode(string)
-    if string =~ /#/
-      name, salt = string.split('#')
-      salt = salt + 'H..'
-      tripcoded_name = name + '!' + (name.crypt(salt))[-10..-1].to_s
-      self.tripcoded = true
-      return tripcoded_name
-    else
-      self.tripcoded = false
-      string
-    end
-  end
-  
   def poster_post_count
     Post.find_all_by_name(self.name).count
   end
@@ -99,6 +86,26 @@ class Post < ActiveRecord::Base
   # to read it not as "Created at less than five minutes ago", but rather
   # "The time this was created at is before 5 minutes ago."
   #
+
+  def tripcode(string)
+    secure_tripcode_salt = Badhoc::Application.config.secure_tripcode_salt
+    if string =~ /##/
+      name, salt = string.split('##')
+      salt = salt + secure_tripcode_salt
+      tripcoded_name = name + '!!' + (name.crypt(salt))[-10..-1].to_s
+      self.tripcoded = true
+      return tripcoded_name
+    elsif string =~ /#/
+      name, salt = string.split('#')
+      salt = salt + 'H..'
+      tripcoded_name = name + '!' + (name.crypt(salt))[-10..-1].to_s
+      self.tripcoded = true
+      return tripcoded_name
+    else
+      self.tripcoded = false
+      string
+    end
+  end
 
   def self.cleanup
     Post.inactive.where("created_at < ?", 5.minutes.ago).count
