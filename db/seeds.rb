@@ -6,6 +6,7 @@
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
 
+Category.destroy_all
 Board.destroy_all
 
 Board.create!(:name => 'Random', :slug => 'b', :description => 'Random', :category_id => Category.find_or_create_by_name('Uncategorized').id)
