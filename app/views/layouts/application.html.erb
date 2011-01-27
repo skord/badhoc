@@ -9,7 +9,9 @@
 	</head>
 	<body>
 		<div class='container'>
+			<% cache 'thumbbar' do %>
 			<%= render :partial => 'shared/thumbbar'%>
+			<% end %>
 			<div class='span-24 last'>
 					<div id='notice'><%= notice %></div>
 			  	<div id="alert"><%= alert %></div>

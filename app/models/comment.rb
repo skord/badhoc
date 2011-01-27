@@ -1,7 +1,7 @@
 class Comment < ActiveRecord::Base
   POST_COMMENT_LIMIT = 100
 
-  belongs_to :post, :counter_cache => true
+  belongs_to :post, :counter_cache => true, :touch => true
   
   has_attached_file :commentpic, 
                     :styles => {:small => '200x200#',

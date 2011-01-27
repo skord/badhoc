@@ -22,14 +22,11 @@
 		<em>Post: <%= post.id %></em>
 		<%= link_to('Show/Reply', post) if controller.action_name == 'index'%>
 		<%= link_to "Picwall", picwall_path(post)%>
-		<% if admin_signed_in? %>
+		<div class='admin' style='display:none;'>
 			<%= link_to 'Edit', edit_board_post_path(post.board, post) %>
 			<%= link_to 'Destroy', board_post_path(post.board, post), :confirm => 'Are you sure?', :method => :delete %>
 			<br />
-			<div id="ban_block_<%= post.client_ip %>">
-			<%= render :partial => 'shared/ban_bar', :locals => {:post => post}%>
-			</div>
-		<% end %>
+		</div>
 		<br />
 		<% if controller.action_name == 'index'%>
 			<%= user_text_markdown(post.message, 500)%>

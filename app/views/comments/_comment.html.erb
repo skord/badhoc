@@ -11,13 +11,10 @@
 	  <dfn><%= comment.subject %></dfn>
 		<em><%= comment.created_at %></em>
 		<em>Comment: <%= comment.id %></em>
-		<% if admin_signed_in? %>
-			<div id="ban_block_<%= comment.client_ip %>">
-			<%= render :partial => 'shared/ban_bar', :locals => {:post => comment }%>
-			</div>
+		<div class='admin' style='display:none;'>
 			<%= link_to 'Edit', edit_post_comment_path(comment.post, comment)%>
 			<%= link_to 'Destroy', post_comment_path(comment.post, comment), :confirm => 'Are you sure?', :method => :delete %>
-		<% end %>
+		</div>
 	  <p><%= user_text_markdown(comment.message) %></p>
 	</div>
 </div>

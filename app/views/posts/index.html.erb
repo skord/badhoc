@@ -5,7 +5,10 @@
 <div id='new_post_form' style="display:none;">
 	<%= render 'form' %>
 </div>
-<%= render @posts %>
+
+<% cache @posts do %>
+	<%= render @posts %>
+<% end %>
 
 <%= render 'pagination' %>
 
