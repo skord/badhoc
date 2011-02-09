@@ -3,7 +3,7 @@ class Ban < ActiveRecord::Base
 scope :active, where('expires_at > ? OR permanent = ?', Time.now, true)
 
 attr_accessible :client_ip, :reason, :expires_at, :permanent, :destructive
-validates_presence_of :expires_at
+validates_presence_of :expires_at, :client_ip
 
   # Touch comments and posts of client_ip to update caches after creating ban
   after_save do 
