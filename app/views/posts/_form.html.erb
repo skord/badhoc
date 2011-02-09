@@ -13,7 +13,7 @@
 	<% end %>
 	<% f.inputs do %>
 	  <%= f.input :name %>
-	  <%= f.input :email %>
+	  <%= f.input :email, :as => :string %>
 	  <%= f.input :subject %>
 	  <%= f.input :message %>
 		<%= f.input :postpic, :hint => 'Max 5Mb. jpg/png/gif accepted' %>
