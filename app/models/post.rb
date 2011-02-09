@@ -56,6 +56,8 @@ class Post < ActiveRecord::Base
     errors.add("You Are Banned From Posting for the Following Reason: ","#{Ban.find_by_client_ip(self.client_ip).reason}") unless Ban.active.find_by_client_ip(self.client_ip) == nil
   end
 
+  validates_presence_of :message
+
   # validate :posting_too_quickly, :on => :create
   # 
   # def posting_too_quickly

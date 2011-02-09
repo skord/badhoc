@@ -19,6 +19,8 @@ class Comment < ActiveRecord::Base
     self.destroy_attached_files
   end
   
+  validates_presence_of :message
+  
   validate  :under_comment_limit
   
   def under_comment_limit
