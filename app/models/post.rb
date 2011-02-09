@@ -1,19 +1,10 @@
 class Post < ActiveRecord::Base
 
-  # The active post threshold is site wide, which effects the contents of the positions
-  # per-board. this is why I've pulled the post "rank" (position) as of this commit,
-  # as it can be confusing to see a board with no posts ranked #1. It's actually sort of 
-  # confusing to think about too, but a change in the positions in one board will just 
-  # shift the positions in the other without changing their order. 
-  # 
-  # Why this way? Because the picwall also sorts by position, but it ignores any sort
-  # of board order. 
-  #
-  # So if you have one insanely popular board, yes, content will expire on less popular 
-  # boards sooner, but then again, you probably have other problems if that's the case. 
+  # It used to be that the post threshold was the entire site. That's fixed as of this commit. 
+  # Active post threshold is now per board, hence lowering the number by a factor of 10 here. 
 
-  ACTIVE_POST_THRESHOLD = 10000
-  acts_as_list 
+  ACTIVE_POST_THRESHOLD = 1000
+  acts_as_list :scope => :board
   
   cattr_reader :per_page
   @@per_page = 10
