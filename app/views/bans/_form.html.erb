@@ -14,7 +14,7 @@
 	<% f.inputs do %>
 	  <%= f.input :client_ip, :as => :select, :collection => Ban.ban_candidates  %>
 	  <%= f.input :reason %>
-	  <%= f.input :expires_at %>
+	  <%= f.input :expires_at, :as => :radio, :collection => { '24 Hour' => 1.day.from_now, '3 Day' => 3.days.from_now, '5 Days' => 5.days.from_now, '1 Year' => 1.year.from_now } %>
 	  <%= f.input :permanent %>
 	<% end %>
 
