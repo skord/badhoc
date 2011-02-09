@@ -6,7 +6,6 @@
     <th>Client IP</th>
     <th>Reason</th>
     <th>Expires</th>
-    <th>Permanent?</th>
 		<th>Content Deleted?<th>
     <th></th>
     <th></th>
@@ -17,8 +16,13 @@
   <tr>
     <td><%= ban.client_ip %></td>
     <td><%= ban.reason %></td>
-    <td><%= distance_of_time_in_words(Time.now, ban.expires_at) %> from now.</td>
-    <td><%= ban.permanent %></td>
+    <td>
+			<% if ban.permanent %>
+				Ban Is Permanent
+			<% else%>
+				<%= distance_of_time_in_words(Time.now, ban.expires_at) %> from now.
+			<% end %>
+		</td>
 		<td><%= ban.destructive %></td>
     <td><%= link_to 'Show', ban %></td>
     <td><%= link_to 'Edit', edit_ban_path(ban) %></td>

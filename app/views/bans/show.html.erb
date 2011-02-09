@@ -13,12 +13,11 @@
 
 <p>
   <b>Expires:</b>
-  <%= @ban.expires_at %> (<%= distance_of_time_in_words(Time.now, @ban.expires_at) %> from now.)
-</p>
-
-<p>
-  <b>Permaban?:</b>
-  <%= @ban.permanent %>
+  <% if @ban.permanent %>
+		Never - Ban is Permanent
+	<% else %>
+		<%= @ban.expires_at %> (<%= distance_of_time_in_words(Time.now, @ban.expires_at) %> from now.)
+	<% end %>
 </p>
 
 <p>
