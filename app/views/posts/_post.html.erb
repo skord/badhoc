@@ -22,7 +22,7 @@
 		<em>Post: <%= post.id %></em>
 		<%= link_to('Show/Reply', post) if controller.action_name == 'index'%>
 		<%= link_to "Picwall", picwall_path(post)%>
-		<div class='admin' style='display:none;'>
+		<div id='admin' class='admin' style='display:none;'>
 			<%= link_to 'Edit', edit_board_post_path(post.board, post) %>
 			<%= link_to 'Destroy', board_post_path(post.board, post), :confirm => 'Are you sure?', :method => :delete %>
 			<br />

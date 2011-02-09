@@ -2,7 +2,8 @@
 	<p>
 		Signed in as <%= current_admin.email %> -
 		<%= link_to 'Manage Bans', bans_path %> -
-		<%= link_to 'Sign Out', destroy_admin_session_path %>
+		<%= link_to 'Sign Out', destroy_admin_session_path %> - 
+		<%= link_to_function 'Toggle Admin Functions', "$$('.admin').each(Element.toggle)"%>
 	</p>
 </div>
 
