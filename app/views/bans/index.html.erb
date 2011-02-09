@@ -1,4 +1,5 @@
-<h1>Listing bans</h1>
+<div class='span-20 last prepend-2'>
+<h1>Ye Olde Tome of Bans</h1>
 
 <table>
   <tr>
@@ -6,6 +7,7 @@
     <th>Reason</th>
     <th>Expires</th>
     <th>Permanent?</th>
+		<th>Content Deleted?<th>
     <th></th>
     <th></th>
     <th></th>
@@ -15,8 +17,9 @@
   <tr>
     <td><%= ban.client_ip %></td>
     <td><%= ban.reason %></td>
-    <td><%= ban.expires_at %></td>
+    <td><%= distance_of_time_in_words(Time.now, ban.expires_at) %> from now.</td>
     <td><%= ban.permanent %></td>
+		<td><%= ban.destructive %></td>
     <td><%= link_to 'Show', ban %></td>
     <td><%= link_to 'Edit', edit_ban_path(ban) %></td>
     <td><%= link_to 'Destroy', ban, :confirm => 'Are you sure?', :method => :delete %></td>
@@ -27,3 +30,4 @@
 <br />
 
 <%= link_to 'New Ban', new_ban_path %>
+</div>

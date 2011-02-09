@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110209202859) do
+ActiveRecord::Schema.define(:version => 20110209212222) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                               :default => "", :null => false
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(:version => 20110209202859) do
     t.datetime "updated_at"
     t.datetime "expires_at"
     t.boolean  "permanent"
+    t.boolean  "destructive"
   end
 
   add_index "bans", ["client_ip"], :name => "index_bans_on_client_ip"
