@@ -12,7 +12,7 @@
   <% end %>
 
 	<% f.inputs do %>
-	  <%= f.input :client_ip %>
+	  <%= f.input :client_ip, :as => :select, :collection => Ban.ban_candidates  %>
 	  <%= f.input :reason %>
 	  <%= f.input :expires_at %>
 	  <%= f.input :permanent %>
