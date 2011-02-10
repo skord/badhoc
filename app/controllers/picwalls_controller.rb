@@ -4,7 +4,7 @@ class PicwallsController < ApplicationController
   # GET /picwalls
   # GET /picwalls.xml
   def index
-    @picwalls = Picwall.order(:updated_at).active.paginate :order => 'position ASC', :page => params[:page], :per_page => 10, :include => :comments
+    @picwalls = Picwall.active.paginate :order => 'updated_at DESC', :page => params[:page], :per_page => 10, :include => :comments
 
     respond_to do |format|
       format.html # index.html.erb
