@@ -6,6 +6,7 @@
     <th>Client IP</th>
     <th>Reason</th>
     <th>Expires</th>
+		<th>Content Nulled?</th>
 		<th>Content Deleted?<th>
     <th></th>
     <th></th>
@@ -23,6 +24,7 @@
 				<%= distance_of_time_in_words(Time.now, ban.expires_at) %> from now.
 			<% end %>
 		</td>
+		<td><%= ban.nullify %></td>
 		<td><%= ban.destructive %></td>
     <td><%= link_to 'Show', ban %></td>
     <td><%= link_to 'Edit', edit_ban_path(ban) %></td>

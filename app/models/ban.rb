@@ -1,55 +1,71 @@
 class Ban < ActiveRecord::Base
 
-scope :active, where('expires_at > ? OR permanent = ?', Time.now, true)
+  scope :active, where('expires_at > ? OR permanent = ?', Time.now, true)
 
-attr_accessible :client_ip, :reason, :expires_at, :permanent, :destructive
-validates_presence_of :expires_at, :client_ip
+  attr_accessible :client_ip, :reason, :expires_at, :permanent, :destructive, :nullify
+  validates_presence_of :expires_at, :client_ip
 
-  # Touch comments and posts of client_ip to update caches after creating ban
-  after_save do 
-    client_posts= Post.find_all_by_client_ip(self.client_ip)
-    client_comments= Post.find_all_by_client_ip(self.client_ip)
-    unless client_comments.nil?
-      if self.destructive?
-        client_comments.each do |comment|
-          comment.destroy
-        end
-      else
-        client_comments.each do |comment|
-          comment.touch
-        end
-      end
-    end
-    unless client_posts.nil?
-      if self.destructive?
-        client_posts.each do |post|
-          post.destroy
-        end
-      else
-        client_posts.each do |post|
-          post.touch
-        end
-      end
+  before_save do 
+    if self.nullify
+      self.nullify_comments
+      self.nullify_posts
+    elsif self.destructive
+      self.destroy_comments
+      self.destroy_posts
+    else
+      self.touch_comments
+      self.touch_posts
     end
   end
 
-  # Touch comments and posts of client_ip to update caches after removing ban
-  after_destroy do 
-    client_posts= Post.find_all_by_client_ip(self.client_ip)
-    client_comments= Post.find_all_by_client_ip(self.client_ip)
-    unless client_posts.nil?
+  def touch_posts
+    client_posts = Post.where(:client_ip => self.client_ip)
+    unless client_posts.empty?
       client_posts.each do |post|
         post.touch
       end
     end
-    unless client_comments.nil?
+  end
+  
+  def touch_comments
+    client_comments = Comment.where(:client_ip => self.client_ip)
+    unless client_comments.empty?
       client_comments.each do |comment|
         comment.touch
       end
     end
   end
 
+  def nullify_posts
+    client_posts = Post.where(:client_ip => self.client_ip)
+    unless client_posts.empty?
+      client_posts.update_all(:message => '_Content removed due to user ban_')
+      client_posts.each do |post|
+        post.update_attribute(:postpic, nil)
+      end
+    end
+  end
 
+  def nullify_comments
+    client_comments = Comment.where(:client_ip => self.client_ip)
+    unless client_comments.empty?
+      client_comments.update_all(:message => '_Content removed due to user ban_')
+      client_comments.each do |comment|
+        comment.update_attribute(:commentpic, nil)
+      end
+    end
+  end
+  
+  def destroy_posts
+    client_posts = Post.where(:client_ip => self.client_ip)
+    client_posts.destroy_all unless client_posts.empty?
+  end
+  
+  def destroy_comments
+    client_comments = Comment.where(:client_ip => self.client_ip)
+    client_comments.destroy_all unless client_comments.empty?
+  end
+  
   def self.ban_candidates
     ban_candidates = {}
     post_candidates = Post.all.collect {|x| {'Post: ' + x.id.to_s + '-' + x.client_ip => x.client_ip}}

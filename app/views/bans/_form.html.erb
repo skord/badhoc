@@ -16,6 +16,7 @@
 	  <%= f.input :reason %>
 	  <%= f.input :expires_at, :as => :radio, :collection => { '24 Hour' => 1.day.from_now, '3 Day' => 3.days.from_now, '5 Days' => 5.days.from_now, '1 Year' => 1.year.from_now } %>
 	  <%= f.input :permanent %>
+		<%= f.input :nullify, :label => 'Remove images and messages from posts and comments?' %>
 		<%= f.input :destructive, :label => 'Recursively delete all posts and comments from IP?' %>
 	<% end %>
 
