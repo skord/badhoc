@@ -16,6 +16,7 @@ class BoardsController < ApplicationController
   # GET /boards/1.xml
   def show
     @board = Board.find(params[:id])
+    @images_size = @board.posts.has_attachment.collect {|x| x.postpic.size}.compact.sum + @board.comments.has_attachment.collect {|x| x.commentpic.size}.compact.sum
 
     respond_to do |format|
       format.html # show.html.erb
