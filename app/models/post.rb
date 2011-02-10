@@ -41,9 +41,9 @@ class Post < ActiveRecord::Base
   validates_attachment_size :postpic, :less_than => 5.megabytes
   validates_attachment_content_type :postpic, :content_type => ['image/jpeg', 'image/png', 'image/gif']
   
-  validate :user_not_banned
+  validate :user_banned
   
-  def user_not_banned
+  def user_banned
     errors.add("You Are Banned From Posting for the Following Reason: ","#{Ban.find_by_client_ip(self.client_ip).reason}") unless Ban.active.find_by_client_ip(self.client_ip) == nil
   end
 

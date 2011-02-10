@@ -54,9 +54,9 @@ class PostsController < ApplicationController
         @post.move_to_top
         format.html { 
           if @post.email == 'noko'
-            redirect_to(board_post_path(board, @post), :notice => 'Post was successfully created.') 
+            redirect_to(board_post_path(board, @post), :notice => 'Post successful.') 
           else
-            redirect_to(board_posts_path, :notice => 'Post was successfully created.')
+            redirect_to(board_posts_path, :notice => 'Post successful.')
           end
           }
       else
