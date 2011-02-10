@@ -13,8 +13,8 @@
 			<%= render :partial => 'shared/thumbbar'%>
 			<% end %>
 			<div class='span-24 last'>
-					<div id='notice'><%= notice %></div>
-			  	<div id="alert"><%= alert %></div>
+					<div id='notice' class='<%= 'notice' if notice %>'><%= notice %></div>
+			  	<div id="alert" class='<%= 'error' if alert %>'><%= alert %></div>
 			</div>
 			<% if admin_signed_in? %>
 				<%= render :partial => 'shared/admin_box'%>
