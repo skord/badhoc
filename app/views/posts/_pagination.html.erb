@@ -3,6 +3,6 @@
 	<%= will_paginate @posts %>
 	</div>
 	<div class='span-4 last pagination'>
-		<%= link_to_function 'New Post', "Element.toggle('new_post_form', 'slide')"%>
+		<%= link_to_function 'New Post', "$('#new_post_form').toggle();"%>
 	</div>
 </div>

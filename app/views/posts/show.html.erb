@@ -4,7 +4,7 @@
 		<div class='prepend-18 last'><em>Thread Locked - Comment Limit</em></div>
 	<% else %>
 		<div class='pagination prepend-20 last'>
-			<%= link_to_function 'New Comment', "Element.toggle('new_comment_form', 'slide')"%>
+			<%= link_to_function 'New Comment', "$('#new_comment_form').toggle();"%>
 			<%= link_to('Edit', edit_board_post_path(@post.board, @post), :class => 'admin', :style => 'display:none;') %>
 		</div>
 	<% end %>
