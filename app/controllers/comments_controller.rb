@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
   respond_to :html
   
   def index
-    @comments = post.comments.all
+    @comments = post.comments.order('updated_at DESC')
 
     respond_with [post, @comments]
   end

@@ -15,6 +15,6 @@
 		<%= render @post %>
 	<% end %>
 	<% cache @post.comments do %>
-		<%= render @post.comments.reverse %>
+		<%= render @post.comments.order('updated_at DESC') %>
 	<% end %>
 </div>
