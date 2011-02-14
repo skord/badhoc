@@ -71,6 +71,14 @@ class Post < ActiveRecord::Base
     self.update_attribute(:locked, false)
   end
   
+  def stickify
+    self.update_attribute(:sticky, true)
+  end
+  
+  def unstickify
+    self.update_attribute(:sticky, false)
+  end
+  
   def active_ban
     @ban_record ||= Ban.active.find_by_client_ip(self.client_ip)
   end

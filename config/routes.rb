@@ -5,6 +5,8 @@ Badhoc::Application.routes.draw do
   resources :posts do
     post :lock
     post :unlock
+    post :stickify
+    post :unstickify
     resources :comments
   end
   

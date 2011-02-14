@@ -8,7 +8,7 @@ class PostsController < ApplicationController
   def index
     @board = board
     @post = board.posts.new
-    @posts = board.posts.active.paginate :order => 'position ASC', :page => params[:page], :per_page => 10, :include => :comments
+    @posts = board.posts.active.paginate :order => 'sticky DESC, position ASC', :page => params[:page], :per_page => 10, :include => :comments
     
     respond_with [board, @posts] do |format|
       format.html # index.html.erb
@@ -111,6 +111,32 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.save
         format.html { redirect_to(post_path(@post), :notice => 'Post unlocked.') }
+      else
+        format.html { render :action => "edit" }
+      end
+    end
+  end
+
+  def stickify
+    @post = Post.find(params[:post_id])
+    @post.stickify
+    @post.touch
+    respond_to do |format|
+      if @post.save
+        format.html { redirect_to(board_posts_path(@post.board), :notice => 'Post stickified.') }
+      else
+        format.html { render :action => "edit" }
+      end
+    end
+  end
+  
+  def unstickify
+    @post = Post.find(params[:post_id])
+    @post.unstickify
+    @post.touch
+    respond_to do |format|
+      if @post.save
+        format.html { redirect_to(board_posts_path(@post.board), :notice => 'Post unstickified.') }
       else
         format.html { render :action => "edit" }
       end
