@@ -10,7 +10,9 @@
 		<%= render :partial => 'shared/tripcode_name_email', :locals => {:post => comment}%>
 	  <dfn><%= comment.subject %></dfn>
 		<em><%= comment.created_at %></em>
+		<br />
 		<em>Comment: <%= comment.id %></em>
+		<%= link_to 'Permalink', post_comment_path(comment.post, comment) %>
 		<div class='admin' style='display:none;'>
 			<%= link_to 'Edit', edit_post_comment_path(comment.post, comment)%>
 			<%= link_to 'Destroy', post_comment_path(comment.post, comment), :confirm => 'Are you sure?', :method => :delete %>

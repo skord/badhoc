@@ -1,10 +1,14 @@
+<p class='large prepend-1 last'>
+<%= link_to @post.board.name, board_posts_path(@post.board) %> \ <%= link_to @post.id, @post %>
+</p>
+
+
 <div class='span-24 last'>
 	<%= auto_discovery_link_tag(:atom, "/posts/#{@post.id}.atom", {:title => 'Posts Atom'}) %>
 	<% if @post.locked?%>
 		<div class='prepend-18 last'><em>Thread Locked - Comment Limit</em></div>
 	<% else %>
-		<div class='pagination prepend-18 last'>
-			<%= link_to "Back to " + @post.board.name, board_posts_path(@post.board) %>
+		<div class='pagination prepend-20 last'>
 			<%= link_to_function 'New Comment', "$('#new_comment_form').toggle();"%>
 		</div>
 	<% end %>

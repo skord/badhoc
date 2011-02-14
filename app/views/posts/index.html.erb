@@ -1,5 +1,10 @@
 <%= auto_discovery_link_tag(:atom, "posts.atom", {:title => 'Posts Atom'}) %>
 
+<p class='large prepend-1 last'>
+<%= link_to @board.name, board_posts_path(@board) %> \ All Posts
+</p>
+
+
 <%= render 'pagination' %>
 
 <div id='new_post_form' style="display:none;">

@@ -6,6 +6,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.xml
   def index
+    @board = board
     @post = board.posts.new
     @posts = board.posts.active.paginate :order => 'position ASC', :page => params[:page], :per_page => 10, :include => :comments
     
