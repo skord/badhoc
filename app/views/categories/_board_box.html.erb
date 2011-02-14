@@ -1,0 +1,18 @@
+<div class='board_box span-4'>
+<%= link_to board.name, board_posts_path(board), :class => 'board_name' %>
+	<div class='board_info'>
+		<p class='board_description'><%= board.description %></p>
+		<p class='board_posts_count'>Posts:<%= board.posts_count + board.posts.all.collect {|x| x.comments_count}.sum %></p>
+		<p class='board_last_post'>Last Post:<%= time_ago_in_words(board.posts.last.created_at) + ' ago' unless board.posts_count < 1%></p>
+		<p class='board_last_comment'>Last Comment:<%= time_ago_in_words(board.comments.last.created_at) + ' ago' unless board.comments.last.nil? %></p>
+		<p class='board_buttons'>
+			<%= link_to image_tag('icons/information.png', :title => 'Info'), board_path(board) %>	
+				<% if admin_signed_in? %>
+					<%= link_to image_tag('icons/application_edit.png', :title => 'Edit'), edit_board_path(board) %>
+					<%= link_to image_tag('icons/delete.png', :title => 'Delete'), board, 
+																:confirm => 'Are you sure? This will delete all boards, posts and comments under this category!', 
+																:method => :delete %>
+				<% end %>
+		</p>
+	</div>
+</div>

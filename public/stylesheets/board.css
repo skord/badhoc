@@ -1,0 +1,49 @@
+.board_box {
+	float: left;
+	background: -webkit-gradient(radial, 50% 50%, 0, 50% 50%, 350, from(#fff), to(#999));
+	background: -moz-radial-gradient(50% 50%, farthest-side, #fff, #ddd);
+	border: solid 1px #999;
+	padding: 5px 10px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	box-shadow: 1px 1px 2px #000;
+	-moz-box-shadow: 1px 1px 2px #000;
+	-webkit-box-shadow: 1px 1px 2px #000;
+}
+
+.board_box a.board_name {
+	font-size: large;
+}
+
+p.board_posts_count {
+	font-size: small;
+	margin: 0;
+}
+
+p.board_description {
+	font-size: small;
+	margin: 0;
+	font-style: italic;
+	white-space: pre;
+}
+
+div.board_info {
+	overflow: hidden;
+}
+
+
+p.board_last_post {
+	margin: 0;
+	font-size: x-small;
+}
+
+p.board_last_comment {
+	margin: 0;
+	font-size: x-small;
+}
+
+p.board_buttons {
+	margin: 0;
+}

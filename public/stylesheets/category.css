@@ -1,0 +1,12 @@
+.category {
+	margin-bottom: 20px;
+	padding-bottom: 10%;
+	padding-top: 20px;
+	float: none;
+	clear: left;
+}
+
+#categories h3 {
+	text-decoration: underline;
+}
+
