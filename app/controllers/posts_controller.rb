@@ -94,6 +94,7 @@ class PostsController < ApplicationController
   def lock
     @post = Post.find(params[:post_id])
     @post.lock
+    @post.touch
     respond_to do |format|
       if @post.save
         format.html { redirect_to(post_path(@post), :notice => 'Post locked.') }
@@ -106,6 +107,7 @@ class PostsController < ApplicationController
   def unlock
     @post = Post.find(params[:post_id])
     @post.unlock
+    @post.touch
     respond_to do |format|
       if @post.save
         format.html { redirect_to(post_path(@post), :notice => 'Post unlocked.') }
