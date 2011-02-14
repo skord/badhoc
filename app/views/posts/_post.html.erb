@@ -19,7 +19,7 @@
 		<dfn><%= post.subject %></dfn>
 		<em><%= post.created_at %></em>
 		<br />
-		<em>Post: <%= post.id %></em>
+		Post: <%= post.id %>
 		<%= link_to('Show/Reply', post) if controller.action_name == 'index'%>
 		<%= link_to "Picwall", picwall_path(post)%>
 		<div id='admin' class='admin' style='display:none;'>
@@ -27,14 +27,26 @@
 				Admin Functions: 
 				<%= link_to 'Edit', edit_board_post_path(post.board, post) %>
 				<%= link_to 'Destroy', board_post_path(post.board, post), :confirm => 'Are you sure?', :method => :delete %>
+				<% unless post.locked? %>
+					<%= link_to("Lock", post_lock_path(post), :method => :post) %>
+				<% else %>
+					<%= link_to("Unlock", post_unlock_path(post), :method => :post) %>
+				<% end %>
 				<br />
 			</p>
 		</div>
 		<br />
+		<% if post.locked? %>
+			<dfn>Post Locked by Administrator</dfn>
+		<% end %>
 		<% if controller.action_name == 'index'%>
-			<%= user_text_markdown(post.message, 500)%>
+			<div class='<%= 'locked quiet' if post.locked? %>'>
+				<%= user_text_markdown(post.message, 500)%>
+			</div>
 		<% else %>
-			<%= user_text_markdown(post.message)%>
+			<div class='<%= 'locked quiet' if post.locked? %>'>
+				<%= user_text_markdown(post.message)%>
+			</div>
 		<% end %>
 		<br />
 		<em><%= pluralize post.comments_count, 'comment' %>...</em>

@@ -91,6 +91,31 @@ class PostsController < ApplicationController
     end
   end
   
+  def lock
+    @post = Post.find(params[:post_id])
+    @post.lock
+    respond_to do |format|
+      if @post.save
+        format.html { redirect_to(post_path(@post), :notice => 'Post locked.') }
+      else
+        format.html { render :action => "edit" }
+      end
+    end
+  end
+
+  def unlock
+    @post = Post.find(params[:post_id])
+    @post.unlock
+    respond_to do |format|
+      if @post.save
+        format.html { redirect_to(post_path(@post), :notice => 'Post unlocked.') }
+      else
+        format.html { render :action => "edit" }
+      end
+    end
+  end
+
+  
   private
   
   def board

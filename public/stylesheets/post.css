@@ -1,3 +1,5 @@
+/* @override http://127.0.0.1:3000/stylesheets/post.css?1297707284 */
+
 form#new_post.formtastic.post {
 	margin: 10px 10px;
 }
@@ -11,4 +13,8 @@ div.post {
 	border-top: 1px solid #ccc;
 	padding-top: 10px;
 	padding-bottom: 10px;
+}
+
+.locked {
+	text-decoration: line-through;
 }

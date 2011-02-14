@@ -3,9 +3,11 @@ Badhoc::Application.routes.draw do
   resources :categories
 
   resources :posts do
+    post :lock
+    post :unlock
     resources :comments
   end
-
+  
   # gotta have this for a weird atom bug I don't feel like looking into right this second
   resources :comments
 

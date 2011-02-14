@@ -59,8 +59,16 @@ class Post < ActiveRecord::Base
     Post.find_all_by_name(self.name).count
   end
   
-  def locked?
+  def limit_locked?
     self.comments_count >= 100
+  end
+  
+  def lock
+    self.update_attribute(:locked, true)
+  end
+  
+  def unlock
+    self.update_attribute(:locked, false)
   end
   
   def active_ban

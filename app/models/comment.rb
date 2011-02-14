@@ -32,6 +32,12 @@ class Comment < ActiveRecord::Base
   def user_not_banned
     errors.add("You Are Banned From Posting for the Following Reason: ","#{Ban.find_by_client_ip(self.client_ip).reason}") unless Ban.active.find_by_client_ip(self.client_ip) == nil
   end
+  
+  validate :thread_locked
+  
+  def thread_locked
+    errors.add("You cannot post to this for the following reason", "This thread has been locked.") if self.post.locked
+  end
     
   def active_ban
     @ban_record ||= Ban.active.find_by_client_ip(self.client_ip)

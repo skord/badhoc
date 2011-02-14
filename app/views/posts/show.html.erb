@@ -5,8 +5,8 @@
 
 <div class='span-24 last'>
 	<%= auto_discovery_link_tag(:atom, "/posts/#{@post.id}.atom", {:title => 'Posts Atom'}) %>
-	<% if @post.locked?%>
-		<div class='prepend-18 last'><em>Thread Locked - Comment Limit</em></div>
+	<% if @post.limit_locked? || @post.locked? %>
+		<div class='prepend-20 last'><em>Thread Locked</em></div>
 	<% else %>
 		<div class='pagination prepend-20 last'>
 			<%= link_to_function 'New Comment', "$('#new_comment_form').toggle();"%>

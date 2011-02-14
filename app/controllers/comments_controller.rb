@@ -55,6 +55,7 @@ class CommentsController < ApplicationController
           redirect_to(board_posts_path(post.board))
         end
       else
+        flash[:error] = 'Comment could not be added'
         render "new"
       end
     }
