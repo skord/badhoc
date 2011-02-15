@@ -1,0 +1,18 @@
+<div id='admin' class='admin' style='display:none;'>
+	<p>
+		Admin: 
+		<%= link_to (image_tag "icons/page_edit.png", :title => 'Edit'), edit_board_post_path(post.board, post) %>
+		<%= link_to (image_tag "icons/page_delete.png", :title => 'Delete'), board_post_path(post.board, post), :confirm => 'Are you sure?', :method => :delete %>
+		<% unless post.locked? %>
+			<%= link_to((image_tag "icons/lock.png", :title => 'Lock'), post_lock_path(post), :method => :post) %>
+		<% else %>
+			<%= link_to((image_tag "icons/lock_open.png", :title => 'Unlock'), post_unlock_path(post), :method => :post) %>
+		<% end %>
+		<% unless post.sticky? %>
+			<%= link_to((image_tag "icons/note_add.png", :title => "Stickify"), post_stickify_path(post), :method => :post) %><%=  %>
+		<% else %>
+			<%= link_to((image_tag "icons/note_delete.png", :title => "Unstickify"), post_stickify_path(post), :method => :post) %><%=  %>
+		<% end %>
+		<br />
+	</p>
+</div>

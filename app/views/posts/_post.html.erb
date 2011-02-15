@@ -16,7 +16,7 @@
 	</div>
 	<div class='post-info span-16 last'>
 		<% if post.sticky? %>
-		<strong class='highlight'>Sticky Post!</strong>
+		<%= image_tag "icons/note.png", :title => "Sticky Post" %>
 		<% end %>
 		<%= render :partial => 'shared/tripcode_name_email', :locals => {:post => post}%>
 		<dfn><%= post.subject %></dfn>
@@ -25,24 +25,7 @@
 		Post: <%= post.id %>
 		<%= link_to('Show/Reply', post) if controller.action_name == 'index'%>
 		<%= link_to "Picwall", picwall_path(post)%>
-		<div id='admin' class='admin' style='display:none;'>
-			<p>
-				Admin Functions: 
-				<%= link_to 'Edit', edit_board_post_path(post.board, post) %>
-				<%= link_to 'Destroy', board_post_path(post.board, post), :confirm => 'Are you sure?', :method => :delete %>
-				<% unless post.locked? %>
-					<%= link_to("Lock", post_lock_path(post), :method => :post) %>
-				<% else %>
-					<%= link_to("Unlock", post_unlock_path(post), :method => :post) %>
-				<% end %>
-				<% unless post.sticky? %>
-					<%= link_to("Stickify", post_stickify_path(post), :method => :post) %>
-				<% else %>
-					<%= link_to("Unstickify", post_unstickify_path(post), :method => :post) %>
-				<% end %>
-				<br />
-			</p>
-		</div>
+		<%= render :partial => 'post_admin_bar', :locals => {:post => post}%>
 		<br />
 		<% if post.locked? %>
 			<dfn>Post Locked by Administrator</dfn>
