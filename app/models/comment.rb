@@ -46,10 +46,6 @@ class Comment < ActiveRecord::Base
   def active_ban?
     active_ban != nil
   end  
-  
-  def self.total_on(date)
-    where("date(created_at) = ?", date).count
-  end
     
   attr_accessible :name, :email, :subject, :message, :password, :commentpic
     

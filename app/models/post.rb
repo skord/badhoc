@@ -87,10 +87,6 @@ class Post < ActiveRecord::Base
     active_ban != nil
   end
   
-  def self.total_on(date)
-    where("date(created_at) = ?", date).count
-  end
-  
   private
   
 
