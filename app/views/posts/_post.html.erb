@@ -15,12 +15,12 @@
 		</div>
 	</div>
 	<div class='post-info span-16 last'>
-		<% if post.sticky? %>
-		<%= image_tag "icons/note.png", :title => "Sticky Post" %>
-		<% end %>
 		<%= render :partial => 'shared/tripcode_name_email', :locals => {:post => post}%>
 		<dfn><%= post.subject %></dfn>
 		<em><%= post.created_at %></em>
+		<% if post.sticky? %>
+		<%= image_tag "icons/note.png", :title => "Sticky Post" %>
+		<% end %>
 		<br />
 		Post: <%= post.id %>
 		<%= link_to('Show/Reply', post) if controller.action_name == 'index'%>
