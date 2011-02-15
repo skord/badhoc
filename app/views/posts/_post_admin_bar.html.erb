@@ -11,7 +11,7 @@
 		<% unless post.sticky? %>
 			<%= link_to((image_tag "icons/note_add.png", :title => "Stickify"), post_stickify_path(post), :method => :post) %><%=  %>
 		<% else %>
-			<%= link_to((image_tag "icons/note_delete.png", :title => "Unstickify"), post_stickify_path(post), :method => :post) %><%=  %>
+			<%= link_to((image_tag "icons/note_delete.png", :title => "Unstickify"), post_unstickify_path(post), :method => :post) %><%=  %>
 		<% end %>
 		<br />
 	</p>

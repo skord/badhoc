@@ -4,14 +4,16 @@ You've pretty much have to be out of your mind to run this, let alone any imageb
 I threw this together in 30 second sprints here and there (adhoc), it needs a ton of work, but if you want it, 
 it's here. 
 
-If you can get past that, Badhoc has support for:
+If you can get past that, Badhoc has:
 
 * Multiple Boards, Multiple Categories of Boards
-* Application-level bans
+* A decent ban system
 * Markdown markup.
-* Project Honeypot Blocklist Lock-outs
+* Project Honeypot Blocklist Lock-outs to prevent comment spam.
 * Atom Feeds for posts and boards (includes ID's so your feed reader doesn't hose itself)
 * TL;DR picture wall view of all site threads. 
+* Sticky and Locked posts
+* Good performance features. 
 
 === Use
 
@@ -67,4 +69,3 @@ Try:
 
 * FOR THE LOVE OF GOD WRITE SOME TESTS
 * Finish the iPhone views, never really tried anything like that before. 
-... see {Pivotal Tracker - Badhoc}[https://www.pivotaltracker.com/projects/190765]
