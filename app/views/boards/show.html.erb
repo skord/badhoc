@@ -1,3 +1,5 @@
+<%= javascript_include_tag 'highcharts' %>
+
 <div class='span-20 append-2 prepend-2'>
 <p id="notice"><%= notice %></p>
 
@@ -15,11 +17,6 @@
   <b>Description:</b>
   <%= @board.description %>
 </p>
-<% unless @board.comments.empty? %>
-<p>
-	<b>Posts Count:</b>
-	<%= @board.posts_count %>
-</p>
 
 <p>
 	<b>Images Count:</b>
@@ -31,22 +28,46 @@
 	<%= number_to_human_size(@images_size) %>
 </p>
 
-<p>
-	<b>Comments Count</b>
-	<%= @board.comments.count %>
-</p>
-
+<% unless @board.posts.empty? %>
 <p>
 	<b>Last New Post:</b>
 	<%= time_ago_in_words(@board.posts.last.created_at)%>
 </p>
+<% end %>
 
+<% unless @board.comments.empty? %>
 <p>
 	<b>Last Commented:</b>
 	<%= time_ago_in_words(@board.comments.last.created_at) %>
 </p>
-
 <% end %>
+
+<div id="posts_count_chart" style="width: 100%; height: 300px;"></div>
+
+<script type="text/javascript" charset="utf-8">  
+$(function () {  
+  new Highcharts.Chart({  
+    chart: { renderTo: 'posts_count_chart' },  
+    title: { text: 'Activity by Day' },  
+    xAxis: { type: 'datetime' },  
+    yAxis: {  
+      title: { text: 'Count'}  
+    },  
+    series: [{
+		  	name: "Posts",
+				pointInterval: <%= 1.day * 1000 %>,
+				pointStart: <%= 4.weeks.ago.at_midnight.to_i * 1000 %>,
+	      data: <%= posts_chart_series(@board.posts, 4.weeks.ago)%>  
+    },{
+				name: "Comments",
+				pointInterval: <%= 1.day * 1000 %>,
+				pointStart: <%= 4.weeks.ago.at_midnight.to_i * 1000 %>,
+				data: <%= comments_chart_series(@board.comments, 4.weeks.ago)%>  
+			}]  
+  });  
+}); 
+</script>
+
 <%= link_to 'Edit', edit_board_path(@board) %> |
 <%= link_to 'Back', categories_path %>
 </div>
