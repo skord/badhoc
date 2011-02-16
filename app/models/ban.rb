@@ -1,7 +1,8 @@
 class Ban < ActiveRecord::Base
 
   scope :active, where('expires_at > ? OR permanent = ?', Time.now, true)
-
+  scope :expired, where('expires_at < ? AND permanent = ?', Time.now, false)
+  
   attr_accessible :client_ip, :reason, :expires_at, :permanent, :destructive, :nullify
   validates_presence_of :expires_at, :client_ip
 

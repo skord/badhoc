@@ -1,6 +1,11 @@
 <div class='span-20 last prepend-2'>
 <h1>Ye Olde Tome of Bans</h1>
 
+<div class='pagination prepend-18'>
+	<%= link_to 'New Ban', new_ban_path %>
+</div>
+
+<h3>Active Bans</h3>
 <table>
   <tr>
     <th>Client IP</th>
@@ -13,7 +18,7 @@
     <th></th>
   </tr>
 
-<% @bans.each do |ban| %>
+<% @active_bans.each do |ban| %>
   <tr>
     <td><%= ban.client_ip %></td>
     <td><%= ban.reason %></td>
@@ -35,5 +40,39 @@
 
 <br />
 
-<%= link_to 'New Ban', new_ban_path %>
+<br />
+
+<h3>Expired Bans</h3>
+<table>
+  <tr>
+    <th>Client IP</th>
+    <th>Reason</th>
+    <th>Expired</th>
+		<th>Content Nulled?</th>
+		<th>Content Deleted?<th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @expired_bans.each do |ban| %>
+  <tr>
+    <td><%= ban.client_ip %></td>
+    <td><%= ban.reason %></td>
+    <td>
+			<% if ban.permanent %>
+				Ban Is Permanent
+			<% else%>
+				<%= distance_of_time_in_words(Time.now, ban.expires_at) %> ago.
+			<% end %>
+		</td>
+		<td><%= ban.nullify %></td>
+		<td><%= ban.destructive %></td>
+    <td><%= link_to 'Show', ban %></td>
+    <td><%= link_to 'Edit', edit_ban_path(ban) %></td>
+    <td><%= link_to 'Destroy', ban, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
 </div>

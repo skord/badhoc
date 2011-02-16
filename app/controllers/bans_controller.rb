@@ -3,7 +3,8 @@ class BansController < ApplicationController
   # GET /bans
   # GET /bans.xml
   def index
-    @bans = Ban.all
+    @active_bans = Ban.active
+    @expired_bans = Ban.expired
 
     respond_to do |format|
       format.html # index.html.erb
