@@ -34,15 +34,11 @@ div.board_info {
 }
 
 
-p.board_last_post {
+p.board_last_active {
 	margin: 0;
 	font-size: x-small;
 }
 
-p.board_last_comment {
-	margin: 0;
-	font-size: x-small;
-}
 
 p.board_buttons {
 	margin: 0;

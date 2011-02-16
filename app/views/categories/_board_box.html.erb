@@ -3,8 +3,7 @@
 	<div class='board_info'>
 		<p class='board_description'><%= board.description %></p>
 		<p class='board_posts_count'>Posts:<%= board.posts_count + board.posts.all.collect {|x| x.comments_count}.sum %></p>
-		<p class='board_last_post'>Last Post:<%= time_ago_in_words(board.posts.last.created_at) + ' ago' unless board.posts_count < 1%></p>
-		<p class='board_last_comment'>Last Comment:<%= time_ago_in_words(board.comments.last.created_at) + ' ago' unless board.comments.last.nil? %></p>
+		<p class='board_last_active'>Last Active:<%= time_ago_in_words(board.last_active) + ' ago' unless board.last_active == ''%></p>
 		<p class='board_buttons'>
 			<%= link_to image_tag('icons/information.png', :title => 'Info'), board_path(board) %>	
 				<% if admin_signed_in? %>
