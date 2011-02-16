@@ -1,21 +1,9 @@
-<% if post.tripcoded? %>
-	<% if post.email.empty? || post.email == 'noko' || post.email == 'sage' %>
-		<strong class='<%= 'authenticated ' unless post.active_ban? %><%= 'quiet ' if post.active_ban? %>'>
-			<%= post.name %><%= " - User Banned for #{post.active_ban.reason}" if post.active_ban? %>
-		</strong>
-	<% else %>
-		<strong class='<%= 'authenticated ' unless post.active_ban? %><%= 'quiet' if post.active_ban? %>'>
-			<%= mail_to post.email, post.name, :encode => 'javascript' %><%= " - User Banned for #{post.active_ban.reason}" if post.active_ban? %>
-		</strong>
-	<% end %>
+<% if post.email.empty? || post.email == 'noko' || post.email == 'sage' %>
+	<strong class='<%= 'authenticated ' unless post.active_ban? || post.tripcoded? == false %><%= ' quiet ' if post.active_ban? %>'>
+		<%= post.name %><%= " - User Banned for #{post.active_ban.reason}" if post.active_ban? %>
+	</strong>
 <% else %>
-	<% if post.email.empty? || post.email == 'noko' || post.email == 'sage'%>
-		<strong class='<%= 'quiet' if post.active_ban? %>'>
-			<%= post.name %><%= " - User Banned for #{post.active_ban.reason}" if post.active_ban? %>
-		</strong>
-	<% else %>
-		<strong class='<%= 'quiet' if post.active_ban? %>'>
-			<%= mail_to post.email, post.name, :encode => 'javascript' %><%= " - User Banned for #{post.active_ban.reason}" if post.active_ban? %>
-		</strong>
-	<% end %>
+	<strong class='<%= ' authenticated ' unless post.active_ban? || post.tripcoded? == false %><%= ' quiet' if post.active_ban? %>'>
+		<%= mail_to post.email, post.name, :encode => 'javascript' %><%= " - User Banned for #{post.active_ban.reason}" if post.active_ban? %>
+	</strong>
 <% end %>
