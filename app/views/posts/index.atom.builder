@@ -6,11 +6,15 @@ atom_feed do |feed|
    feed.entry(post) do |entry|
      entry.id
      entry.title(post.subject)
-     entry.content(post.message, :type => 'html')
+     entry.content(user_text_markdown("![#{post.postpic.original_filename}](#{post.postpic.url(:small)})\r\n\r\n" + post.message), :type => 'html')
      entry.updated
      
      entry.author do |author|
-       author.name(post.name)
+       if post.tripcoded?
+         author.name(post.name + ' (Tripcoded) ')
+       else
+         author.name(post.name)
+       end
      end
    end
  end
