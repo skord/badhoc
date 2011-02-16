@@ -35,6 +35,9 @@ class Post < ActiveRecord::Base
   scope :no_attachment, where('postpic_file_name is ?', nil)
   scope :active, where('position <= ?', ACTIVE_POST_THRESHOLD)
   scope :inactive, where('position > ?', ACTIVE_POST_THRESHOLD)
+  scope :sticky, where('sticky = ?', true)
+  scope :not_sticky, where('sticky = ?', false)
+  
   validates_presence_of :name, :message => "can't be blank"
 
   validates_attachment_presence :postpic, :message => "can't be blank. That means you have to upload something."
@@ -90,11 +93,6 @@ class Post < ActiveRecord::Base
   private
   
 
-  #
-  # These are weird, and the english doesn't exactly match the SQL. Basically, you have
-  # to read it not as "Created at less than five minutes ago", but rather
-  # "The time this was created at is before 5 minutes ago."
-  #
 
   def tripcode(string)
     secure_tripcode_salt = Badhoc::Application.config.secure_tripcode_salt
@@ -118,12 +116,19 @@ class Post < ActiveRecord::Base
     end
   end
 
+
+  #
+  # These are weird, and the english doesn't exactly match the SQL. Basically, you have
+  # to read it not as "Created at less than five minutes ago", but rather
+  # "The time this was created at is before 5 minutes ago."
+  #
+
   def self.cleanup
-    Post.inactive.where("created_at < ?", 5.minutes.ago).count
+    Post.not_sticky.inactive.where("created_at < ?", 5.minutes.ago).count
   end
 
   def self.cleanup!
-    Post.inactive.where("created_at < ?", 5.minutes.ago).destroy_all.count
+    Post.not_sticky.inactive.where("created_at < ?", 5.minutes.ago).destroy_all.count
   end
 
   

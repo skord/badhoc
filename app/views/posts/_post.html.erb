@@ -19,7 +19,10 @@
 		<dfn><%= post.subject %></dfn>
 		<em><%= post.created_at %></em>
 		<% if post.sticky? %>
-		<%= image_tag "icons/note.png", :title => "Sticky Post" %>
+			<%= image_tag "icons/note.png", :title => "Sticky Post" %>
+		<% end %>
+		<% if post.locked? %>
+			<%= image_tag "icons/lock.png", :title => "Locked Post" %>
 		<% end %>
 		<br />
 		Post: <%= post.id %>
@@ -27,9 +30,6 @@
 		<%= link_to "Picwall", picwall_path(post)%>
 		<%= render :partial => 'post_admin_bar', :locals => {:post => post}%>
 		<br />
-		<% if post.locked? %>
-			<dfn>Post Locked by Administrator</dfn>
-		<% end %>
 		<% if controller.action_name == 'index'%>
 			<div class='<%= 'locked quiet' if post.locked? %>'>
 				<%= user_text_markdown(post.message, 500)%>
