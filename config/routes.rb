@@ -9,9 +9,6 @@ Badhoc::Application.routes.draw do
     post :unstickify
     resources :comments
   end
-  
-  # gotta have this for a weird atom bug I don't feel like looking into right this second
-  resources :comments
 
   resources :boards do
     resources :posts

@@ -21,7 +21,7 @@ atom_feed do |feed|
  end
  
  for comment in @post.comments 
-   feed.entry(comment) do |entry|
+   feed.entry(comment, :url => post_comment_url(:id => comment, :post_id => @post)) do |entry|
      entry.title(comment.subject)
      entry.content(user_text_markdown("![#{comment.commentpic.original_filename}](#{comment.commentpic.url(:small)})\r\n\r\n" + comment.message), :type => 'html')
      entry.updated
