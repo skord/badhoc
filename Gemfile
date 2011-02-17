@@ -15,6 +15,8 @@ gem 'acts_as_list'
 gem 'rdiscount'
 gem 'httpbl'
 gem 'jquery-rails'
+gem 'dalli'
+gem 'kgio'
 
 # Use unicorn as the web server
 # gem 'unicorn'
