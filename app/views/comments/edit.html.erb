@@ -1,6 +1,10 @@
 <h1>Editing comment</h1>
 
+<div class='prepend-2 span-20 last'>
 <%= render 'form' %>
+</div>
 
-<%= link_to 'Show', @comment %> |
-<%= link_to 'Back', comments_path %>
+<div class='prepend-2 span-20 last'>
+<%= link_to 'Show', post_comment_path(@comment.post, @comment) %> |
+<%= link_to 'Back', post_path(@comment.post) %>
+</div>
