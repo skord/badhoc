@@ -12,7 +12,7 @@
 			<%= link_to_function 'New Comment', "$('#new_comment_form').toggle();"%>
 		</div>
 	<% end %>
-	<div id="new_comment_form" style="display:none;">
+	<div id="new_comment_form" style="display:none;" class='prepend-2 span-20 last'>
 		<%= render 'comments/form'%>
 	</div>
 	<% cache @post do %>
