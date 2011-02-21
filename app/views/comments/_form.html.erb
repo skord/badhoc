@@ -1,6 +1,6 @@
 <%= semantic_form_for([@comment.post, @comment], :html => {:multipart => true}) do |f| %>
 	<% f.inputs "Comment" do %>
-	  <%= f.input :name %>
+	  <%= f.input :name, :input_html => {:value => form_name_app_helper} %>
 	  <%= f.input :email, :as => :string %>
 	  <%= f.input :subject %>
 	  <%= f.input :message %>

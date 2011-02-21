@@ -52,6 +52,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
+        session[:my_name] = params[:post][:name]
         @post.move_to_top
         format.html { 
           if @post.email == 'noko'

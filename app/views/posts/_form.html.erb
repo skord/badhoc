@@ -12,7 +12,7 @@
 	  </div>
 	<% end %>
 	<% f.inputs do %>
-	  <%= f.input :name %>
+	  <%= f.input :name, :input_html => {:value => form_name_app_helper} %>
 	  <%= f.input :email, :as => :string %>
 	  <%= f.input :subject %>
 	  <%= f.input :message %>

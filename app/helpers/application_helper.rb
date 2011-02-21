@@ -11,4 +11,14 @@ module ApplicationHelper
       sanitize(RDiscount.new(truncate(text, :length => truncate_to), :filter_html, :filter_styles, :safelink, :no_pseudo_protocols, :smart).to_html)
     end
   end
+  
+  # So named so I can freaking find it later. 
+  def form_name_app_helper
+    if session[:my_name].nil?
+      return 'Anonymous'
+    else
+      return session[:my_name]
+    end
+  end
+  
 end
