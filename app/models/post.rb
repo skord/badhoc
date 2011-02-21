@@ -1,4 +1,5 @@
 class Post < ActiveRecord::Base
+  include TripcodeHelper
 
   # It used to be that the post threshold was the entire site. That's fixed as of this commit. 
   # Active post threshold is now per board, hence lowering the number by a factor of 10 here. 
@@ -90,32 +91,6 @@ class Post < ActiveRecord::Base
     active_ban != nil
   end
   
-  private
-  
-
-
-  def tripcode(string)
-    secure_tripcode_salt = Badhoc::Application.config.secure_tripcode_salt
-    if string =~ /##/
-      name, salt = string.split('##')
-      salt = salt + secure_tripcode_salt
-      digest = OpenSSL::Digest::Digest.new('sha1')
-      tripcoded_name = name + '!!' + (OpenSSL::HMAC.hexdigest(digest, salt, name))[-10..-1].to_s
-      self.tripcoded = true
-      return tripcoded_name
-    elsif string =~ /#/
-      name, salt = string.split('#')
-      salt = salt + 'H..'
-      digest = OpenSSL::Digest::Digest.new('sha1')
-      tripcoded_name = name + '!' + (OpenSSL::HMAC.hexdigest(digest, salt, name))[-10..-1].to_s
-      self.tripcoded = true
-      return tripcoded_name
-    else
-      self.tripcoded = false
-      string
-    end
-  end
-
 
   #
   # These are weird, and the english doesn't exactly match the SQL. Basically, you have
