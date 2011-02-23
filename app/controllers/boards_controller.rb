@@ -6,9 +6,11 @@ class BoardsController < ApplicationController
   def index
     @boards = Board.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @boards }
+    if stale?(:last_modified => @boards.last.updated_at.utc, :etag => @boards)
+      respond_to do |format|
+        format.html # index.html.erb
+        format.xml  { render :xml => @boards }
+      end
     end
   end
 
@@ -18,9 +20,11 @@ class BoardsController < ApplicationController
     @board = Board.find(params[:id])
     @images_size = @board.posts.has_attachment.collect {|x| x.postpic.size}.compact.sum + @board.comments.has_attachment.collect {|x| x.commentpic.size}.compact.sum
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @board }
+    if stale?(:last_modified => @board.updated_at.utc, :etag => @board)
+      respond_to do |format|
+        format.html # show.html.erb
+        format.xml  { render :xml => @board }
+      end
     end
   end
 
