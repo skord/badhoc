@@ -6,9 +6,11 @@ class PicwallsController < ApplicationController
   def index
     @picwalls = Picwall.active.paginate :order => 'updated_at DESC', :page => params[:page], :per_page => 10, :include => :comments
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @picwalls }
+    if stale?(:last_modified => @picwalls.last.updated_at.utc, :etag => @picwalls)
+      respond_to do |format|
+        format.html # index.html.erb
+        format.xml  { render :xml => @picwalls }
+      end
     end
   end
 
@@ -17,9 +19,11 @@ class PicwallsController < ApplicationController
   def show
     @picwall = Picwall.find(params[:id], :include => :comments)
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @picwall }
+    if stale?(:last_modified => @picwall.updated_at.utc, :etag => @picwall)
+      respond_to do |format|
+        format.html # show.html.erb
+        format.xml  { render :xml => @picwall }
+      end
     end
   end
 
