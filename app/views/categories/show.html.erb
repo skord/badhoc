@@ -6,7 +6,7 @@
 <div class='last category prepend-2 append-2'>
 
 <% @category.boards.each do |board|%>
-<%= render :partial => 'board_box', :locals => {:board => board} %>
+	<%= render :partial => 'shared/board_box', :locals => {:board => board} %>
 <% end %>
 
 <div class='last span-20 append-2'>
