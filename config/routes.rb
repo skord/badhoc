@@ -1,5 +1,11 @@
 Badhoc::Application.routes.draw do
 
+  namespace :api do 
+    resources :boards
+    resources :posts
+    resources :comments
+  end
+
   resources :categories
 
   resources :posts do
