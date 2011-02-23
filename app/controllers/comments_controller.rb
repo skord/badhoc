@@ -49,7 +49,6 @@ class CommentsController < ApplicationController
       if @comment.save
         session[:my_name] = params[:comment][:name]
         @comment.post.move_to_top unless @comment.email == 'sage'
-        flash[:notice] = 'Comment created'
         if @comment.email == 'noko'
           redirect_to(post_path(post))
         else
@@ -71,7 +70,6 @@ class CommentsController < ApplicationController
     respond_with [post, @comment] do |format|
       format.html {
         if @comment.update_attributes(params[:comment])
-          flash[:notice] = 'Comment Updated'
           redirect_to(post_path(post))
         else
           render "new"

@@ -10,10 +10,13 @@ class PostsController < ApplicationController
     @post = board.posts.new
     @posts = board.posts.active.paginate :order => 'sticky DESC, position ASC', :page => params[:page], :per_page => 10, :include => :comments
     
-    respond_with [board, @posts] do |format|
-      format.html # index.html.erb
-      format.atom
+    if stale?(:last_modified => @board.updated_at.utc, :etag => @posts)
+      respond_with [board, @posts] do |format|
+        format.html # index.html.erb
+        format.atom
+      end
     end
+    
   end
 
   # GET /posts/1
@@ -22,9 +25,11 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
     @comment = @post.comments.new
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.atom
+    if stale?(:last_modified => @post.updated_at.utc, :etag => @post)
+      respond_to do |format|
+        format.html # show.html.erb
+        format.atom
+      end
     end
   end
 
@@ -56,9 +61,9 @@ class PostsController < ApplicationController
         @post.move_to_top
         format.html { 
           if @post.email == 'noko'
-            redirect_to(board_post_path(board, @post), :notice => 'Post successful.') 
+            redirect_to(board_post_path(board, @post)) 
           else
-            redirect_to(board_posts_path, :notice => 'Post successful.')
+            redirect_to(board_posts_path)
           end
           }
       else
