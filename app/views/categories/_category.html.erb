@@ -7,6 +7,6 @@
 		<% end %>
 	</p>
 	<% category.boards.each do |board|%>
-	<%= render :partial => 'board_box', :locals => {:board => board} %>
+		<%= render :partial => 'shared/board_box', :locals => {:board => board} %>
 	<% end %>
 </div>

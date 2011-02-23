@@ -8,18 +8,4 @@ class Board < ActiveRecord::Base
   
   attr_accessible :name, :slug, :description, :category_id
   
-  def last_active
-    if self.posts.empty?
-      return ''
-    elsif self.comments.empty?
-      return self.posts.last.created_at
-    else
-      status = self.posts.last.created_at <=> self.comments.last.created_at
-      if status == 1
-        self.posts.last.created_at
-      else
-        self.comments.last.created_at
-      end
-    end
-  end
 end
