@@ -2,7 +2,7 @@ atom_feed do |feed|
  feed.title("badhoc")
  feed.updated(@posts.first.created_at)
  
- for post in @posts
+ for post in @all_posts
    feed.entry(post) do |entry|
      entry.title(post.subject)
      entry.content(user_text_markdown("![#{post.postpic.original_filename}](#{post.postpic.url(:small)})\r\n\r\n" + post.message), :type => 'html')

@@ -1,4 +1,4 @@
-<%= auto_discovery_link_tag(:atom, "posts.atom", {:title => 'Posts Atom'}) %>
+<%= auto_discovery_link_tag(:atom, "#{board_posts_path(@board)}.atom", {:title => 'Posts Atom'}) %>
 
 <p class='large prepend-1 last'>
 <%= link_to 'Home', '/'%> \

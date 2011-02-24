@@ -9,6 +9,7 @@ class PostsController < ApplicationController
     @board = board
     @post = board.posts.new
     @posts = board.posts.active.paginate :order => 'sticky DESC, position ASC', :page => params[:page], :per_page => 10, :include => :comments
+    @all_posts = board.posts.active
     
     if stale?(:last_modified => @board.updated_at.utc, :etag => @posts)
       respond_with [board, @posts] do |format|
