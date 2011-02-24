@@ -9,7 +9,7 @@
 	<div class='comment-info span-16'>
 		<%= render :partial => 'shared/tripcode_name_email', :locals => {:post => comment}%>
 	  <dfn><%= comment.subject %></dfn>
-		<em><%= comment.created_at %></em>
+		<em><%= timeago(comment.created_at) %></em>
 		<br />
 		<em>Comment: <%= comment.id %></em>
 		<%= link_to 'Permalink', post_comment_path(comment.post, comment) %>

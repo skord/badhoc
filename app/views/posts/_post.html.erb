@@ -17,7 +17,7 @@
 	<div class='post-info span-16 last'>
 		<%= render :partial => 'shared/tripcode_name_email', :locals => {:post => post}%>
 		<dfn><%= post.subject %></dfn>
-		<em><%= post.created_at %></em>
+		<em><%= timeago(post.created_at) %></em>
 		<% if post.sticky? %>
 			<%= image_tag "icons/note.png", :size => '16x16', :title => "Sticky Post" %>
 		<% end %>
