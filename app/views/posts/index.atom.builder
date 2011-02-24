@@ -1,5 +1,5 @@
 atom_feed do |feed|
- feed.title("badhoc")
+ feed.title("Badhoc - #{@board.name}")
  feed.updated(@posts.first.created_at)
  
  for post in @all_posts

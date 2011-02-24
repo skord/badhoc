@@ -1,5 +1,5 @@
 atom_feed do |feed|
- feed.title("badhoc")
+ feed.title("Badhoc - #{@post.board.name} - #{@post.id}")
  if @post.comments.empty?
    feed.updated(@post.updated_at)
  else
@@ -23,7 +23,11 @@ atom_feed do |feed|
  for comment in @post.comments 
    feed.entry(comment, :url => post_comment_url(:id => comment, :post_id => @post)) do |entry|
      entry.title(comment.subject)
-     entry.content(user_text_markdown("![#{comment.commentpic.original_filename}](#{comment.commentpic.url(:small)})\r\n\r\n" + comment.message), :type => 'html')
+     if comment.commentpic?
+       entry.content(user_text_markdown("![#{comment.commentpic.original_filename}](#{comment.commentpic.url(:small)})\r\n\r\n" + comment.message), :type => 'html')
+     else
+       entry.content(user_text_markdown(comment.message), :type => 'html')
+     end
      entry.updated
      entry.author do |author|
        if comment.tripcoded?
