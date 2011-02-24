@@ -38,12 +38,12 @@
 
 <p>
 	<b>Last New Post:</b>
-	<%= time_ago_in_words(@board.posts.last.created_at)%>
+	<%= timeago(@board.posts.last.created_at)%>
 </p>
 
 <p>
 	<b>Last Commented:</b>
-	<%= time_ago_in_words(@board.comments.last.created_at) %>
+	<%= timeago(@board.comments.last.created_at) %>
 </p>
 
 <% end %>

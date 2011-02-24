@@ -47,7 +47,7 @@
 			<% post.comments.reverse[0..8].each do |comment| %>
 				<tr>
 					<td><%= render :partial => 'shared/tripcode_name_email', :locals => {:post => comment}%></td>
-					<td><%= time_ago_in_words(comment.created_at) %> ago</td>
+					<td><%= timeago(comment.created_at) %></td>
 					<td><%= strip_tags user_text_markdown(comment.message,40) %></td>
 				</tr>
 			<% end %>
