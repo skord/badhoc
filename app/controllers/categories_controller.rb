@@ -6,9 +6,7 @@ class CategoriesController < ApplicationController
 
   def index
     @categories = Category.all(:include => :boards)
-    if stale?(:last_modified => Board.order('updated_at DESC').first.updated_at.utc, :etag => @categories)
-      respond_with @categories
-    end
+    respond_with @categories
   end
 
   def show
