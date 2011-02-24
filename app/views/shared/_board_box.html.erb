@@ -3,7 +3,7 @@
 	<div class='board_info'>
 		<p class='board_description'><%= board.description %></p>
 		<p class='board_posts_count'>Posts:<%= board.posts_count + board.posts.all.collect {|x| x.comments_count}.sum %></p>
-		<p class='board_last_active'>Last Active: <%= time_ago_in_words(board.updated_at) + ' ago' %></p>
+		<p class='board_last_active'>Last Active: <%= timeago(board.updated_at) %></p>
 		<p class='board_buttons'>
 			<%= link_to image_tag('icons/information.png', :title => 'Info'), board_path(board) %>	
 				<% if admin_signed_in? %>

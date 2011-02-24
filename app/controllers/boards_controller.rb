@@ -4,11 +4,13 @@ class BoardsController < ApplicationController
   # GET /boards
   # GET /boards.xml
   def index
-    @boards = Board.all
+    @boards = Board.order('updated_at DESC')
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @boards }
+    if stale?(:last_modified => @boards.first.updated_at.utc, :etag => @boards)
+      respond_to do |format|
+        format.html # index.html.erb
+        format.xml  { render :xml => @boards }
+      end
     end
   end
 
