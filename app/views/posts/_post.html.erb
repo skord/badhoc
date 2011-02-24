@@ -30,6 +30,7 @@
 		<%= link_to "Picwall", picwall_path(post)%>
 		<%= render :partial => 'post_admin_bar', :locals => {:post => post}%>
 		<br />
+		<br />
 		<% if controller.action_name == 'index'%>
 			<div class='<%= 'locked quiet' if post.locked? %>'>
 				<%= user_text_markdown(post.message, 500)%>
