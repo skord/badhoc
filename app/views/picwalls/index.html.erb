@@ -6,7 +6,7 @@
 		<div class='span-2 last'>
 			<%= link_to(image_tag(picwall.postpic.url(:thumb), :size => '64x64', :title => picwall.subject), picwall_path(picwall)) %>
 			<% picwall.comments.each do |comment|%>
-				<%= link_to(image_tag(comment.commentpic.url(:thumb), :size => '64x64'), comment.commentpic.url, :target => "_blank") if comment.commentpic? %>
+				<%= link_to(image_tag(comment.commentpic.url(:thumb), :size => '64x64'), picwall_path(picwall)) if comment.commentpic? %>
 			<% end %>
 		</div>
 <% end %>
