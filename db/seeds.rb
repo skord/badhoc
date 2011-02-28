@@ -53,6 +53,7 @@ end
 
 comment = Post.find_by_subject("And The Tripcodes...").comments.new
 comment.name= 'skord'
+comment.email= ''
 comment.subject= 'Offending the colorblind for sure...'
 comment.message= "if you put a tripcoded name in the name field, like _user#name_, after submission it will be highlighted in blue. If someone has a bang in what they put in the name field, the name will not be highlighted. This highlighting happens all over the app. " 
 comment.client_ip= '127.0.0.1'
