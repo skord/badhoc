@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
 
-  respond_to :html
+  respond_to :html, :js
 
   before_filter :authenticate_admin!, :except => [:index, :show, :new, :create]
   # GET /posts
@@ -105,6 +105,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.save
         format.html { redirect_to(post_path(@post), :notice => 'Post locked.') }
+        format.js
       else
         format.html { render :action => "edit" }
       end
@@ -118,6 +119,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.save
         format.html { redirect_to(post_path(@post), :notice => 'Post unlocked.') }
+        format.js
       else
         format.html { render :action => "edit" }
       end
@@ -131,6 +133,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.save
         format.html { redirect_to(board_posts_path(@post.board), :notice => 'Post stickified.') }
+        format.js
       else
         format.html { render :action => "edit" }
       end
@@ -144,6 +147,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.save
         format.html { redirect_to(board_posts_path(@post.board), :notice => 'Post unstickified.') }
+        format.js
       else
         format.html { render :action => "edit" }
       end

@@ -1,17 +1,17 @@
-<div id='admin' class='admin' style='display:none;'>
+<div class="admin post_admin_bar" style="display:none;">
 	<p>
 		Admin: 
-		<%= link_to (image_tag "icons/page_edit.png", :size => '16x16', :title => 'Edit'), edit_board_post_path(post.board, post) %>
-		<%= link_to (image_tag "icons/page_delete.png", :size => '16x16', :title => 'Delete'), board_post_path(post.board, post), :confirm => 'Are you sure?', :method => :delete %>
+		<%= link_to (image_tag "icons/page_edit.png", :size => "16x16", :title => "Edit"), edit_board_post_path(post.board, post) %>
+		<%= link_to (image_tag "icons/page_delete.png", :size => "16x16", :title => "Delete"), board_post_path(post.board, post), :confirm => "Are you sure?", :method => :delete %>
 		<% unless post.locked? %>
-			<%= link_to((image_tag "icons/lock.png", :size => '16x16', :title => 'Lock'), post_lock_path(post), :method => :post) %>
+			<%= link_to((image_tag "icons/lock_open.png", :size => "16x16", :title => "Lock", :class => "lock"), post_lock_path(post), :method => :post) %>
 		<% else %>
-			<%= link_to((image_tag "icons/lock_open.png", :size => '16x16', :title => 'Unlock'), post_unlock_path(post), :method => :post) %>
+			<%= link_to((image_tag "icons/lock.png", :size => "16x16", :title => "Unlock", :class => 'unlock'), post_unlock_path(post), :method => :post) %>
 		<% end %>
 		<% unless post.sticky? %>
-			<%= link_to((image_tag "icons/note_add.png", :size => '16x16', :title => "Stickify"), post_stickify_path(post), :method => :post) %><%=  %>
+			<%= link_to((image_tag "icons/note_add.png", :size => "16x16", :title => "Stickify", :class => 'stick'), post_stickify_path(post), :method => :post) %><%=  %>
 		<% else %>
-			<%= link_to((image_tag "icons/note_delete.png", :size => '16x16', :title => "Unstickify"), post_unstickify_path(post), :method => :post) %><%=  %>
+			<%= link_to((image_tag "icons/note_delete.png", :size => "16x16", :title => "Unstickify", :class => 'unstick'), post_unstickify_path(post), :method => :post) %><%=  %>
 		<% end %>
 		<br />
 	</p>

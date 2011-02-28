@@ -1,0 +1,17 @@
+$("#<%= dom_id(@post) %> .post_admin_bar").html('<%= escape_javascript(render(:partial => 'post_admin_bar', :locals => {:post => @post})) %>');
+$(".post_admin_bar").show();
+$("div#post_<%= @post.id %>.post div.post-info em abbr.timeago").after(' <img alt="Lock" class="locked_post" height="16" src="/images/icons/lock.png" title="Locked Post" width="16">');
+
+$(document).ready(function () {
+	$('img.lock').click(function() {
+		$.post($(this).parent()[0] + '.js');
+		return false;
+	});
+});
+
+$(document).ready(function () {
+	$('img.unlock').click(function() {
+		$.post($(this).parent()[0] + '.js');
+		return false;
+	});
+});

@@ -1,0 +1,17 @@
+$("#<%= dom_id(@post) %> .post_admin_bar").html('<%= escape_javascript(render(:partial => 'post_admin_bar', :locals => {:post => @post})) %>');
+$(".post_admin_bar").show();
+$("div#post_<%= @post.id %>.post img.sticky_post").remove();
+
+$(document).ready(function () {
+	$('img.stick').click(function() {
+		$.post($(this).parent()[0] + '.js');
+		return false;
+	});
+});
+
+$(document).ready(function () {
+	$('img.unstick').click(function() {
+		$.post($(this).parent()[0] + '.js');
+		return false;
+	});
+});

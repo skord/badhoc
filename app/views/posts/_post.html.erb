@@ -1,4 +1,4 @@
-<div class='post prepend-1 append-1 span-22 last'>
+<div id='<%= dom_id(post) %>' class='post prepend-1 append-1 span-22 last %>'>
 
 	<div class='postpic span-6'>
 		<% if post.postpic? %>
@@ -19,10 +19,10 @@
 		<dfn><%= post.subject %></dfn>
 		<em><%= timeago(post.created_at) %></em>
 		<% if post.sticky? %>
-			<%= image_tag "icons/note.png", :size => '16x16', :title => "Sticky Post" %>
+			<%= image_tag "icons/note.png", :size => '16x16', :title => "Sticky Post", :class => 'sticky_post' %>
 		<% end %>
 		<% if post.locked? %>
-			<%= image_tag "icons/lock.png", :size => '16x16', :title => "Locked Post" %>
+			<%= image_tag "icons/lock.png", :size => '16x16', :title => "Locked Post", :class => 'locked_post' %>
 		<% end %>
 		<br />
 		Post: <%= post.id %>
@@ -36,7 +36,7 @@
 				<%= user_text_markdown(post.message, 500)%>
 			</div>
 		<% else %>
-			<div class='<%= 'locked quiet' if post.locked? %>'>
+			<div id='<%= dom_id(post)%>' class='<%= 'locked quiet' if post.locked? %>'>
 				<%= user_text_markdown(post.message)%>
 			</div>
 		<% end %>
