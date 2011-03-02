@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
   respond_to :html, :js
   
   def index
-    @comments = post.comments.order('updated_at ASC').where('post_id = ? and created_at > ?', params[:post_id], Time.at(params[:after].to_i) + 1)
+    @comments = post.comments.order('updated_at ASC').where('created_at > ?', Time.at(params[:after].to_i) + 1)
 
     if stale?(:last_modified => post.comments.last.updated_at, :etag => @comments)
       respond_with [post, @comments] do |format|
