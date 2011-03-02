@@ -4,12 +4,17 @@ class CommentsController < ApplicationController
   # GET /comments
   # GET /comments.xml
   
-  respond_to :html
+  respond_to :html, :js
   
   def index
-    @comments = post.comments.order('updated_at DESC')
+    @comments = post.comments.order('updated_at DESC').where('post_id = ? and created_at > ?', params[:post_id], Time.at(params[:after].to_i))
 
-    respond_with [post, @comments]
+    if stale?(:last_modified => post.updated_at, :etag => @comments)
+      respond_with [post, @comments] do |format|
+        format.html
+        format.js
+      end
+    end
   end
 
   # GET /comments/1
@@ -20,6 +25,7 @@ class CommentsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @comment }
+      format.js
     end
   end
 

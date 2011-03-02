@@ -30,6 +30,7 @@ class PostsController < ApplicationController
       respond_to do |format|
         format.html # show.html.erb
         format.atom
+        format.js
       end
     end
   end

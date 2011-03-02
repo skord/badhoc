@@ -41,7 +41,7 @@
 			</div>
 		<% end %>
 		<br />
-		<em><%= pluralize post.comments_count, 'comment' %>...</em>
+		<em id='post_comments_count'><%= pluralize post.comments_count, 'comment' %>...</em>
 		<br />
 		<% if controller.action_name == "index"%>
 			<table>

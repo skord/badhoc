@@ -19,9 +19,13 @@
 		<%= render 'comments/form'%>
 	</div>
 	<% cache @post do %>
-		<%= render @post %>
+		<div id='post' data-id='<%= @post.id %>'>
+			<%= render @post %>
+		</div>
 	<% end %>
-	<% cache @post.comments do %>
-		<%= render @post.comments.order('updated_at DESC') %>
-	<% end %>
+	<div id='comments'>
+		<% cache @post.comments do %>
+			<%= render @post.comments.order('updated_at DESC') %>
+		<% end %>
+	</div>
 </div>

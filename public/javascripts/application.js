@@ -32,3 +32,22 @@ $(document).ready(function () {
 		return false;
 	});
 });
+
+$(function () {
+	if ($('#comments').length > 0) {
+		setTimeout(updateComments, 10000);
+	}
+});
+
+function updateComments() {
+	var post_id = $('#post').attr('data-id');
+	if ($('.comment').length > 0) {
+		var after = $('.comment:nth-child(2)').attr('data-time');
+	}
+	else {
+		var after = 0;
+	}
+	
+	$.getScript('/posts/' + post_id + '/comments.js?post_id=' + post_id + '&after=' + after);
+	setTimeout(updateComments, 10000)
+}
