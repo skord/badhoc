@@ -23,7 +23,7 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.xml
   def show
-    @post = Post.find(params[:id])
+    @post = Post.find(params[:id], :include => :comments)
     @comment = @post.comments.new
 
     if stale?(:last_modified => @post.updated_at.utc, :etag => @post)
