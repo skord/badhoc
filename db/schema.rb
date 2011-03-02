@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110214203835) do
+ActiveRecord::Schema.define(:version => 20110302154904) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                               :default => "", :null => false
@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(:version => 20110214203835) do
   end
 
   add_index "comments", ["client_ip"], :name => "index_comments_on_client_ip"
+  add_index "comments", ["created_at", "post_id"], :name => "index_comments_on_created_at_and_post_id"
   add_index "comments", ["post_id"], :name => "index_comments_on_post_id"
 
   create_table "posts", :force => true do |t|
