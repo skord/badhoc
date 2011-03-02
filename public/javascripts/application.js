@@ -42,7 +42,7 @@ $(function () {
 function updateComments() {
 	var post_id = $('#post').attr('data-id');
 	if ($('.comment').length > 0) {
-		var after = $('.comment:nth-child(2)').attr('data-time');
+		var after = $('#comments .comment:first').attr('data-time');
 	}
 	else {
 		var after = 0;
