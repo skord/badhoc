@@ -1,5 +1,5 @@
 <% unless @comments.empty? %>
-$('#comments').html("<%= escape_javascript(raw render :partial => 'comments/comments' )%>");
+$('#comments').prepend("<%= escape_javascript(raw render :partial => 'comments/comments' )%>");
 $('#post_comments_count').text($('.comment').length - 1 + ' comments');
 <% if current_admin %>
 	$(".admin").show();
