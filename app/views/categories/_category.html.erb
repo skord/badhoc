@@ -1,6 +1,6 @@
 <div class='last category prepend-2 append-2'>
-	<h3><%= category.name %></h3>
 	<p class='category_admin'>
+	<%= category.name %>
 		<% if admin_signed_in? %>
 			<%= link_to image_tag('icons/application_edit.png', :title => 'Edit'), edit_category_path(category) %>
 			<%= link_to image_tag('icons/delete.png', :title => 'Delete'), category, :confirm => 'Are you sure?', :method => :delete %>

@@ -19,3 +19,8 @@ strong.authenticated {
 	margin-top: 20px;
 	margin-bottom: 20px;
 }
+
+p.category_admin {
+	font-size: large;
+	margin: 0;
+}
