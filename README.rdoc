@@ -14,6 +14,7 @@ If you can get past that, Badhoc has:
 * TL;DR picture wall view of all site threads. 
 * Sticky and Locked posts
 * Good performance features. 
+* Ajaxy auto-updating comments on posts. Make a post, watch comments roll in in realtime. Well, pretty close to realtime. 
 
 === Use
 
