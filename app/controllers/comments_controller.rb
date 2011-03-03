@@ -9,11 +9,12 @@ class CommentsController < ApplicationController
   def index
     @comments = post.comments.where('created_at > ?', Time.at(params[:after].to_i) + 1)
 
-    if stale?(:last_modified => post.updated_at, :etag => @comments)
+    if @comments.length > 0
       respond_with [post, @comments] do |format|
-        format.html
         format.js
       end
+    else
+      head :not_modified
     end
   end
 
