@@ -43,11 +43,13 @@ function updateComments() {
 	var post_id = $('#post').attr('data-id');
 	if ($('.comment').length > 0) {
 		var after = $('#comments .comment:first').attr('data-time');
+		var comments_count = $('#comments .comment').length;
 	}
 	else {
 		var after = 0;
+		var comments_count = 0;
 	}
 	
-	$.getScript('/posts/' + post_id + '/comments.js?post_id=' + post_id + '&after=' + after);
+	$.getScript('/posts/' + post_id + '/comments.js?post_id=' + post_id + '&after=' + after + '&comments_count=' + comments_count);
 	setTimeout(updateComments, 10000)
 }
