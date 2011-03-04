@@ -1,0 +1,5 @@
+<div class='post-comment-thumbs'>
+	<% for comment in post.comments.has_attachment.reverse[0..8] %>
+		<%= link_to(image_tag(comment.commentpic.url(:thumb), :size => '64x64'), comment.commentpic.url, :target => '_blank', :class => 'comment_thumbnail')%>
+	<% end %>
+</div>

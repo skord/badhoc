@@ -7,6 +7,7 @@ class CommentsController < ApplicationController
   respond_to :html, :js
   
   def index
+
     if params[:comments_count].to_i < post.comments_count
       @comments = post.comments.where('created_at > ?', Time.at(params[:after].to_i) + 1)
       respond_with [post, @comments] do |format|
