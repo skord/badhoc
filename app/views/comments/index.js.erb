@@ -1,5 +1,10 @@
 <% unless @comments.empty? %>
-$('#comments').prepend("<%= escape_javascript(raw render :partial => 'comments/comments' )%>");
+var a = "<%= escape_javascript(raw render :partial => 'comments/comments' )%>";
+$(a).prependTo("#comments").hide().each(function (i){
+	var self = $(this);
+	window.setTimeout(function() { self.fadeIn('slow'); },1000*i);
+});
+// $('#comments').prepend("<%= escape_javascript(raw render :partial => 'comments/comments' )%>");
 $('#post_comments_count').text($('#comments .comment').length + ' comments');
 <% if current_admin %>
 	$(".admin").show();
