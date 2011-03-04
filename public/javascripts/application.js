@@ -1,10 +1,12 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
 
+// Time Ago in Words for datestamps
 jQuery(document).ready(function() {
 	jQuery("abbr.timeago").timeago();
 });
 
+// Admin Actions
 $(document).ready(function () {
 	$('img.lock').click(function() {
 		$.post($(this).parent()[0] + '.js');
@@ -33,6 +35,13 @@ $(document).ready(function () {
 	});
 });
 
+// Alternate comment highlighting
+$(document).ready(function () {
+	$('#comments .comment:nth-child(odd)').addClass('even');
+	$('#comments .comment:nth-child(even)').addClass('odd');	
+})
+
+// Ajaxy stuff for comment updating.
 $(function () {
 	if ($('#comments').length > 0) {
 		setTimeout(updateComments, 10000);

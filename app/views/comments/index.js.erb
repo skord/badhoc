@@ -3,17 +3,18 @@
 var post_comment_thumbs = "<%= escape_javascript(raw render :partial => 'posts/post_comment_thumbs', :locals => {:post => @post})%>";
 
 $('div#<%= dom_id(@post)%>.post .post-comment-thumbs').css('opacity',1);
-$('div#<%= dom_id(@post)%>.post .post-comment-thumbs').animate({opacity:0}, 1000, function() {
+$('div#<%= dom_id(@post)%>.post .post-comment-thumbs').animate({opacity:0}, 700, function() {
 	$('div#<%= dom_id(@post)%>.post .post-comment-thumbs').replaceWith($(post_comment_thumbs).css('opacity',0));
-	$('div#<%= dom_id(@post)%>.post .post-comment-thumbs').animate({opacity:1}, 1000);
+	$('div#<%= dom_id(@post)%>.post .post-comment-thumbs').animate({opacity:1}, 700);
 });
 // Render our new comments
 var new_comments = "<%= escape_javascript(raw render :partial => 'comments/comments' )%>";
 $(new_comments).css('opacity',0).prependTo("#comments");
-$('.comment').animate({opacity:1}, 2000);
+$('.comment').animate({opacity:1}, 1000);
 
-
-
+// Yeah, the css classes are backwards. alternate colors in comments
+$('#comments .comment:nth-child(odd)').addClass('even');
+$('#comments .comment:nth-child(even)').addClass('odd');
 
 // Update Posts count
 $('#post_comments_count').text($('#comments .comment').length + ' comments');
