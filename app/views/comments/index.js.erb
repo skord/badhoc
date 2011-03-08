@@ -12,10 +12,6 @@ var new_comments = "<%= escape_javascript(raw render :partial => 'comments/comme
 $(new_comments).css('opacity',0).prependTo("#comments");
 $('.comment').animate({opacity:1}, 1000);
 
-// Yeah, the css classes are backwards. alternate colors in comments
-$('#comments .comment:nth-child(odd)').addClass('even');
-$('#comments .comment:nth-child(even)').addClass('odd');
-
 // Update Posts count
 $('#post_comments_count').text($('#comments .comment').length + ' comments');
 
@@ -24,3 +20,11 @@ $('#post_comments_count').text($('#comments .comment').length + ' comments');
 	$(".admin").show();
 <% end %>
 <% end %>
+
+// Alternate comment highlighting
+$(document).ready(function () {
+	$('#comments .comment').removeClass('even');
+	$('#comments .comment').removeClass('odd');
+	$('#comments .comment:nth-child(odd)').addClass('even');
+	$('#comments .comment:nth-child(even)').addClass('odd');	
+})
