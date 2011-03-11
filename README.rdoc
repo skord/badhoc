@@ -1,20 +1,13 @@
 == Badhoc
 
+Badhoc is an imageboard. It's sort of fashioned like other popular ones, but has some features I wanted like 
+threads that auto-update and pretty decent performance. It also has spam prevention and a ban system built in.
+
 You've pretty much have to be out of your mind to run this, let alone any imageboard script really. 
 I threw this together in 30 second sprints here and there (adhoc), it needs a ton of work, but if you want it, 
 it's here. 
 
-If you can get past that, Badhoc has:
-
-* Multiple Boards, Multiple Categories of Boards
-* A decent ban system
-* Markdown markup.
-* Project Honeypot Blocklist Lock-outs to prevent comment spam.
-* Atom Feeds for posts and boards (includes ID's so your feed reader doesn't hose itself)
-* TL;DR picture wall view of all site threads. 
-* Sticky and Locked posts
-* Good performance features. 
-* Ajaxy auto-updating comments on posts. Make a post, watch comments roll in in realtime. Well, pretty close to realtime. 
+Now for the TL;DR...
 
 === Use
 
