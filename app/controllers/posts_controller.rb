@@ -15,6 +15,7 @@ class PostsController < ApplicationController
       respond_with [board, @posts] do |format|
         format.html # index.html.erb
         format.atom
+        format.js
       end
     end
     

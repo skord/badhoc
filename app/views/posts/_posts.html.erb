@@ -1,0 +1,13 @@
+<%= render 'pagination' %>
+
+<div id='new_post_form' style="display:none;">
+	<%= render 'form' %>
+</div>
+
+
+<% cache @posts do %>
+	<%= render @posts %>
+<% end %>
+
+
+<%= render 'pagination' %>

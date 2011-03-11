@@ -1,0 +1,2 @@
+$('#posts').html("<%= escape_javascript(render("posts"))%>");
+document.title = "<%= escape_javascript("Posts Page #{params[:page] || 1}")%>";

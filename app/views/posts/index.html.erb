@@ -7,16 +7,7 @@
 All Posts
 </p>
 
-
-<%= render 'pagination' %>
-
-<div id='new_post_form' style="display:none;">
-	<%= render 'form' %>
+<div id='posts'>
+<%= render 'posts' %>
 </div>
-
-<% cache @posts do %>
-	<%= render @posts %>
-<% end %>
-
-<%= render 'pagination' %>
 

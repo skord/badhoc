@@ -62,3 +62,16 @@ function updateComments() {
 	$.getScript('/posts/' + post_id + '/comments.js?post_id=' + post_id + '&after=' + after + '&comments_count=' + comments_count);
 	setTimeout(updateComments, 10000)
 }
+
+if (history && history.pushState) {
+	$(function () {
+		$('#posts .pagination a').live("click", function(e) {
+			$.getScript(this.href);
+			history.pushState(null, document.title, this.href);
+			e.preventDefault();
+		});
+		$(window).bind("popstate", function() {
+			$.getScript(location.href);
+		});
+	});
+}
