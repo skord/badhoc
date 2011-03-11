@@ -1,13 +1,11 @@
+<div class='prepend-1 last'>
 <%= render 'pagination' %>
-
-<div id='new_post_form' style="display:none;">
-	<%= render 'form' %>
 </div>
-
 
 <% cache @posts do %>
 	<%= render @posts %>
 <% end %>
 
-
+<div class='prepend-1 last'>
 <%= render 'pagination' %>
+</div>

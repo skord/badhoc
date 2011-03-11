@@ -1,4 +1,3 @@
-<div class='prepend-2 span-20 last'>
 <%= semantic_form_for([@post.board, @post], :html => {:multipart => true}) do |f| %>
 	<% if @post.errors.any? %>
 	  <div id="error_explanation">
@@ -22,4 +21,3 @@
     <%= f.submit %>
   </div>
 <% end %>
-</div>

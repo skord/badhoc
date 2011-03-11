@@ -7,6 +7,14 @@
 All Posts
 </p>
 
+<div class='prepend-21 last'>
+	<%= button_to_function 'New Post', "$('#new_post_form').toggle();" %>
+</div>
+
+<div id='new_post_form' style="display:none;" class='last'>
+	<%= render 'form' %>
+</div>
+
 <div id='posts'>
 <%= render 'posts' %>
 </div>
