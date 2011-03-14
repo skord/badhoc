@@ -1,15 +1,3 @@
-
-<%= render 'pagination'%>
-
-<div class='span-21 prepend-3 last'>
-	<% @picwalls.each do |picwall|%>
-		<div class='span-2 last'>
-			<%= link_to(image_tag(picwall.postpic.url(:thumb), :size => '64x64', :title => picwall.subject), picwall_path(picwall)) %>
-			<% picwall.comments.each do |comment|%>
-				<%= link_to(image_tag(comment.commentpic.url(:thumb), :size => '64x64'), picwall_path(picwall)) if comment.commentpic? %>
-			<% end %>
-		</div>
-<% end %>
+<div id='picwalls'>
+	<%= render 'picwalls' %>
 </div>
-
-<%= render 'pagination'%>
