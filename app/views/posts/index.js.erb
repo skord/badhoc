@@ -3,3 +3,7 @@ document.title = "<%= escape_javascript("Posts Page #{params[:page] || 1}")%>";
 jQuery(document).ready(function() {
 	jQuery("abbr.timeago").timeago();
 });
+// Restore admin functions
+<% if current_admin %>
+	$(".admin").show();
+<% end %>
