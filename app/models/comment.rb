@@ -1,5 +1,7 @@
 class Comment < ActiveRecord::Base
   include TripcodeHelper 
+
+  acts_as_nested_set :scope => :post
   
   POST_COMMENT_LIMIT = 100
 

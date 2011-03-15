@@ -55,6 +55,7 @@ class CommentsController < ApplicationController
       format.html {
       if @comment.save
         session[:my_name] = params[:comment][:name]
+        set_message_parent
         @comment.post.move_to_top unless @comment.email == 'sage'
         if @comment.email == 'noko'
           redirect_to(post_path(post))
@@ -107,4 +108,17 @@ class CommentsController < ApplicationController
     @post ||= Post.find(params[:post_id])
   end
   
+  def set_message_parent
+    if @comment.message =~ /^@\d{1,}\s{0,}\r\n\r\n/
+      parent_id = @comment.message.scan(/^@(\d{1,})\s{0,}\r\n\r\n/)[0][0].to_i
+      parent_candidate = Comment.where(:id => parent_id).first
+      if parent_candidate
+        if @comment.move_possible?(parent_candidate)
+          @comment.move_to_child_of(parent_candidate)
+        end
+      end
+    else
+      @comment.move_to_root
+    end
+  end
 end

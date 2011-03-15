@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110302154904) do
+ActiveRecord::Schema.define(:version => 20110315125424) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                               :default => "", :null => false
@@ -74,6 +74,11 @@ ActiveRecord::Schema.define(:version => 20110302154904) do
     t.string   "commentpic_content_type"
     t.integer  "commentpic_file_size"
     t.datetime "commentpic_updated_at"
+    t.integer  "parent_id"
+    t.integer  "lft"
+    t.integer  "rgt"
+    t.integer  "depth"
+    t.integer  "comments_count",          :default => 0
   end
 
   add_index "comments", ["client_ip"], :name => "index_comments_on_client_ip"

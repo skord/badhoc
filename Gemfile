@@ -17,6 +17,7 @@ gem 'httpbl'
 gem 'jquery-rails'
 gem 'dalli'
 gem 'kgio'
+gem 'awesome_nested_set', :git => 'https://github.com/galetahub/awesome_nested_set.git'
 
 # Use unicorn as the web server
 # gem 'unicorn'
