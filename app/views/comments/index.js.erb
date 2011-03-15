@@ -28,3 +28,18 @@ $(document).ready(function () {
 	$('#comments .comment:nth-child(odd)').addClass('even');
 	$('#comments .comment:nth-child(even)').addClass('odd');	
 })
+
+// Fucking cheating at the unobtrusive comment replies
+
+$(document).ready( function () {
+	$('a.comment-reply').remove();
+	$('#comments .comment a.permalink').each( function() {
+		$(this).after('  <a href="#" class="comment-reply">Reply</a>');
+	});
+	$('a.comment-reply').click( function() {
+		var comment_id = $(this).parent().parent().data('id');
+		var reply_string = '@' + comment_id + "\r\n\r\n";
+		$('#new_comment_form').show();
+		$('#new_comment_form textarea').val(reply_string);
+	});
+});

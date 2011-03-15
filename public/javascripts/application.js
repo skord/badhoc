@@ -92,3 +92,17 @@ if (history && history.pushState) {
 		});
 	});
 }
+
+// Helps with in-line comment replies
+
+$(document).ready( function () {
+	$('#comments .comment a.permalink').each( function() {
+		$(this).after('  <a href="#" class="comment-reply">Reply</a>');
+	});
+	$('a.comment-reply').click( function() {
+		var comment_id = $(this).parent().parent().data('id');
+		var reply_string = '@' + comment_id + "\r\n\r\n";
+		$('#new_comment_form').show();
+		$('#new_comment_form textarea').val(reply_string);
+	});
+});
