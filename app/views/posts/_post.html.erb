@@ -19,6 +19,8 @@
 			<%= image_tag "icons/lock.png", :size => '16x16', :title => "Locked Post", :class => 'locked_post' %>
 		<% end %>
 		<br />
+		<%= render :partial => 'post_file_info_bar', :locals => {:post => post} %>
+		<br />
 		Post: <%= post.id %>
 		<%= link_to('Show/Reply', post) if controller.action_name == 'index'%>
 		<%= link_to "Picwall", picwall_path(post)%>

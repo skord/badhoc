@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110315125424) do
+ActiveRecord::Schema.define(:version => 20110316162033) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                               :default => "", :null => false
@@ -79,6 +79,8 @@ ActiveRecord::Schema.define(:version => 20110315125424) do
     t.integer  "rgt"
     t.integer  "depth"
     t.integer  "comments_count",          :default => 0
+    t.integer  "image_width",             :default => 0
+    t.integer  "image_height",            :default => 0
   end
 
   add_index "comments", ["client_ip"], :name => "index_comments_on_client_ip"
@@ -103,6 +105,8 @@ ActiveRecord::Schema.define(:version => 20110315125424) do
     t.integer  "board_id"
     t.boolean  "locked",               :default => false
     t.boolean  "sticky",               :default => false
+    t.integer  "image_width",          :default => 0
+    t.integer  "image_height",         :default => 0
   end
 
   add_index "posts", ["board_id"], :name => "index_posts_on_board_id"

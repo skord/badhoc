@@ -17,6 +17,8 @@
 			<br />
 			<em>In Reply To: <%= comment.parent_id %><%= link_to((image_tag "icons/arrow_turn_left.png"), post_path(comment.post, :anchor => "comment_#{comment.parent_id}")) %></em>
 		<% end %>
+		<br />
+		<%= render :partial => 'comments/comment_file_info_bar', :locals => {:comment => comment} %>
 		<div class='admin' style='display:none;'>
 			<%= link_to 'Edit', edit_post_comment_path(comment.post, comment)%>
 			<%= link_to 'Destroy', post_comment_path(comment.post, comment), :confirm => 'Are you sure?', :method => :delete %>

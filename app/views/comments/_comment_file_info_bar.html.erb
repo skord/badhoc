@@ -1,0 +1,3 @@
+<% if comment.commentpic? %>
+<em><%= comment.commentpic.original_filename %>/<%= number_to_human_size(comment.commentpic.size) %>/<%= comment.image_width %>x<%= comment.image_height %></em>
+<% end %>

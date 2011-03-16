@@ -28,6 +28,15 @@ class Post < ActiveRecord::Base
   #   Post.inactive.where("created_at < ?", Time.now - 5.minutes).destroy_all
   # end
 
+  before_save do
+    tempfile = self.postpic.queued_for_write[:original]
+    unless tempfile.nil?
+      dimensions = Paperclip::Geometry.from_file(tempfile)
+      self.image_width = dimensions.width
+      self.image_height = dimensions.height
+    end
+  end
+
   before_destroy do
     self.destroy_attached_files
   end

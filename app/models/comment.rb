@@ -20,6 +20,15 @@ class Comment < ActiveRecord::Base
     self.name = tripcode(self.name)
   end
   
+  before_save do
+    tempfile = self.commentpic.queued_for_write[:original]
+    unless tempfile.nil?
+      dimensions = Paperclip::Geometry.from_file(tempfile)
+      self.image_width = dimensions.width
+      self.image_height = dimensions.height
+    end
+  end
+  
   before_destroy do
     self.destroy_attached_files
   end
