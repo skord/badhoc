@@ -10,6 +10,11 @@ class PostsController < ApplicationController
     @post = board.posts.new
     @posts = board.posts.active.paginate :order => 'sticky DESC, position ASC', :page => params[:page], :per_page => 10, :include => :comments
     @all_posts = board.posts.active
+
+    # For varnish. Anyone that cares this much about an atom feed should find another way.
+    if request.format.atom?
+      response.headers['Cache-Control'] = 'public, max-age=60'
+    end
     
     if stale?(:last_modified => @board.updated_at.utc, :etag => @posts)
       respond_with [board, @posts] do |format|
@@ -27,6 +32,11 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id], :include => :comments)
     @comment = @post.comments.new
 
+    # For varnish. Anyone that cares this much about an atom feed should find another way.
+    if request.format.atom?
+      response.headers['Cache-Control'] = 'public, max-age=60'
+    end
+  
     if stale?(:last_modified => @post.updated_at.utc, :etag => @post)
       respond_to do |format|
         format.html # show.html.erb
