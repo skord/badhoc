@@ -116,6 +116,7 @@ $(document).ready( function() {
 			'showNavArrows'	: false,
 	    'changeFade'    : 0,
 	    'cyclic'				: true,
-			'hideOnContentClick' : true
+			'hideOnContentClick' : true,
+			'showCloseButton'	: false
 		});
 });

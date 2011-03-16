@@ -20,6 +20,11 @@
 		<%= @picwall.comments.no_attachment.count %>
 	</div>
 </div>
+<div class='span-8 prepend-1 last'>
+	<br />
+	<br />
+	<em>Click any picture to open a gallery. Use your mousewheel or trackpad to scroll through. Click anywhere to close the slideshow. Right click options are for the full size image, which may be bigger than what appears.</em>
+</div>
 <div class='span-22 prepend-2 last'>
 	<% @picwall.comments.each do |comment|%>
 		<%= link_to(image_tag(comment.commentpic.url(:small)), comment.commentpic.url, :target => '_blank', :class => 'fancybox', :rel => 'picwall') if comment.commentpic? %>
