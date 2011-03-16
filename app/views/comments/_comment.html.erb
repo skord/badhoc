@@ -2,7 +2,7 @@
 <div class="comment span-23  prepend-1 last " data-time="<%=  comment.created_at.to_i %>" data-id="<%= comment.id %>">
 	<div class='span-6 last'>
 		<% if comment.commentpic? %>
-			<%= link_to(image_tag(comment.commentpic.url(:small)),comment.commentpic.url, :class => 'comment-pic', :target => '_blank') %>
+			<%= link_to(image_tag(comment.commentpic.url(:small)),comment.commentpic.url, :class => 'comment-pic thickbox', :target => '_blank') %>
 		<% else %>
 			<p></p>
 		<% end %>

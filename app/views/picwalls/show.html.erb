@@ -22,6 +22,6 @@
 </div>
 <div class='span-22 prepend-2 last'>
 	<% @picwall.comments.each do |comment|%>
-		<%= link_to(image_tag(comment.commentpic.url(:small)), comment.commentpic.url) if comment.commentpic? %>
+		<%= link_to(image_tag(comment.commentpic.url(:small)), comment.commentpic.url, :target => '_blank', :class => 'thickbox') if comment.commentpic? %>
 	<% end %>
 </div>
