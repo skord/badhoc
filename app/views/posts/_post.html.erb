@@ -2,7 +2,7 @@
 
 	<div class='postpic span-6'>
 		<% if post.postpic? %>
-			<%= link_to(image_tag(post.postpic.url(:small), :size => '200x200'),post.postpic.url, :class => 'postpic thickbox', :target => "_blank") %>
+			<%= link_to(image_tag(post.postpic.url(:small), :size => '200x200'),post.postpic.url, :class => 'postpic', :target => "_blank") %>
 		<% else %>
 			<p>None</p>
 		<% end %>
