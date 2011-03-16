@@ -106,3 +106,16 @@ $(document).ready( function () {
 		$('#new_comment_form textarea').val(reply_string);
 	});
 });
+
+// Picwall fancybox
+$(document).ready( function() {
+	$(".fancybox").fancybox({
+			'transitionIn'	:	'none',
+			'transitionOut'	:	'none',
+			'overlayShow'		:	true,
+			'showNavArrows'	: false,
+	    'changeFade'    : 0,
+	    'cyclic'				: true,
+			'hideOnContentClick' : true
+		});
+});
