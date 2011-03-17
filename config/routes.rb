@@ -1,5 +1,8 @@
 Badhoc::Application.routes.draw do
 
+
+  match 'boards/:board_id/posts/page/:page' => 'posts#index'
+
   namespace :api do 
     resources :boards
     resources :posts
