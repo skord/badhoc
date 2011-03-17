@@ -1,8 +1,29 @@
 class PostsController < ApplicationController
 
+  # Yeah, there's a lot of caching methods here, its much of an attempt to cover different cases.
+  # Because of CSRF protection and user sessions, the response headers really only do anything
+  # at all if you're stripping cookies at the reverse proxy session. If you setup that way,
+  # I'd recommend a filter to avoid the /admin path and other admin actions you can find in 
+  # rake routes. See, isn't RESTfulness super? TL;DR: Cache headers mean nothing unless you've 
+  # configured your reverse proxy to toss cookies. 
+  #
+  # There is a conditional get for index, which will throw a 304 unless the 
+  # content in the block and the last modified date has changed.
+  #
+  # The action caching on the show method is a lot faster than fragment caching or even the 
+  # conditional get. Does not work for the index action because of pagination. Uses more memcached
+  # space, but its worth it. It bypasses doing the db query at all, hence faster. If you're limited
+  # to a small memcached instance, it might be better to modify this so the action caching is turned 
+  # off but keep the conditional get. The conditional get is in place as well as the action caching 
+  # for the case where the cache is expired or not available. 
+  #
+  # In the views there are quite a bit of partial fragments cached. The render times for comments 
+  # and post names, emails etc are a bit high and there are quite a few of these.
+
   respond_to :html, :js
 
   before_filter :authenticate_admin!, :except => [:index, :show, :new, :create]
+  caches_action :show, :layout => false
   # GET /posts
   # GET /posts.xml
   def index
@@ -98,6 +119,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.update_attributes(params[:post])
+        expire_action :action => :show
         format.html { redirect_to(board_posts_path, :notice => 'Post was successfully updated.') }
       else
         format.html { render :action => "edit" }

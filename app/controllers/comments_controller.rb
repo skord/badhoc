@@ -56,6 +56,7 @@ class CommentsController < ApplicationController
       if @comment.save
         session[:my_name] = params[:comment][:name]
         set_message_parent
+        expire_action(:controller => 'posts', :action => 'show', :id => @comment.post.id)
         @comment.post.move_to_top unless @comment.email == 'sage'
         if @comment.email == 'noko'
           redirect_to(post_path(post))
@@ -78,6 +79,7 @@ class CommentsController < ApplicationController
     respond_with [post, @comment] do |format|
       format.html {
         if @comment.update_attributes(params[:comment])
+          expire_action(:controller => 'posts', :action => 'show', :id => @comment.post.id)
           redirect_to(post_path(post))
         else
           render "new"
