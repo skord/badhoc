@@ -11,15 +11,18 @@ class PostsController < ApplicationController
     @posts = board.posts.active.paginate :order => 'sticky DESC, position ASC', :page => params[:page], :per_page => 10, :include => :comments
     @all_posts = board.posts.active
 
-    # For varnish. Anyone that cares this much about an atom feed should find another way.
-    if request.format.atom?
-      response.headers['Cache-Control'] = 'public, max-age=60'
-    end
-    
     if stale?(:last_modified => @board.updated_at.utc, :etag => @posts)
       respond_with [board, @posts] do |format|
-        format.html # index.html.erb
-        format.atom
+        format.html {
+          # Since pagination is done via JS if available, this mostly targets robots. 
+          # It's still set pretty low because the #1 landing spot is board_posts_path
+          # in html format.
+          response.headers['Cache-Control'] = 'public, max-age=15'
+        }
+        format.atom {
+          # For varnish. Anyone that cares this much about an atom feed should find another way.
+          response.headers['Cache-Control'] = 'public, max-age=60'
+        }
         format.js
       end
     end
@@ -32,15 +35,18 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id], :include => :comments)
     @comment = @post.comments.new
 
-    # For varnish. Anyone that cares this much about an atom feed should find another way.
-    if request.format.atom?
-      response.headers['Cache-Control'] = 'public, max-age=60'
-    end
-  
     if stale?(:last_modified => @post.updated_at.utc, :etag => @post)
       respond_to do |format|
-        format.html # show.html.erb
-        format.atom
+        format.html {
+          # Anything longer than this can lead to some "odd" behavior. New posts should roll in via JS
+          # but if someone hits refresh they'll get the reverse proxy cache version, but if they wait 
+          # a moment they'll get the updates via JS.
+          response.headers['Cache-Control'] = 'public, max-age=30'
+        }
+        format.atom {
+          # For varnish. Anyone that cares this much about an atom feed should find another way.
+          response.headers['Cache-Control'] = 'public, max-age=60'
+        }
         format.js
       end
     end
