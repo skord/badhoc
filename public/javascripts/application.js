@@ -68,12 +68,7 @@ if (history && history.pushState) {
 	$(function () {
 		$('#posts .pagination a').live("click", function(e) {
 			$(".pagination").css({opacity:0.5});
-			$.ajax({
-				url: this.href,
-				dataType: 'script',
-				cache: true
-			});
-			// $.getScript(this.href);
+			$.getScript(this.href);
 			history.pushState(null, document.title, this.href);
 			e.preventDefault();
 		});
