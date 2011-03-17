@@ -95,6 +95,7 @@ class CommentsController < ApplicationController
     
     if comment.destroy
       flash[:notice] = 'The comment was destroyed'
+      expire_action(:controller => 'posts', :action => 'show', :id => comment.post.id)
     else
       flash[:alert] = 'The comment could not be destroyed'
     end
