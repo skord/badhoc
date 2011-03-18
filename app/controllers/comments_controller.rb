@@ -91,17 +91,17 @@ class CommentsController < ApplicationController
   # DELETE /comments/1
   # DELETE /comments/1.xml
   def destroy
-    comment = post.comments.find(params[:id])
-    post_id = comment.post.id
+    @comment = post.comments.find(params[:id])
+    post_id = @comment.post.id
     
-    if comment.destroy
+    if @comment.destroy
       flash[:notice] = 'The comment was destroyed'
       expire_action(:controller => 'posts', :action => 'show', :id => post_id)
     else
       flash[:alert] = 'The comment could not be destroyed'
     end
     
-    respond_with [post, @comment] do |format|
+    respond_to do |format|
       format.html {redirect_to(post_path(post))}
     end    
   end
