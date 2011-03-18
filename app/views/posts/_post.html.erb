@@ -41,7 +41,7 @@
 		<br />
 		<% if controller.action_name == "index"%>
 			<table>
-			<% post.comments.reverse[0..8].each do |comment| %>
+			<% post.comments.order('created_at DESC')[0..8].each do |comment| %>
 				<tr>
 					<td><%= render :partial => 'shared/tripcode_name_email', :locals => {:post => comment}%></td>
 					<td><%= timeago(comment.created_at) %></td>
