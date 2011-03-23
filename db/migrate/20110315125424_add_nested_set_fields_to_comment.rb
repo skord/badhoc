@@ -5,12 +5,6 @@ class AddNestedSetFieldsToComment < ActiveRecord::Migration
     add_column :comments, :rgt, :integer
     add_column :comments, :depth, :integer
     add_column :comments, :comments_count, :integer, :default => 0
-    say_with_time "Creating comment tree structure" do 
-      Comment.rebuild!
-    end
-    say_with_time "Setting current comment depth" do
-      Comment.all.each {|comment| comment.move_to_root}
-    end
   end
 
   def self.down
@@ -21,3 +15,4 @@ class AddNestedSetFieldsToComment < ActiveRecord::Migration
     remove_column :comments, :parent_id
   end
 end
+
