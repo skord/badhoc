@@ -8,6 +8,15 @@ class Comment < ActiveRecord::Base
   belongs_to :post, :counter_cache => true, :touch => true
   belongs_to :board, :touch => true
   
+  
+  # Callbacks. They're here because they have to go before the attachment definition.
+  before_validation :set_tripcoded_name
+  after_create      :increment_board_comments_counter
+  before_save       :pull_image_geometries
+  after_create      :increment_board_attachments_size
+  before_destroy    :decrement_board_attachments_size
+  after_destroy     :decremement_board_comments_counter
+  
   has_attached_file :commentpic, 
                     :styles => {:small => '200x200#',
                                 :thumb => '64x64#'}
@@ -16,13 +25,12 @@ class Comment < ActiveRecord::Base
   scope :no_attachment, where('commentpic_file_name is ?', nil)
 
   
-  # Callbacks
-  
-  before_validation do
+  # Callback Methods
+ 
+  def set_tripcoded_name
     self.name = tripcode(self.name)
   end
-  
-  before_save :pull_image_geometries
+
   def pull_image_geometries
     tempfile = self.commentpic.queued_for_write[:original]
     unless tempfile.nil?
@@ -33,8 +41,6 @@ class Comment < ActiveRecord::Base
   end
   
   # Faking a comment count for board since there's no direct association.
-  after_create :increment_board_comments_counter
-  after_destroy :decremement_board_comments_counter
     
   def increment_board_comments_counter
     Board.increment_counter(:comments_count, self.post.board.id)
@@ -44,10 +50,20 @@ class Comment < ActiveRecord::Base
     Board.decrement_counter(:comments_count, self.post.board.id)
   end
   
-  before_destroy do
-    self.destroy_attached_files
+  def increment_board_attachments_size
+    if self.commentpic.size != nil
+      board = self.post.board
+      board.increment!(:attachments_size, by = self.commentpic.size)
+    end
   end
-  
+
+  def decrement_board_attachments_size
+    if self.commentpic.size != nil
+      board = self.post.board
+      board.decrement!(:attachments_size, by = self.commentpic.size)
+    end
+  end
+    
   # Validations
   validates_presence_of :message
   

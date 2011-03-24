@@ -9,17 +9,28 @@ class Post < ActiveRecord::Base
   
   cattr_reader :per_page
   @@per_page = 10
-  
-  
+
   has_many :comments, :dependent => :destroy
   belongs_to :board, :counter_cache => true, :touch => true
+  
+  before_validation :set_tripcoded_name
+  before_save       :pull_image_geometries
+  after_create      :increment_board_attachments_size
+  before_destroy    :decrement_board_attachments_size
+  
+  
   has_attached_file :postpic,
                     :styles => {:small => '200x200#',
                                 :thumb => '64x64#'}
-                                
-  before_validation do
-    self.name = tripcode(self.name)
-  end
+
+  # Bitches don't know bout my named scopes
+  scope :has_attachment, where('postpic_file_name is not ?', nil)
+  scope :no_attachment, where('postpic_file_name is ?', nil)
+  scope :active, where('position <= ?', ACTIVE_POST_THRESHOLD)
+  scope :inactive, where('position > ?', ACTIVE_POST_THRESHOLD)
+  scope :sticky, where('sticky = ?', true)
+  scope :not_sticky, where('sticky = ?', false)
+
 
   # I thought this could clean up inactive posts, but I think it causes an infinite loop 
   # or something somewhere. Rails will crash with an illegal instruction upon a creating a new record. 
@@ -28,25 +39,32 @@ class Post < ActiveRecord::Base
   #   Post.inactive.where("created_at < ?", Time.now - 5.minutes).destroy_all
   # end
 
-  before_save do
+  def set_tripcoded_name
+    self.name = tripcode(self.name)
+  end
+
+  def pull_image_geometries
     tempfile = self.postpic.queued_for_write[:original]
     unless tempfile.nil?
       dimensions = Paperclip::Geometry.from_file(tempfile)
       self.image_width = dimensions.width
       self.image_height = dimensions.height
+    end    
+  end
+
+  def increment_board_attachments_size
+    if self.postpic.size != nil
+      board = self.board
+      board.increment!(:attachments_size, by = self.postpic.size)
     end
   end
 
-  before_destroy do
-    self.destroy_attached_files
+  def decrement_board_attachments_size
+    # if self.postpic.size != nil
+      board = self.board
+      board.decrement!(:attachments_size, by = self.postpic.size)
+    # end
   end
-    
-  scope :has_attachment, where('postpic_file_name is not ?', nil)
-  scope :no_attachment, where('postpic_file_name is ?', nil)
-  scope :active, where('position <= ?', ACTIVE_POST_THRESHOLD)
-  scope :inactive, where('position > ?', ACTIVE_POST_THRESHOLD)
-  scope :sticky, where('sticky = ?', true)
-  scope :not_sticky, where('sticky = ?', false)
   
   validates_presence_of :name, :message => "can't be blank"
 
