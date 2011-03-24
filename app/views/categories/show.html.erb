@@ -1,15 +1,19 @@
-<p class='large prepend-1 last'>
-	<%= link_to 'Home', '/'%> \
-	<%= @category.name %>
-</p>
+<div class='last prepend-2'>
+  <p class='large'>
+    <%= link_to 'Home', '/'%> \
+    <%= @category.name %>
+  </p>
+</div>
 
 <div class='last category prepend-2 append-2'>
+  <% @category.boards.each do |board|%>
+	  <%= render :partial => 'shared/board_box', :locals => {:board => board} %>
+  <% end %>
+</div>
 
-<% @category.boards.each do |board|%>
-	<%= render :partial => 'shared/board_box', :locals => {:board => board} %>
-<% end %>
-
-<div class='last span-20 append-2'>
-<%= link_to 'Edit', edit_category_path(@category) %> |
-<%= link_to 'Back', categories_path %>
+<div class='last span-20 prepend-2'>
+  <% if admin_signed_in? %>
+    <%= link_to 'Edit', edit_category_path(@category) %> |
+  <% end %>
+  <%= link_to 'Back', categories_path %>
 </div>

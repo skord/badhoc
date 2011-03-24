@@ -1,52 +1,57 @@
 <div class='span-20 append-2 prepend-2'>
-<p id="notice"><%= notice %></p>
+  <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @board.name %>
-</p>
+  <p>
+    <b>Name:</b>
+    <%= @board.name %>
+  </p>
 
-<p>
-  <b>Slug:</b>
-  <%= @board.slug %>
-</p>
+  <p>
+    <b>Slug:</b>
+    <%= @board.slug %>
+  </p>
 
-<p>
-  <b>Description:</b>
-  <%= @board.description %>
-</p>
-<% unless @board.comments.empty? %>
-<p>
-	<b>Posts Count:</b>
-	<%= @board.posts_count %>
-</p>
+  <p>
+    <b>Description:</b>
+    <%= @board.description %>
+  </p>
 
-<p>
-	<b>Images Count:</b>
-	<%= @board.posts.has_attachment.count + @board.comments.has_attachment.count %>
-</p>
+  <% unless @board.comments.empty? %>
+    <p>
+	    <b>Posts Count:</b>
+	    <%= @board.posts_count %>
+    </p>
 
-<p>
-	<b>Images Size:</b>
-	<%= number_to_human_size(@images_size) %>
-</p>
+    <p>
+	    <b>Images Count:</b>
+	    <%= @board.posts.has_attachment.count + @board.comments.has_attachment.count %>
+    </p>
 
-<p>
-	<b>Comments Count</b>
-	<%= @board.comments.count %>
-</p>
+    <p>
+	    <b>Images Size:</b>
+	    <%= number_to_human_size(@images_size) %>
+    </p>
 
-<p>
-	<b>Last New Post:</b>
-	<%= timeago(@board.posts.last.created_at)%>
-</p>
+    <p>
+	    <b>Comments Count</b>
+	    <%= @board.comments.count %>
+    </p>
 
-<p>
-	<b>Last Commented:</b>
-	<%= timeago(@board.comments.last.created_at) %>
-</p>
+    <p>
+	    <b>Last New Post:</b>
+	    <%= timeago(@board.posts.last.created_at)%>
+    </p>
 
-<% end %>
-<%= link_to 'Edit', edit_board_path(@board) %> |
-<%= link_to 'Back', categories_path %>
+    <p>
+	    <b>Last Commented:</b>
+	    <%= timeago(@board.comments.last.created_at) %>
+    </p>
+
+  <% end %>
+
+  <% if admin_signed_in? %>
+    <%= link_to 'Edit', edit_board_path(@board) %> |
+  <% end %>
+  <%= link_to 'Back', categories_path %>
 </div>
+

@@ -16,23 +16,39 @@ class Comment < ActiveRecord::Base
   scope :no_attachment, where('commentpic_file_name is ?', nil)
 
   
+  # Callbacks
+  
   before_validation do
     self.name = tripcode(self.name)
   end
   
-  before_save do
+  before_save :pull_image_geometries
+  def pull_image_geometries
     tempfile = self.commentpic.queued_for_write[:original]
     unless tempfile.nil?
       dimensions = Paperclip::Geometry.from_file(tempfile)
       self.image_width = dimensions.width
       self.image_height = dimensions.height
-    end
+    end    
+  end
+  
+  # Faking a comment count for board since there's no direct association.
+  after_create :increment_board_comments_counter
+  after_destroy :decremement_board_comments_counter
+    
+  def increment_board_comments_counter
+    Board.increment_counter(:comments_count, self.post.board.id)
+  end
+  
+  def decremement_board_comments_counter
+    Board.decrement_counter(:comments_count, self.post.board.id)
   end
   
   before_destroy do
     self.destroy_attached_files
   end
   
+  # Validations
   validates_presence_of :message
   
   validate  :under_comment_limit

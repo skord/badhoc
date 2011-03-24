@@ -5,8 +5,10 @@
 </div>
 
 <br />
-<div class='span-24 last'>
-<% if admin_signed_in? %>
-<%= link_to 'New Board', new_board_path %>
-<% end %>
+
+<div class='span-22 prepend-2 last'>
+  <% if admin_signed_in? %>
+    <%= link_to 'New Board', new_board_path %>
+  <% end %>
 </div>
+
