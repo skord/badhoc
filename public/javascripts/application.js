@@ -44,7 +44,7 @@ $(document).ready(function () {
 // Ajaxy stuff for comment updating.
 $(function () {
 	if ($('#comments').length > 0) {
-		setTimeout(updateComments, 10000);
+		setTimeout(updateComments, 5000);
 	}
 });
 
@@ -60,7 +60,7 @@ function updateComments() {
 	}
 	
 	$.getScript('/posts/' + post_id + '/comments.js?post_id=' + post_id + '&after=' + after + '&comments_count=' + comments_count);
-	setTimeout(updateComments, 10000)
+	setTimeout(updateComments, 5000)
 }
 
 // Posts Pagination
