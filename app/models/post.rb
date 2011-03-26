@@ -25,22 +25,22 @@ class Post < ActiveRecord::Base
   # still be linked to, which can be a problem if you do third party
   # hosting via S3 or rackspace or something. 
   #
-  # The solution is to send the cleanups to the delayed_job
-  # queue and run these periodically. The problem is that in 
-  # heroku setups that workers aren't free and there may be other 
-  # hosted instances where a worker process may not be available. 
-  # I could spin up a worker via the heroku API, but this makes this 
-  # not so generic for deployment anymore. 
-  #
+  # There's four scenarios here:
+  # 1. Extremely low traffic sites. Pick the first one
+  # 2. Your dorm room, pick the second.
+  # 3. Mid-size traffic sites, pick #3, but watch your queues.
+  # 4. High traffic sites. Pick number one, but by all means get a
+  # hold of me so this can be done better.
+
   # So, pick one of the following:
 
-  # No auto-cleanup. Periodically run Post.cleanup! somehow.
+  # #1: No auto-cleanup. Periodically run Post.cleanup! somehow.
   after_create      :increment_board_attachments_size
 
-  # Auto-Cleanup, non-async. You have been warned.
+  # #2: Auto-Cleanup, non-async. You have been warned.
   # after_create      :increment_board_attachments_size, :cleanup!
   
-  # Auto-Cleanup, delayed_job. If you use this, uncomment the delayed_job 
+  # #3: Auto-Cleanup, delayed_job. If you use this, uncomment the delayed_job 
   # gem in Gemfile and run 'bundle install':
   # after_create      :increment_board_attachments_size, :dj_cleanup!
     
