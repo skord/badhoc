@@ -1,5 +1,5 @@
 <% cache comment do %>
-<div class="comment span-23  prepend-1 last " data-time="<%=  comment.created_at.to_i %>" data-id="<%= comment.id %>">
+<div id='<%= dom_id(comment)%>' class="comment span-23  prepend-1 last <%= 'commentpic_processing' if comment.commentpic_processing %>" data-time="<%=  comment.created_at.to_i %>" data-id="<%= comment.id %>">
 	<div class='span-6 last'>
 		<% if comment.commentpic_processing %>
 			<center>
