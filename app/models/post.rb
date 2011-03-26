@@ -26,8 +26,8 @@ class Post < ActiveRecord::Base
   # hosting via S3 or rackspace or something. 
   #
   # There's four scenarios here:
-  # 1. Extremely low traffic sites. Pick the first one
-  # 2. Your dorm room, pick the second.
+  # 1. Extremely low traffic sites. Pick #1. 
+  # 2. Your dorm room, pick the #2.
   # 3. Mid-size traffic sites, pick #3, but watch your queues.
   # 4. High traffic sites. Pick number one, but by all means get a
   # hold of me so this can be done better.
@@ -41,7 +41,8 @@ class Post < ActiveRecord::Base
   # after_create      :increment_board_attachments_size, :cleanup!
   
   # #3: Auto-Cleanup, delayed_job. If you use this, uncomment the delayed_job 
-  # gem in Gemfile and run 'bundle install':
+  # gem in Gemfile and run 'bundle install'. Run the cron job for this 
+  # as OFTEN as possible to avoid dupe jobs in queue.
   # after_create      :increment_board_attachments_size, :dj_cleanup!
     
   before_destroy    :decrement_board_attachments_size
