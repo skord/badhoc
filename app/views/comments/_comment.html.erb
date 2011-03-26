@@ -2,27 +2,27 @@
 <div class="comment span-23  prepend-1 last " data-time="<%=  comment.created_at.to_i %>" data-id="<%= comment.id %>">
 	<div class='span-6 last'>
 		<% if comment.commentpic? %>
-			<%= link_to(image_tag(comment.commentpic.url(:small)),comment.commentpic.url, :class => 'comment-pic', :target => '_blank') %>
+			<%= link_to(image_tag(comment.commentpic.url(:small)), comment.commentpic.url, :class => 'comment-pic', :target => '_blank') %>
 		<% else %>
 			<p></p>
 		<% end %>
 	</div>
 	<div class='comment-info span-16'>
-		<%= render :partial => 'shared/tripcode_name_email', :locals => {:post => comment}%>
+	  <%= render :partial => 'shared/tripcode_name_email', :locals => {:post => comment}%>
 	  <dfn><%= comment.subject %></dfn>
-		<em><%= timeago(comment.created_at) %></em> - 
-		<em>Comment: <%= comment.id %></em>
-		<%= link_to 'Permalink', post_comment_path(comment.post, comment), :name => dom_id(comment), :class => 'permalink' %>
-		<% unless comment.parent_id.nil? %>
-			<br />
-			<em>In Reply To: <%= comment.parent_id %><%= link_to((image_tag "icons/arrow_turn_left.png"), post_path(comment.post, :anchor => "comment_#{comment.parent_id}")) %></em>
-		<% end %>
+      <em><%= timeago(comment.created_at) %></em> -
+      <em>Comment: <%= comment.id %></em>
+      <%= link_to 'Permalink', post_comment_path(comment.post, comment), :name => dom_id(comment), :class => 'permalink' %>
+	  <% unless comment.parent_id.nil? %>
 		<br />
-		<%= render :partial => 'comments/comment_file_info_bar', :locals => {:comment => comment} %>
-		<div class='admin' style='display:none;'>
-			<%= link_to 'Edit', edit_post_comment_path(comment.post, comment)%>
-			<%= link_to 'Destroy', post_comment_path(comment.post, comment), :confirm => 'Are you sure?', :method => :delete %>
-		</div>
+		<em>In Reply To: <%= comment.parent_id %><%= link_to((image_tag "icons/arrow_turn_left.png"), post_path(comment.post, :anchor => "comment_#{comment.parent_id}")) %></em>
+	  <% end %>
+	<br />
+	  <%= render :partial => 'comments/comment_file_info_bar', :locals => {:comment => comment} %>
+	  <div class='admin' style='display:none;'>
+	    <%= link_to 'Edit', edit_post_comment_path(comment.post, comment)%>
+		<%= link_to 'Destroy', post_comment_path(comment.post, comment), :confirm => 'Are you sure?', :method => :delete %>
+	  </div>
 	  <p><%= user_text_markdown(comment.message) %></p>
 	</div>
 </div>

@@ -3,7 +3,9 @@
 	<%= category.name %>
 		<% if admin_signed_in? %>
 			<%= link_to image_tag('icons/application_edit.png', :title => 'Edit'), edit_category_path(category) %>
-			<%= link_to image_tag('icons/delete.png', :title => 'Delete'), category, :confirm => 'Are you sure?', :method => :delete %>
+			<%= link_to image_tag('icons/delete.png', :title => 'Delete'), category,
+                  :confirm => 'Are you sure?',
+                  :method => :delete %>
 		<% end %>
 	</p>
 	<% category.boards.each do |board|%>

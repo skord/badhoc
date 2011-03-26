@@ -17,7 +17,8 @@ gem 'httpbl'
 gem 'jquery-rails'
 gem 'dalli'
 gem 'kgio'
-gem 'awesome_nested_set', :git => 'https://github.com/galetahub/awesome_nested_set.git'
+#gem 'awesome_nested_set', :git => 'https://github.com/galetahub/awesome_nested_set.git', :tag => 'v1.4.3'
+gem 'nested_set', :git => 'git://github.com/skyeagle/nested_set.git', :tag => 'v1.6.4'
 
 # Use unicorn as the web server
 # gem 'unicorn'
@@ -42,10 +43,11 @@ gem 'awesome_nested_set', :git => 'https://github.com/galetahub/awesome_nested_s
 #   gem 'webrat'
 # end
 
-group :test, :development do 
+group :test, :development do
   gem 'wirble'
   gem 'rspec-rails'
   gem 'autotest'
   gem 'webrat'
   gem 'faker'
 end
+

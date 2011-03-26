@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110316162033) do
+ActiveRecord::Schema.define(:version => 20110324205015) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                               :default => "", :null => false
@@ -48,8 +48,10 @@ ActiveRecord::Schema.define(:version => 20110316162033) do
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "posts_count", :default => 0
+    t.integer  "posts_count",      :default => 0
     t.integer  "category_id"
+    t.integer  "comments_count",   :default => 0
+    t.integer  "attachments_size", :default => 0
   end
 
   add_index "boards", ["category_id"], :name => "index_boards_on_category_id"
@@ -77,7 +79,6 @@ ActiveRecord::Schema.define(:version => 20110316162033) do
     t.integer  "parent_id"
     t.integer  "lft"
     t.integer  "rgt"
-    t.integer  "depth"
     t.integer  "comments_count",          :default => 0
     t.integer  "image_width",             :default => 0
     t.integer  "image_height",            :default => 0

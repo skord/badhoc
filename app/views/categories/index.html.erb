@@ -1,10 +1,10 @@
 <div id='categories'>
-	<%= render @categories %>
+  <%= render @categories %>
 </div>
 
 <% if admin_signed_in? %>
-<div class='span-22 prepend-2'>
-<%= link_to 'New Category', new_category_path %>
-<%= link_to 'New Board', new_board_path %>
-</div>
+  <div class='span-22 prepend-2'>
+    <%= link_to 'New Category', new_category_path %>
+    <%= link_to 'New Board', new_board_path %>
+  </div>
 <% end %>

@@ -8,11 +8,13 @@ GIT
       warden (~> 1.0.3)
 
 GIT
-  remote: https://github.com/galetahub/awesome_nested_set.git
-  revision: 6c98d59faf3a9de4dc62ba2e34059189cd4799d4
+  remote: git://github.com/skyeagle/nested_set.git
+  revision: 7828735ceca73bead61381ab38aa7caa25109716
+  tag: v1.6.4
   specs:
-    awesome_nested_set (1.5.0)
+    nested_set (1.6.4)
       activerecord (>= 3.0.0)
+      railties (>= 3.0.0)
 
 GEM
   remote: http://rubygems.org/
@@ -140,7 +142,6 @@ PLATFORMS
 DEPENDENCIES
   acts_as_list
   autotest
-  awesome_nested_set!
   aws-s3
   dalli
   devise!
@@ -149,6 +150,7 @@ DEPENDENCIES
   httpbl
   jquery-rails
   kgio
+  nested_set!
   paperclip
   rails (= 3.0.5)
   rdiscount

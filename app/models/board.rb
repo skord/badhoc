@@ -7,5 +7,8 @@ class Board < ActiveRecord::Base
   validates_presence_of :category_id
   
   attr_accessible :name, :slug, :description, :category_id
-  
+
+  def children_count
+    self.comments_count + self.posts_count
+  end
 end
