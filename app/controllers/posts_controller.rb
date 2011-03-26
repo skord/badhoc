@@ -23,7 +23,7 @@ class PostsController < ApplicationController
   respond_to :html, :js
 
   before_filter :authenticate_admin!, :except => [:index, :show, :new, :create]
-  caches_action :show, :layout => false
+  
   # GET /posts
   # GET /posts.xml
   def index
