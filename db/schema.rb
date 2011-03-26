@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110326125818) do
+ActiveRecord::Schema.define(:version => 20110326154403) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                               :default => "", :null => false
@@ -83,11 +83,27 @@ ActiveRecord::Schema.define(:version => 20110326125818) do
     t.integer  "comments_count",          :default => 0
     t.integer  "image_width",             :default => 0
     t.integer  "image_height",            :default => 0
+    t.boolean  "commentpic_processing",   :default => false
   end
 
   add_index "comments", ["client_ip"], :name => "index_comments_on_client_ip"
   add_index "comments", ["created_at", "post_id"], :name => "index_comments_on_created_at_and_post_id"
   add_index "comments", ["post_id"], :name => "index_comments_on_post_id"
+
+  create_table "delayed_jobs", :force => true do |t|
+    t.integer  "priority",   :default => 0
+    t.integer  "attempts",   :default => 0
+    t.text     "handler"
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
 
   create_table "posts", :force => true do |t|
     t.string   "name",                 :default => "Anonymous"

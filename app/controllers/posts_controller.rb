@@ -59,12 +59,7 @@ class PostsController < ApplicationController
 
     if stale?(:last_modified => @post.updated_at.utc, :etag => @post)
       respond_to do |format|
-        format.html {
-          # Anything longer than this can lead to some "odd" behavior. New posts should roll in via JS
-          # but if someone hits refresh they'll get the reverse proxy cache version, but if they wait 
-          # a moment they'll get the updates via JS.
-          response.headers['Cache-Control'] = 'public, max-age=30'
-        }
+        format.html
         format.atom {
           # For varnish. Anyone that cares this much about an atom feed should find another way.
           response.headers['Cache-Control'] = 'public, max-age=60'
