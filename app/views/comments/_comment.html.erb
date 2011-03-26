@@ -6,7 +6,7 @@
 				<br />
 				<%= image_tag 'processing.gif', :size => '31x31' %>
 				<br />
-				<em>Workin' it. Try a manual refresh.</em>
+				<em>Processing Thumbnail...</em>
 			</center>
 		<% elsif comment.commentpic? %>
 			<%= link_to(image_tag(comment.commentpic.url(:small)), comment.commentpic.url, :class => 'comment-pic', :target => '_blank') %>
