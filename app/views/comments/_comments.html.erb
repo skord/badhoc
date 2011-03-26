@@ -1,5 +1,5 @@
-<% cache @comments.not_processing do %>
-<% @comments.not_processing.reverse.each do |comment| %>
+<% cache @comments do %>
+<% @comments.reverse.each do |comment| %>
 	<%= render comment %>
 <% end %>
 <% end %>

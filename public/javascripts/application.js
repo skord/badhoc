@@ -63,6 +63,24 @@ function updateComments() {
 	setTimeout(updateComments, 5000)
 }
 
+$(function () {
+	if ($('#comments .commentpic_processing').length > 0) {
+		setTimeout(updateStale, 1000);
+	}
+});
+
+
+function updateStale() {
+	if ($('#comments .commentpic_processing').length > 0) {
+		$('#comments .commentpic_processing').each( function () {
+			var post_id = $('#post').attr('data-id');
+			var comment_id = $(this).data('id');
+			$.getScript('/posts/' + post_id + "/comments/" + comment_id + '.js');
+		});		
+	}
+	setTimeout(updateStale, 1000);
+}
+
 // Posts Pagination
 if (history && history.pushState) {
 	$(function () {

@@ -24,8 +24,8 @@
 		</div>
 	<% end %>
 	<div id='comments'>
-		<% cache @post.comments.not_processing do %>
-			<%= render @post.comments.not_processing.order('created_at DESC') %>
+		<% cache @post.comments do %>
+			<%= render @post.comments.order('created_at DESC') %>
 		<% end %>
 	</div>
 </div>
