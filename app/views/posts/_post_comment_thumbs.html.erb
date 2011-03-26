@@ -1,6 +1,8 @@
 <div class='post-comment-thumbs'>
 	<% for comment in post.comments.order('created_at DESC').select {|x| x.commentpic_file_name != nil}[0..8] %>
-		<%= link_to(image_tag(comment.commentpic.url(:thumb), :size => '64x64', :class => 'comment_thumbnail'), comment.commentpic.url, :target => '_blank')%>
+		<% unless comment.commentpic_processing? %>
+			<%= link_to(image_tag(comment.commentpic.url(:thumb), :size => '64x64', :class => 'comment_thumbnail'), comment.commentpic.url, :target => '_blank')%>
+		<% end %>
 	<% end %>
 </div>
 

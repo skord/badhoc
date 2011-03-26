@@ -20,11 +20,14 @@ class Comment < ActiveRecord::Base
   has_attached_file :commentpic, 
                     :styles => {:small => '200x200#',
                                 :thumb => '64x64#'}
+
+  process_in_background :commentpic
   
   scope :has_attachment, where('commentpic_file_name is not ?', nil)
   scope :no_attachment, where('commentpic_file_name is ?', nil)
+  scope :processing, where('commentpic_processing = ?', true)
+  scope :not_processing, where('commentpic_processing = ?', false)
 
-  
   # Callback Methods
  
   def set_tripcoded_name

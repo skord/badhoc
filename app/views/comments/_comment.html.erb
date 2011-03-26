@@ -1,7 +1,14 @@
 <% cache comment do %>
 <div class="comment span-23  prepend-1 last " data-time="<%=  comment.created_at.to_i %>" data-id="<%= comment.id %>">
 	<div class='span-6 last'>
-		<% if comment.commentpic? %>
+		<% if comment.commentpic_processing %>
+			<center>
+				<br />
+				<%= image_tag 'processing.gif', :size => '31x31' %>
+				<br />
+				<em>Workin' it. Try a manual refresh.</em>
+			</center>
+		<% elsif comment.commentpic? %>
 			<%= link_to(image_tag(comment.commentpic.url(:small)), comment.commentpic.url, :class => 'comment-pic', :target => '_blank') %>
 		<% else %>
 			<p></p>
