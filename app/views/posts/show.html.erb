@@ -58,7 +58,7 @@ else{ alert('Desktop Notification is not supported by browser');}
 		</div>
 	<% end %>
 	<div id='comments'>
-		<% cache @post.comments do %>
+		<% cache @post.comments.not_processing do %>
 			<%= render @post.comments.not_processing.order('created_at DESC') %>
 		<% end %>
 	</div>
