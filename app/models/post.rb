@@ -25,11 +25,10 @@ class Post < ActiveRecord::Base
   # still be linked to, which can be a problem if you do third party
   # hosting via S3 or rackspace or something. 
   #
-  # There's four scenarios here:
+  # There's three scenarios here:
   # 1. Extremely low traffic sites. Pick #1. 
   # 2. Your dorm room, pick the #2.
-  # 3. Mid-size traffic sites, pick #3, but watch your queues.
-  # 4. High traffic sites. Pick number one, but by all means get a
+  # 3. High traffic sites. Pick number one, but by all means get a
   # hold of me so this can be done better.
 
   # So, pick one of the following:
@@ -40,10 +39,6 @@ class Post < ActiveRecord::Base
   # #2: Auto-Cleanup, non-async. You have been warned.
   # after_create      :increment_board_attachments_size, :cleanup!
   
-  # #3: Auto-Cleanup, delayed_job. If you use this, uncomment the delayed_job 
-  # gem in Gemfile and run 'bundle install'. Run the cron job for this 
-  # as OFTEN as possible to avoid dupe jobs in queue.
-  # after_create      :increment_board_attachments_size, :dj_cleanup!
     
   before_destroy    :decrement_board_attachments_size
   
@@ -164,11 +159,6 @@ class Post < ActiveRecord::Base
   def self.cleanup!
     Post.not_sticky.inactive.where("created_at < ?", 5.minutes.ago).destroy_all
   end
-
-  def self.dj_cleanup!
-    Post.not_sticky.inactive.where("created_at < ?", 5.minutes.ago).delay.destroy_all
-  end
-
   
   def cleanup
     Post.not_sticky.inactive.where("created_at < ?", 5.minutes.ago).count
@@ -178,9 +168,6 @@ class Post < ActiveRecord::Base
     Post.not_sticky.inactive.where("created_at < ?", 5.minutes.ago).destroy_all.count
   end
   
-  def dj_cleanup!
-    Post.not_sticky.inactive.where("created_at < ?", 5.minutes.ago).delay.destroy_all
-  end
 
   attr_accessible :name, :email, :subject, :message, :password, :postpic
 end
