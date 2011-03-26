@@ -3,8 +3,12 @@ class Post < ActiveRecord::Base
 
   # It used to be that the post threshold was the entire site. That's fixed as of this commit. 
   # Active post threshold is now per board, hence lowering the number by a factor of 10 here. 
+  # Still a small issue though, this needs to be moved to the board model for post aging somehow, 
+  # but you end up screwing up the named scopes below. So for now the active threshold for posts
+  # is still a global (across every board) value. This is reflected in the weird mix of instance
+  # and singleton methods at the bottom until I get that mentally cleared up. 
 
-  ACTIVE_POST_THRESHOLD = 1000
+  ACTIVE_POST_THRESHOLD = 100
   acts_as_list :scope => :board
   
   cattr_reader :per_page
@@ -15,7 +19,31 @@ class Post < ActiveRecord::Base
   
   before_validation :set_tripcoded_name
   before_save       :pull_image_geometries
+  
+  # Since the post controller makes use of the 'active' scope, posts
+  # that have aged off won't appear in the app, but the assets can 
+  # still be linked to, which can be a problem if you do third party
+  # hosting via S3 or rackspace or something. 
+  #
+  # The solution is to send the cleanups to the delayed_job
+  # queue and run these periodically. The problem is that in 
+  # heroku setups that workers aren't free and there may be other 
+  # hosted instances where a worker process may not be available. 
+  # I could spin up a worker via the heroku API, but this makes this 
+  # not so generic for deployment anymore. 
+  #
+  # So, pick one of the following:
+
+  # No auto-cleanup. Periodically run Post.cleanup! somehow.
   after_create      :increment_board_attachments_size
+
+  # Auto-Cleanup, non-async. You have been warned.
+  # after_create      :increment_board_attachments_size, :cleanup!
+  
+  # Auto-Cleanup, delayed_job. If you use this, uncomment the delayed_job 
+  # gem in Gemfile and run 'bundle install':
+  # after_create      :increment_board_attachments_size, :dj_cleanup!
+    
   before_destroy    :decrement_board_attachments_size
   
   
@@ -35,9 +63,10 @@ class Post < ActiveRecord::Base
   # I thought this could clean up inactive posts, but I think it causes an infinite loop 
   # or something somewhere. Rails will crash with an illegal instruction upon a creating a new record. 
   #
-  # before_save do
-  #   Post.inactive.where("created_at < ?", Time.now - 5.minutes).destroy_all
-  # end
+  def purge_old_posts
+    Post.inactive.where("created_at < ?", Time.now - 5.minutes).destroy_all
+  end
+
 
   def set_tripcoded_name
     self.name = tripcode(self.name)
@@ -124,15 +153,33 @@ class Post < ActiveRecord::Base
   # to read it not as "Created at less than five minutes ago", but rather
   # "The time this was created at is before 5 minutes ago."
   #
+  # There are a plethora of cleanup methods rather than doing this the rails way so I can
+  # easily explain it to people for the decision they need to make regarding delayed jobs.
 
   def self.cleanup
     Post.not_sticky.inactive.where("created_at < ?", 5.minutes.ago).count
   end
 
   def self.cleanup!
-    Post.not_sticky.inactive.where("created_at < ?", 5.minutes.ago).destroy_all.count
+    Post.not_sticky.inactive.where("created_at < ?", 5.minutes.ago).destroy_all
+  end
+
+  def self.dj_cleanup!
+    Post.not_sticky.inactive.where("created_at < ?", 5.minutes.ago).delay.destroy_all
   end
 
   
+  def cleanup
+    Post.not_sticky.inactive.where("created_at < ?", 5.minutes.ago).count
+  end
+
+  def cleanup!
+    Post.not_sticky.inactive.where("created_at < ?", 5.minutes.ago).destroy_all.count
+  end
+  
+  def dj_cleanup!
+    Post.not_sticky.inactive.where("created_at < ?", 5.minutes.ago).delay.destroy_all
+  end
+
   attr_accessible :name, :email, :subject, :message, :password, :postpic
 end

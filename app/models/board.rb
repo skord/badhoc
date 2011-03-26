@@ -11,4 +11,8 @@ class Board < ActiveRecord::Base
   def children_count
     self.comments_count + self.posts_count
   end
+  
+  def cleanup
+    self.posts.not_sticky.where('position > ?', self.post_limit)
+  end
 end

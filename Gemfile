@@ -19,6 +19,7 @@ gem 'dalli'
 gem 'kgio'
 #gem 'awesome_nested_set', :git => 'https://github.com/galetahub/awesome_nested_set.git', :tag => 'v1.4.3'
 gem 'nested_set', :git => 'git://github.com/skyeagle/nested_set.git', :tag => 'v1.6.4'
+# gem 'delayed_job'
 
 # Use unicorn as the web server
 # gem 'unicorn'
