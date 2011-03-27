@@ -9,13 +9,7 @@ class PostsController < ApplicationController
   #
   # There is a conditional get for index, which will throw a 304 unless the 
   # content in the block and the last modified date has changed.
-  #
-  # The action caching on the show method is a lot faster than fragment caching or even the 
-  # conditional get. Does not work for the index action because of pagination. Uses more memcached
-  # space, but its worth it. It bypasses doing the db query at all, hence faster. If you're limited
-  # to a small memcached instance, it might be better to modify this so the action caching is turned 
-  # off but keep the conditional get. The conditional get is in place as well as the action caching 
-  # for the case where the cache is expired or not available. 
+  
   #
   # In the views there are quite a bit of partial fragments cached. The render times for comments 
   # and post names, emails etc are a bit high and there are quite a few of these.

@@ -31,6 +31,7 @@ jQuery(document).ready(function() {
 	jQuery("abbr.timeago").timeago();
 });
 
+
 var post_comment_thumbs = "<%= escape_javascript(raw render :partial => 'posts/post_comment_thumbs', :locals => {:post => @post})%>";
 
 $('div#<%= dom_id(@post)%>.post .post-comment-thumbs').css('opacity',1);
