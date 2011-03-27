@@ -23,11 +23,14 @@ class CommentsController < ApplicationController
   def show
     @comment = post.comments.find(params[:id])
 
-    respond_with [post, @comment] do |format|
-      format.js 
-      format.html # show.html.erb
-      format.xml  { render :xml => @comment }
-
+    if @comment.commentpic_processing == false
+      respond_with [post, @comment] do |format|
+        format.js 
+        format.html # show.html.erb
+        format.xml  { render :xml => @comment }
+      end
+    else
+      head :not_modified
     end
   end
 
