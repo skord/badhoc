@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110326154403) do
+ActiveRecord::Schema.define(:version => 20110328171442) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                               :default => "", :null => false
@@ -125,6 +125,7 @@ ActiveRecord::Schema.define(:version => 20110326154403) do
     t.boolean  "sticky",               :default => false
     t.integer  "image_width",          :default => 0
     t.integer  "image_height",         :default => 0
+    t.boolean  "destroy_pending",      :default => false
   end
 
   add_index "posts", ["board_id"], :name => "index_posts_on_board_id"
