@@ -134,14 +134,6 @@ class Post < ActiveRecord::Base
   # There are a plethora of cleanup methods rather than doing this the rails way so I can
   # easily explain it to people for the decision they need to make regarding delayed jobs.
 
-  def self.cleanup
-    self.board.cleanup
-  end
-
-  def self.cleanup!
-    self.board.cleanup!
-  end
-  
   def cleanup
     self.board.cleanup
   end
