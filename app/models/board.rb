@@ -13,8 +13,11 @@ class Board < ActiveRecord::Base
     self.comments_count + self.posts_count
   end
   
+  # The cleanup is different here than in master. The worker isn't so smart, so we queue these one at a time. 
   def cleanup!
-    self.inactive_posts.not_sticky.where('position > ? and created_at < ?', self.post_limit, 5.minutes.ago).destroy_all
+    self.inactive_posts.not_sticky.where('position > ? and created_at < ?', self.post_limit, 5.minutes.ago).each do |post| 
+      post.delay.destroy
+    end
   end
 
   def cleanup
