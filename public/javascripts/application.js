@@ -82,34 +82,34 @@ function updateStale() {
 }
 
 // Posts Pagination
-// if (history && history.pushState) {
-// 	$(function () {
-// 		$('#posts .pagination a').live("click", function(e) {
-// 			$(".pagination").css({opacity:0.5});
-// 			$.getScript(this.href);
-// 			history.pushState(null, document.title, this.href);
-// 			e.preventDefault();
-// 		});
-// 		$(window).bind("popstate", function() {
-// 			$.getScript(location.href);
-// 		});
-// 	});
-// }
+if (history && history.pushState) {
+	$(function () {
+		$('#posts .pagination a').live("click", function(e) {
+			$(".pagination").css({opacity:0.5});
+			$.getScript(this.href);
+			history.pushState(null, document.title, this.href);
+			e.preventDefault();
+		});
+		$(window).bind("popstate", function() {
+			$.getScript(location.href);
+		});
+	});
+}
 
 // Picwalls Pagination
-// if (history && history.pushState) {
-// 	$(function () {
-// 		$('#picwalls .pagination a').live("click", function(e) {
-// 			$("#picwalls").css({opacity:0.5});
-// 			$.getScript(this.href);
-// 			history.pushState(null, document.title, this.href);
-// 			e.preventDefault();
-// 		});
-// 		$(window).bind("popstate", function() {
-// 			$.getScript(location.href);
-// 		});
-// 	});
-// }
+if (history && history.pushState) {
+	$(function () {
+		$('#picwalls .pagination a').live("click", function(e) {
+			$("#picwalls").css({opacity:0.5});
+			$.getScript(this.href);
+			history.pushState(null, document.title, this.href);
+			e.preventDefault();
+		});
+		$(window).bind("popstate", function() {
+			$.getScript(location.href);
+		});
+	});
+}
 
 // Helps with in-line comment replies
 
