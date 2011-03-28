@@ -15,11 +15,9 @@ class Board < ActiveRecord::Base
   
   # The cleanup is different here than in master. The worker isn't so smart, so we queue these one at a time. 
   def cleanup!
-    self.inactive_posts.not_sticky.where('position > ? and created_at < ?', self.post_limit, 5.minutes.ago).each do |post| 
-      unless post.destroy_pending?
-        post.update_attribute(:destroy_pending, true)
-        post.delay.destroy
-      end
+    self.inactive_posts.not_sticky.where('position > ? and created_at < ? and destroy_pending = ?', self.post_limit, 5.minutes.ago, false).each do |post| 
+      post.update_attribute(:destroy_pending, true)
+      post.delay.destroy
     end
   end
 
