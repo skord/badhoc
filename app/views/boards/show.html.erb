@@ -16,6 +16,12 @@
     <%= @board.description %>
   </p>
 
+  <p>
+    <b>Thread Limit:</b>
+    <%= @board.post_limit %>
+  </p>
+
+
   <% unless @board.comments.empty? %>
     <p>
 	    <b>Posts Count:</b>

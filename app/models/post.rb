@@ -20,20 +20,19 @@ class Post < ActiveRecord::Base
   before_validation :set_tripcoded_name
   before_save       :pull_image_geometries
   
-  # Since the post controller makes use of the 'active' scope, posts
-  # that have aged off won't appear in the app, but the assets can 
-  # still be linked to, which can be a problem if you do third party
-  # hosting via S3 or rackspace or something. 
+
+  # There's two choices for an after_create filter to purge old posts.
+  # It should be safe to auto-purge expired posts, however this is not an async
+  # operation, so it could make posting slower. It could potentially mean chaos
+  # if you use non-local storage like S3 and S3 happens to be down. OOPS! 
+  # If you want this to go to a worker, try the delayed_job branch, that would be 
+  # the smart thing to do anyway. If you'd rather just do it yourself to save some
+  # time for users, pick #1. If you never check your site or you're comfortable with
+  # the non-async delete, chose #2. #1 is the default.
   #
-  # There's three scenarios here:
-  # 1. Extremely low traffic sites. Pick #1. 
-  # 2. Your dorm room, pick the #2.
-  # 3. High traffic sites. Pick number one, but by all means get a
-  # hold of me so this can be done better.
+  # TL;DR. Pick #2 unless this site is your baby or you use S3 or other cloud storage.
 
-  # So, pick one of the following:
-
-  # #1: No auto-cleanup. Periodically run Post.cleanup! somehow.
+  # #1: No auto-cleanup. Periodically run Board.all.each {|board| board.cleanup!} somehow.
   after_create      :increment_board_attachments_size
 
   # #2: Auto-Cleanup, non-async. You have been warned.
@@ -50,18 +49,8 @@ class Post < ActiveRecord::Base
   # Bitches don't know bout my named scopes
   scope :has_attachment, where('postpic_file_name is not ?', nil)
   scope :no_attachment, where('postpic_file_name is ?', nil)
-  scope :active, where('position <= ?', ACTIVE_POST_THRESHOLD)
-  scope :inactive, where('position > ?', ACTIVE_POST_THRESHOLD)
   scope :sticky, where('sticky = ?', true)
   scope :not_sticky, where('sticky = ?', false)
-
-
-  # I thought this could clean up inactive posts, but I think it causes an infinite loop 
-  # or something somewhere. Rails will crash with an illegal instruction upon a creating a new record. 
-  #
-  def purge_old_posts
-    Post.inactive.where("created_at < ?", Time.now - 5.minutes).destroy_all
-  end
 
 
   def set_tripcoded_name
@@ -85,10 +74,10 @@ class Post < ActiveRecord::Base
   end
 
   def decrement_board_attachments_size
-    # if self.postpic.size != nil
+    if self.postpic.size != nil
       board = self.board
       board.decrement!(:attachments_size, by = self.postpic.size)
-    # end
+    end
   end
   
   validates_presence_of :name, :message => "can't be blank"
@@ -153,19 +142,19 @@ class Post < ActiveRecord::Base
   # easily explain it to people for the decision they need to make regarding delayed jobs.
 
   def self.cleanup
-    Post.not_sticky.inactive.where("created_at < ?", 5.minutes.ago).count
+    self.board.cleanup
   end
 
   def self.cleanup!
-    Post.not_sticky.inactive.where("created_at < ?", 5.minutes.ago).destroy_all
+    self.board.cleanup!
   end
   
   def cleanup
-    Post.not_sticky.inactive.where("created_at < ?", 5.minutes.ago).count
+    self.board.cleanup
   end
 
   def cleanup!
-    Post.not_sticky.inactive.where("created_at < ?", 5.minutes.ago).destroy_all.count
+    self.board.cleanup!
   end
   
 
