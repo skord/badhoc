@@ -21,22 +21,15 @@ class Post < ActiveRecord::Base
   before_save       :pull_image_geometries
   
 
-  # There's two choices for an after_create filter to purge old posts.
-  # It should be safe to auto-purge expired posts, however this is not an async
-  # operation, so it could make posting slower. It could potentially mean chaos
-  # if you use non-local storage like S3 and S3 happens to be down. OOPS! 
-  # If you want this to go to a worker, try the delayed_job branch, that would be 
-  # the smart thing to do anyway. If you'd rather just do it yourself to save some
-  # time for users, pick #1. If you never check your site or you're comfortable with
-  # the non-async delete, chose #2. #1 is the default.
-  #
-  # TL;DR. Pick #2 unless this site is your baby or you use S3 or other cloud storage.
-
-  # #1: No auto-cleanup. Periodically run Board.all.each {|board| board.cleanup!} somehow.
-  after_create      :increment_board_attachments_size
-
-  # #2: Auto-Cleanup, non-async. You have been warned.
-  # after_create      :increment_board_attachments_size, :cleanup!
+  # Hey awesome, you're running the delayed_job branch for asynchronous awesomness!
+  # The cleanup portion of the following filter calls Board#cleanup!.
+  # Rather than looking over there, I'll just mention here that it throws a destroy
+  # job in queue for each Post that's expired (not a destroy_all, the AREL stuff doesn't
+  # work as expected, maybe I'm wrong). Some of of those are doomed to fail since I'm 
+  # not deduplicating or throwing up a flag for "put in the kill me queue", but it's
+  # no big deal.
+  
+  after_create      :increment_board_attachments_size, :cleanup!
   
     
   before_destroy    :decrement_board_attachments_size
