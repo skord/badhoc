@@ -1,3 +1,7 @@
+<% if iphone_user_agent? %>
+<h1>Hey, it looks like you have a mobile device. <%= link_to "Try the mobile version!", '/.iphone' %></h1>
+<% end %>
+
 <div id='categories'>
   <%= render @categories %>
 </div>
