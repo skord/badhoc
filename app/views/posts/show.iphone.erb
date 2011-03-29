@@ -1,0 +1,31 @@
+<div class = "panel" title = "<%= @post.subject %>" selected = "true">
+  <center><%= image_tag @post.postpic.url(:small) %></center>
+  <fieldset>
+    <div class="row">
+      <label>Post</label>
+      <span><%= @post.id %></span>
+    </div>    
+    <div class="row">
+      <label>From</label>
+      <span><%= @post.name %></span>
+    </div>
+    <div class="row">
+      <label>Subject</label>
+      <span><%= truncate(@post.subject, :length => 20, :omission => '...') %></span>
+    </div>
+    <div class="row">
+      <label>Submitted</label>
+      <span><%= time_ago_in_words(@post.created_at) %> ago</span>
+    </div>
+    <div class="row">
+      <label>Replies</label>
+      <span><%= @post.comments_count %></span>
+    </div>   
+    <div class="row">
+      <p><%= @post.message %></p>
+    </div>     
+  </fieldset>
+  <% @post.comments.each do |comment| %>
+    <%= render :partial => 'comments/comment.iphone', :locals => {:comment => comment} %>
+  <% end %>
+</div>

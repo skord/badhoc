@@ -1,0 +1,17 @@
+<ul title="Posts" selected="true">
+  <% @posts.each do |post| %>
+  <li>
+    <a href="<%= post_path(post) + '.iphone' %>">
+      <% if post.subject == '' %>
+        <em>No Subject...</em>
+      <% else %>
+        <%= post.subject %>
+      <% end %>
+      <span>
+        Active <%= time_ago_in_words(post.updated_at) %> ago, 
+        <%= pluralize(post.comments_count, 'comment') %>
+      </span>
+    </a> 
+  </li>
+  <% end %>
+</ul>

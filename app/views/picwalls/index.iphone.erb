@@ -1,39 +1,6 @@
-
-<%= javascript_tag :data => 'data' do -%>
-var data =
-[
-<% @picwalls.each do |picwall|%>
-	{
-		title:	'<%= picwall.name %>',
-		desc:		'<%= picwall.name %>',
-		link:		'<%= picwall.postpic.url %>',
-		image:	'<%= picwall.postpic.url(:small) %>',
-		date:		'<%= picwall.created_at %>'
-	},
-	<% end %>
-	];
-	const PARAGRAPHS = [
-	<% @picwalls.each do |picwall| %>
-		'<%= picwall.message %>',
-	<% end %>
-	];
-<% end -%>
-
-<div id='ring-container'>
-	<%= will_paginate @picwalls, :page_links => false  %>
-	<div id='ring-aligner'>
-		<ol id='ring'></ol>
-	</div>
-</div>
-
-<div id='info-pane'>
-	<div id='info-back-button'>Posts</div>
-	<div id='info-image-wrapper'>
-		<img id='info-image'>
-	</div>
-	<div id='info-metadata'>
-		<div id='info-title'></div>
-		<div id='info-link'></div>
-		<div id='info-date'></div>
-	</div>
-</div>
+<% @picwalls_iphone.each do |picwall| %>
+<%= link_to (image_tag picwall.postpic.url(:thumb), :class => 'picwall-postpic'), picwall.postpic.url %>
+ <% picwall.comments.each do |comment| %>
+ <%= link_to (image_tag comment.commentpic.url(:thumb), :class => 'picwall-commentpic'), comment.commentpic.url %>
+ <% end %>
+<% end %>

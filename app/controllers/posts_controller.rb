@@ -45,6 +45,7 @@ class PostsController < ApplicationController
           response.headers['Cache-Control'] = 'public, max-age=60'
         }
         format.js
+        format.iphone {render :layout => false}
       end
     end
     
@@ -69,6 +70,7 @@ class PostsController < ApplicationController
           response.headers['Cache-Control'] = 'public, max-age=60'
         }
         format.js
+        format.iphone {render :layout => false}
       end
     end
   end
