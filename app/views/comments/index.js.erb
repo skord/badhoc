@@ -1,24 +1,44 @@
 <% unless @comments.empty? %>
-// Update the thumbnails from the _post partial
-var post_comment_thumbs = "<%= escape_javascript(raw render :partial => 'posts/post_comment_thumbs', :locals => {:post => @post})%>";
+  // Update the thumbnails from the _post partial
+  var post_comment_thumbs = "<%= escape_javascript(raw render :partial => 'posts/post_comment_thumbs', :locals => {:post => @post})%>";
 
-$('div#<%= dom_id(@post)%>.post .post-comment-thumbs').css('opacity',1);
-$('div#<%= dom_id(@post)%>.post .post-comment-thumbs').animate({opacity:0}, 700, function() {
-	$('div#<%= dom_id(@post)%>.post .post-comment-thumbs').replaceWith($(post_comment_thumbs).css('opacity',0));
-	$('div#<%= dom_id(@post)%>.post .post-comment-thumbs').animate({opacity:1}, 700);
-});
-// Render our new comments
-var new_comments = "<%= escape_javascript(raw render :partial => 'comments/comments' )%>";
-$(new_comments).css('opacity',0).prependTo("#comments");
-$('.comment').animate({opacity:1}, 1000);
+  $('div#<%= dom_id(@post)%>.post .post-comment-thumbs').css('opacity',1);
+  $('div#<%= dom_id(@post)%>.post .post-comment-thumbs').animate({opacity:0}, 700, function() {
+  	$('div#<%= dom_id(@post)%>.post .post-comment-thumbs').replaceWith($(post_comment_thumbs).css('opacity',0));
+  	$('div#<%= dom_id(@post)%>.post .post-comment-thumbs').animate({opacity:1}, 700);
+  });
 
-// Update Posts count
-$('#post_comments_count').text($('#comments .comment').length + ' comments');
+  // Render our new comments
+  var new_comments = "<%= escape_javascript(raw render :partial => 'comments/comments' )%>";
+  $(new_comments).css('opacity',0).prependTo("#comments");
+  $('.comment').animate({opacity:1}, 1000);
 
-// Restore admin functions
-<% if current_admin %>
-	$(".admin").show();
-<% end %>
+  // Update Posts count
+  $('#post_comments_count').text($('#comments .comment').length + ' comments');
+
+  // Restore admin functions
+  <% if current_admin %>
+  	$(".admin").show();
+  <% end %>
+  
+
+  <% @comments.each do |comment| %>
+    $.jwNotifyHTML({
+        url: '<%= escape_javascript(post_path(@post)) %>',
+      <% if comment.commentpic? %>
+        image: '<%= escape_javascript(comment.commentpic.url(:thumb)) %>',
+      <% else %>
+        image: '<%= escape_javascript(@post.postpic.url(:thumb)) %>',
+      <% end %>
+      <% if comment.parent_id.nil? %>
+        title: 'New Reply to Post <%= @post.id %>',
+      <% else  %>
+        title: 'New Reply to Comment <%= comment.parent_id %>',
+      <% end %>
+      body:  '<%= escape_javascript(comment.message) %>',
+      timeout: 5000
+    });
+  <% end %>
 <% end %>
 
 // Alternate comment highlighting
