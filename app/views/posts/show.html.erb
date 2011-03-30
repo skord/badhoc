@@ -1,10 +1,44 @@
+<script>
+if (window.webkitNotifications) {
+  $(document).ready(function () {
+    if (window.webkitNotifications.checkPermission() > 0) {
+      $('#comments').append('<%= link_to_function("Enable Notifications", 'showPopup();')%>');
+    }
+  });
+}
+if (window.webkitNotifications){
+function requestingPopupPermission(callback){
+  window.webkitNotifications.requestPermission(callback);
+}
+ 
+function showPopup(){
+  if(window.webkitNotifications.checkPermission() > 0){
+   requestingPopupPermission(showPopup);
+}
+else{
+var thumb = 'http://badhoc.heroku.com/';
+var title = 'Success!';
+var body = 'You are setup for notifications!';
+ 
+  
+        var popup = window.webkitNotifications.createNotification(thumb, title, body);
+ 
+        //Show the popup
+        popup.show();
+ 
+        //set timeout to hide it
+        setTimeout(function(){
+        popup.cancel();
+        }, '10000');
+}}}
+else{ alert('Desktop Notification is not supported by browser');}
+</script>
 <p class='large prepend-1 last'>
 <%= link_to 'Home', '/'%> \
 <%= link_to @post.board.category.name, @post.board.category %> \
 <%= link_to @post.board.name, board_posts_path(@post.board) %> \ 
 <%= link_to @post.id, @post %>
 </p>
-
 
 <div class='span-24 last'>
 	<%= auto_discovery_link_tag(:atom, "/posts/#{@post.id}.atom", {:title => 'Posts Atom'}) %>
