@@ -23,8 +23,7 @@
   
 
   <% @comments.each do |comment| %>
-    $.jwNotifyHTML({
-        url: '<%= escape_javascript(post_path(@post)) %>',
+    $.jwNotify({
       <% if comment.commentpic? %>
         image: '<%= escape_javascript(comment.commentpic.url(:thumb)) %>',
       <% else %>
