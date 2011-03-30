@@ -22,7 +22,7 @@
       <span><%= @post.comments_count %></span>
     </div>   
     <div class="row">
-      <p><%= @post.message %></p>
+      <p><%= user_text_markdown(@post.message) %></p>
     </div>     
   </fieldset>
   <% @post.comments.each do |comment| %>
