@@ -103,9 +103,9 @@ class PostsController < ApplicationController
         @post.move_to_top
         format.html { 
           if @post.email == 'noko'
-            redirect_to(board_post_path(board, @post)) 
-          else
             redirect_to(board_posts_path)
+          else
+            redirect_to(board_post_path(board, @post)) 
           end
           }
       else
