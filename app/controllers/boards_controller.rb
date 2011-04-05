@@ -17,7 +17,7 @@ class BoardsController < ApplicationController
   # GET /boards/1
   # GET /boards/1.xml
   def show
-    @board = Board.find(params[:id])
+    @board = Board.find_by_slug(params[:id])
     @images_size = @board.attachments_size
 
     respond_to do |format|
@@ -39,7 +39,7 @@ class BoardsController < ApplicationController
 
   # GET /boards/1/edit
   def edit
-    @board = Board.find(params[:id])
+    @board = Board.find_by_slug(params[:id])
   end
 
   # POST /boards
@@ -59,7 +59,7 @@ class BoardsController < ApplicationController
   # PUT /boards/1
   # PUT /boards/1.xml
   def update
-    @board = Board.find(params[:id])
+    @board = Board.find_by_slug(params[:id])
 
     respond_to do |format|
       if @board.update_attributes(params[:board])
@@ -73,7 +73,7 @@ class BoardsController < ApplicationController
   # DELETE /boards/1
   # DELETE /boards/1.xml
   def destroy
-    @board = Board.find(params[:id])
+    @board = Board.find_by_slug(params[:id])
     @board.destroy
 
     respond_to do |format|

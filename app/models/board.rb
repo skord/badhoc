@@ -9,6 +9,10 @@ class Board < ActiveRecord::Base
   
   attr_accessible :name, :slug, :description, :category_id, :post_limit
 
+  def to_param
+    slug
+  end
+
   def children_count
     self.comments_count + self.posts_count
   end
