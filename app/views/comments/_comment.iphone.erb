@@ -1,0 +1,28 @@
+  <% if comment.commentpic? %>
+  <center><%= image_tag comment.commentpic.url(:small) %></center>
+  <% end %>
+  <fieldset>
+    <div class="row">
+      <label>Reply</label>
+      <span><%= comment.id %></span>
+    </div>    
+    <div class="row">
+      <label>From</label>
+      <span><%= comment.name %></span>
+    </div>
+    <div class="row">
+      <label>Subject</label>
+      <span><%= comment.subject %></span>
+    </div>
+    <div class="row">
+      <label>Submitted</label>
+      <span><%= time_ago_in_words(comment.created_at) %> ago</span>
+    </div>
+    <div class="row">
+      <label>Replies</label>
+      <span><%= comment.comments_count %></span>
+    </div>
+    <div class="row">
+      <p><%= user_text_markdown(comment.message) %></p>
+    </div>
+  </fieldset>

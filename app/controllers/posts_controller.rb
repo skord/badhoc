@@ -39,6 +39,7 @@ class PostsController < ApplicationController
           response.headers['Cache-Control'] = 'public, max-age=60'
         }
         format.js
+        format.iphone {render :layout => false}
       end
     end
     
@@ -58,6 +59,7 @@ class PostsController < ApplicationController
           response.headers['Cache-Control'] = 'public, max-age=60'
         }
         format.js
+        format.iphone {render :layout => false}
       end
     end
   end
@@ -90,9 +92,9 @@ class PostsController < ApplicationController
         @post.move_to_top
         format.html { 
           if @post.email == 'noko'
-            redirect_to(board_post_path(board, @post)) 
-          else
             redirect_to(board_posts_path)
+          else
+            redirect_to(board_post_path(board, @post)) 
           end
           }
       else
@@ -187,6 +189,6 @@ class PostsController < ApplicationController
   private
   
   def board
-    @board ||= Board.find(params[:board_id])
+    @board ||= Board.find_by_slug(params[:board_id])
   end
 end

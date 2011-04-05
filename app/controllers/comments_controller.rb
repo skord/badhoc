@@ -63,9 +63,9 @@ class CommentsController < ApplicationController
         expire_action(:controller => 'posts', :action => 'show', :id => @comment.post.id)
         @comment.post.move_to_top unless @comment.email == 'sage'
         if @comment.email == 'noko'
-          redirect_to(post_path(post))
-        else
           redirect_to(board_posts_path(post.board))
+        else
+          redirect_to(post_path(post))
         end
       else
         flash[:error] = 'Comment could not be added'

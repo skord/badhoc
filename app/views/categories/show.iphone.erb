@@ -1,0 +1,5 @@
+<ul title="Boards" selected="true">
+  <% @category.boards.each do |board| %>
+   <li><%= link_to board.name, board_posts_path(board) + '.iphone' %></li>
+  <% end %>
+</ul>

@@ -5,6 +5,7 @@ class PicwallsController < ApplicationController
   # GET /picwalls.xml
   def index
     @picwalls = Picwall.paginate :order => 'updated_at DESC', :page => params[:page], :per_page => 10, :include => :comments
+    @picwalls_iphone = Picwall.limit(10).order(:position)
 
     if stale?(:last_modified => @picwalls.last.updated_at.utc, :etag => @picwalls)
       respond_to do |format|
