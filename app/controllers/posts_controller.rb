@@ -23,10 +23,10 @@ class PostsController < ApplicationController
   def index
     @board = board
     @post = board.posts.new
-    @posts = board.active_posts.paginate :order => 'sticky DESC, position ASC', :page => params[:page], :per_page => 10, :include => :comments
-    @all_posts = board.active_posts
 
     if stale?(:last_modified => @board.updated_at.utc, :etag => @posts)
+    @posts = board.active_posts.paginate :order => 'sticky DESC, position ASC', :page => params[:page], :per_page => 10, :include => :comments
+    @all_posts = board.active_posts
       respond_with [board, @posts] do |format|
         format.html {
           # Since pagination is done via JS if available, this mostly targets robots. 

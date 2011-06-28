@@ -17,9 +17,9 @@
 					<div id='notice' class='<%= 'notice' if notice %>'><%= notice %></div>
 			  	<div id="alert" class='<%= 'error' if alert %>'><%= alert %></div>
 			</div>
-			<% if admin_signed_in? %>
-				<%= render :partial => 'shared/admin_box'%>
-			<% end %>
+
+			<%= render :partial => 'shared/admin_box'%>
+
 	
 			<div class='content'>
 				<%= yield %>	
