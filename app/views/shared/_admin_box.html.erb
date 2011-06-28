@@ -1,9 +1,6 @@
-<div class='span-24 last'>
+<div class='admin span-24 last' style="display:none;">
 	<p>
-		Signed in as <%= current_admin.email %> -
-		<%= link_to 'Manage Bans', bans_path %> -
-		<%= link_to 'Sign Out', destroy_admin_session_path %>
-		<%= javascript_tag('$(document).ready(function() { $(".admin").show(); })')%>
+		<%= link_to 'Manage Bans', bans_path %>
 	</p>
 </div>
 
